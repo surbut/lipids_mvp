@@ -20,10 +20,8 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -249,64 +247,10 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-
-
-
 <style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
+.code-folding-btn { margin-bottom: 4px; }
 </style>
+
 
 
 
@@ -316,16 +260,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -367,6 +301,14 @@ div.section {
 </style>
 
 <div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
 
 
 
@@ -520,26 +462,34 @@ relative
 <tbody>
 <tr>
 <td style="text-align:left;">
-~/lipids_mvp/merged_z.txt
+~/lipids_mvp/data/merged_z.txt
 </td>
 <td style="text-align:left;">
-merged_z.txt
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/max_ld_block.txt
-</td>
-<td style="text-align:left;">
-max_ld_block.txt
+data/merged_z.txt
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-~/lipids_mvp/EDcov.Rds
+~/lipids_mvp/data/znew.txt
 </td>
 <td style="text-align:left;">
-EDcov.Rds
+data/znew.txt
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+~/lipids_mvp/data/max_ld_block.txt
+</td>
+<td style="text-align:left;">
+data/max_ld_block.txt
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+~/lipids_mvp/data/EDcov.Rds
+</td>
+<td style="text-align:left;">
+data/EDcov.Rds
 </td>
 </tr>
 </tbody>
@@ -550,10 +500,10 @@ EDcov.Rds
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreeddf1ea3f35b1a8d34d8ed5678e15b55a2a125b29targetblankddf1ea3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/ddf1ea3f35b1a8d34d8ed5678e15b55a2a125b29" target="_blank">ddf1ea3</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreeca158bfe3fb11c32becd8beed2cd252e9229904ctargetblankca158bfa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/ca158bfe3fb11c32becd8beed2cd252e9229904c" target="_blank">ca158bf</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreeddf1ea3f35b1a8d34d8ed5678e15b55a2a125b29targetblankddf1ea3a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreeca158bfe3fb11c32becd8beed2cd252e9229904ctargetblankca158bfa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -564,21 +514,18 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/workingwithdata_cache/
+    Ignored:    data/.DS_Store
     Ignored:    data/Archive.zip.gz
+    Ignored:    data/EDcov.Rds
+    Ignored:    data/max_ld_block.txt
+    Ignored:    data/merged_betas.txt
+    Ignored:    data/merged_se.txt
+    Ignored:    data/merged_z.txt
+    Ignored:    data/znew.txt
     Ignored:    docs/.DS_Store
 
 Untracked files:
-    Untracked:  EDcov.Rds
-    Untracked:  analysis/EDcov.Rds
-    Untracked:  analysis/merged_betas.txt
-    Untracked:  analysis/merged_se.txt
-    Untracked:  analysis/merged_z.txt
     Untracked:  analysis/workingwithdata.Rmd
-    Untracked:  docs/figure/
-    Untracked:  max_ld_block.txt
-    Untracked:  merged_betas.txt
-    Untracked:  merged_se.txt
-    Untracked:  merged_z.txt
 
 </code></pre>
 <p>
@@ -591,9 +538,52 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
+
 <p>
-There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
 </p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/surbut/lipids_mvp/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/workingwithdata.html" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+<td>
+Update docs
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 </div>
 </div>
@@ -626,25 +616,19 @@ z=m[,c(4,6,8,10)]/n[,c(3:6)]
 z=cbind(m[,c(1,2)],z)
 write.table(z,&quot;merged_z.txt&quot;)</code></pre>
 <p>To run mashr, we need a matrix of maxes. The best way to do this is to choose the max effect across conditions per LD block, as described in Pickrell et al. Only then can we assume the maxes used to create covariance matrices are truly linearly independent. We will select SNPS falling within each of the 1700 LD blocks and choose SNP with maximum absolute effect acrtoss conditions.</p>
-<pre class="r"><code>z=read.table(&quot;~/lipids_mvp/merged_z.txt&quot;)
-
-bed=read.table(&quot;~/Downloads/ld_chunk.bed&quot;)
-head(bed)</code></pre>
-<pre><code>    V1      V2      V3
-1 chr1   10583 1892607
-2 chr1 1892607 3582736
-3 chr1 3582736 4380811
-4 chr1 4380811 5913893
-5 chr1 5913893 7247335
-6 chr1 7247335 9365199</code></pre>
-<pre class="r"><code>z=z[1:2437099,]### last 3 are rsIDs from mislabeled columns
-library(&quot;reshape&quot;)
-df=transform(z, foo = colsplit(z$SNP_hg18, split = &quot;\\:&quot;, names = c(&#39;Chr&#39;, &#39;Pos&#39;)))
-
-znew=cbind(df$foo.Chr,df$foo.Pos,z[,-1])
-maxes=apply(znew[,c(&quot;hdl&quot;,&quot;ldl&quot;,&quot;tg&quot;,&quot;tc&quot;)],1,function(x){max(abs(x))})
-znew=cbind(znew,maxes)</code></pre>
-<pre class="r"><code>max_block=data.frame(matrix(ncol = ncol(znew), nrow = nrow(bed)))
+<pre class="r"><code>#z=read.table(&quot;~/lipids_mvp/data/merged_z.txt&quot;)
+# 
+# bed=read.table(&quot;~/Downloads/ld_chunk.bed&quot;)
+# head(bed)
+# z=z[1:2437099,]### last 3 are rsIDs from mislabeled columns
+# library(&quot;reshape&quot;)
+# df=transform(z, foo = colsplit(z$SNP_hg18, split = &quot;\\:&quot;, names = c(&#39;Chr&#39;, &#39;Pos&#39;)))
+# 
+# znew=cbind(df$foo.Chr,df$foo.Pos,z[,-1])
+# maxes=apply(znew[,c(&quot;hdl&quot;,&quot;ldl&quot;,&quot;tg&quot;,&quot;tc&quot;)],1,function(x){max(abs(x))})
+# znew=cbind(znew,maxes)</code></pre>
+<pre class="r"><code>znew=read.table(&quot;~/lipids_mvp/data/znew.txt&quot;)
+max_block=data.frame(matrix(ncol = ncol(znew), nrow = nrow(bed)))
 colnames(max_block)=colnames(znew)
 for(i in 1:nrow(bed)){
   chr=bed[i,1]
@@ -670,7 +654,7 @@ write.table(max_block,&quot;max_ld_block.txt&quot;)</code></pre>
 <p>Now, we’re ready to mash!</p>
 <pre class="r"><code>library(&quot;mashr&quot;)
 library(&quot;flashr&quot;)
-max_block=read.table(&quot;~/lipids_mvp/max_ld_block.txt&quot;)
+max_block=read.table(&quot;~/lipids_mvp/data/max_ld_block.txt&quot;)
 ## source(&#39;~/Dropbox/jointData/flashscript.R&#39;)
 # identify a random subset of 20000 tests
 random.subset = sample(1:nrow(znew),20000)
@@ -691,19 +675,56 @@ U.pca = cov_pca(data.strong,3)
 # U.ed = cov_ed(data.strong, c(U.flash, U.pca, list(&quot;XX&quot; = t(X.center) %*% X.center / nrow(X.center))))
 # saveRDS(U.ed,&quot;EDcov.Rds&quot;)
 
-U.ed=readRDS(&quot;~/lipids_mvp/EDcov.Rds&quot;)
+U.ed=readRDS(&quot;~/lipids_mvp/data/EDcov.Rds&quot;)
 U.c = cov_canonical(data.random)
 m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)</code></pre>
 <pre><code> - Computing 20000 x 321 likelihood matrix.
- - Likelihood calculations took 0.70 seconds.
+ - Likelihood calculations took 0.73 seconds.
  - Fitting model with 321 mixture components.
- - Model fitting took 33.73 seconds.</code></pre>
+ - Model fitting took 32.56 seconds.</code></pre>
 <pre class="r"><code>k=length(m$fitted_g$Ulist)
 l=length(m$fitted_g$grid)
 pimat=matrix(m$fitted_g$pi[-1],nrow=l,byrow=T)
 colnames(pimat)=names(m$fitted_g$pi)[2:(k+1)]
 barplot(colSums(pimat),las=2)</code></pre>
 <p><img src="figure/workingwithdata.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-4-1.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Now, let’s plot the patterns of sharing:</p>
 <pre class="r"><code>library(&quot;lattice&quot;)
 for(i in 1:k){
@@ -713,7 +734,614 @@ clrs = colorRampPalette((c(&quot;#D73027&quot;,&quot;#FC8D59&quot;,&quot;#FEE090
 z.num[lower.tri(z.num)] = NA
 print(levelplot(z.num,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,colorkey = TRUE,main=paste0(names(m$fitted_g$Ulist)[[i]])))
 }</code></pre>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-6.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-7.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-8.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-9.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-10.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-11.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-12.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-13.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-14.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-15.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-16.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-1.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-2">
+Past versions of unnamed-chunk-5-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-2.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-3">
+Past versions of unnamed-chunk-5-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-3.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-4">
+Past versions of unnamed-chunk-5-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-4.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-5">
+Past versions of unnamed-chunk-5-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-5.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-6">
+Past versions of unnamed-chunk-5-6.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-6.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-7.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-7">
+Past versions of unnamed-chunk-5-7.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-7.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-8.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-8">
+Past versions of unnamed-chunk-5-8.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-8.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-9.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-9">
+Past versions of unnamed-chunk-5-9.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-9" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-9.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-10.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-10">
+Past versions of unnamed-chunk-5-10.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-10" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-10.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-11.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-11">
+Past versions of unnamed-chunk-5-11.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-11" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-11.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-12.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-12">
+Past versions of unnamed-chunk-5-12.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-12" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-12.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-13.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-13">
+Past versions of unnamed-chunk-5-13.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-13" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-13.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-14.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-14">
+Past versions of unnamed-chunk-5-14.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-14" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-14.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-15.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-15">
+Past versions of unnamed-chunk-5-15.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-15" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-15.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-16.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-16">
+Past versions of unnamed-chunk-5-16.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-16" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-16.png" target="_blank">ca158bf</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -777,8 +1405,6 @@ footer is added to webpages before the MathJax javascript. -->
 </script>
 
 
-</div>
-</div>
 
 </div>
 
@@ -810,33 +1436,12 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-
 <script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

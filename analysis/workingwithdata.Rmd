@@ -1,0 +1,166 @@
+---
+title: "creating_merged_lipids"
+output:
+  html_document:
+    df_print: paged
+    toc: no
+  html_notebook: default
+  workflowr::wflow_html:
+    code_folding: show
+    toc: no
+editor_options:
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache= TRUE)
+knitr::opts_chunk$set(autodep = TRUE)
+```
+
+## R Markdown
+
+Here we will try to merge based on common chr.position (per Hg18) names.
+
+```{r  create table,echo=FALSE,eval=FALSE}
+library("data.table")
+hdl=fread("~/Dropbox/jointData/jointGwasMc_HDL.txt");ldl=fread("~/Dropbox/jointData/jointGwasMc_LDL.txt");tc=fread("~/Dropbox/jointData/jointGwasMc_TC.txt");tg=fread("~/Dropbox/jointData/jointGwasMc_TG.txt")
+hdl=data.frame(hdl);ldl=data.frame(ldl);tc=data.frame(tc);tg=data.frame(tg)
+
+length(intersect(intersect(intersect(hdl$SNP_hg18,ldl$SNP_hg18),tc$SNP_hg18),tg$SNP_hg18))
+
+## Creating Beta Table
+
+m=merge(hdl[,c(1,3,4,6)],ldl[,c(1,4,6)],by=1);names(m)[4]="hdl";names(m)[6]="ldl"
+m=merge(m,tg[,c(1,4,6)],by=1);names(m)[8]="tg"
+m=merge(m,tc[,c(1,4,6)],by=1);names(m)[10]="tc"
+
+```
+
+
+We recognize that the alleles have been flipped to make all effects positive
+Let's use HDL as reference
+```{r,eval=F}
+
+ref=m[,3]
+
+for(x in seq(1:3)){
+  betaindex=4+2*x
+  beta=m[,betaindex]
+  allele=betaindex-1
+  a=m[,allele]
+  test=a==ref;test[test=="FALSE"]=-1
+  beta=beta*test
+  m[,betaindex]=beta}
+
+head(m)
+write.table(m,"merged_betas.txt")
+
+## Creating SE Table
+n=merge(hdl[,c(1,3,7)],ldl[,c(1,7)],by=1);names(n)[3]="hdl";names(n)[4]="ldl"
+n=merge(n,tg[,c(1,7)],by=1);names(n)[5]="tg"
+n=merge(n,tc[,c(1,7)],by=1);names(n)[6]="tc"
+write.table(n,"merged_se.txt")
+
+z=m[,c(4,6,8,10)]/n[,c(3:6)]
+z=cbind(m[,c(1,2)],z)
+write.table(z,"merged_z.txt")
+
+```
+
+
+To run mashr, we need a matrix of maxes. The best way to do this is to choose the max effect across conditions per LD block, as described in Pickrell et al. Only then can we assume the maxes used to create covariance matrices are truly linearly independent. We will select SNPS falling within each of the 1700 LD blocks and choose SNP with maximum absolute effect acrtoss conditions.
+
+```{r}
+#z=read.table("~/lipids_mvp/data/merged_z.txt")
+# 
+# bed=read.table("~/Downloads/ld_chunk.bed")
+# head(bed)
+# z=z[1:2437099,]### last 3 are rsIDs from mislabeled columns
+# library("reshape")
+# df=transform(z, foo = colsplit(z$SNP_hg18, split = "\\:", names = c('Chr', 'Pos')))
+# 
+# znew=cbind(df$foo.Chr,df$foo.Pos,z[,-1])
+# maxes=apply(znew[,c("hdl","ldl","tg","tc")],1,function(x){max(abs(x))})
+# znew=cbind(znew,maxes)
+
+```
+
+```{r, eval=FALSE,echo=TRUE}
+znew=read.table("~/lipids_mvp/data/znew.txt")
+max_block=data.frame(matrix(ncol = ncol(znew), nrow = nrow(bed)))
+colnames(max_block)=colnames(znew)
+for(i in 1:nrow(bed)){
+  chr=bed[i,1]
+  start=bed[i,2]
+  stop=bed[i,3]
+  in_chrom=znew[znew$`df$foo.Chr`==chr,]
+  goodguys=in_chrom[in_chrom$`df$foo.Pos`>start&in_chrom$`df$foo.Pos`<stop,]
+ if(nrow(goodguys)>0) {
+    z.max=which.max(goodguys[,"maxes"])
+    z_good=goodguys[z.max,]
+    } else {
+      z_good=rep(0,ncol(max_block))
+    }
+  z_good=data.table(z_good,stringsAsFactors = T)
+  z_good$`df$foo.Chr`=as.character(z_good$`df$foo.Chr`)
+  z_good$rsid=as.character(z_good$rsid)
+  max_block[i,]=z_good
+  #print(i)
+}
+
+max_block=na.omit(max_block)
+write.table(max_block,"max_ld_block.txt")
+
+
+
+
+```
+
+Now, we're ready to mash!
+```{r}
+library("mashr")
+library("flashr")
+max_block=read.table("~/lipids_mvp/data/max_ld_block.txt")
+## source('~/Dropbox/jointData/flashscript.R')
+# identify a random subset of 20000 tests
+random.subset = sample(1:nrow(znew),20000)
+zmash=as.matrix(znew[,c("hdl","ldl","tg","tc")]);rownames(zmash)=znew$rsid
+data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
+
+Vhat = estimate_null_correlation_simple(data.temp)
+rm(data.temp)
+data.random = mash_set_data(zmash[random.subset,],alpha = 1,V=Vhat)
+
+zmax=apply(max_block[,c(4:7)],2,function(x){as.numeric(x)});rownames(zmax)=max_block$rsid
+data.strong = mash_set_data(zmax,alpha = 1,V=Vhat)
+
+U.pca = cov_pca(data.strong,3)
+
+# U.flash=cov_flash(data.strong, non_canonical = TRUE)
+# X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
+# U.ed = cov_ed(data.strong, c(U.flash, U.pca, list("XX" = t(X.center) %*% X.center / nrow(X.center))))
+# saveRDS(U.ed,"EDcov.Rds")
+
+U.ed=readRDS("~/lipids_mvp/data/EDcov.Rds")
+U.c = cov_canonical(data.random)
+m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)
+
+k=length(m$fitted_g$Ulist)
+l=length(m$fitted_g$grid)
+pimat=matrix(m$fitted_g$pi[-1],nrow=l,byrow=T)
+colnames(pimat)=names(m$fitted_g$pi)[2:(k+1)]
+barplot(colSums(pimat),las=2)
+```
+
+Now, let's plot the patterns of sharing:
+
+```{r,eval=T}
+library("lattice")
+for(i in 1:k){
+  z.num=as.matrix(m$fitted_g$Ulist[[i]])
+  colnames(z.num)=row.names(z.num)=colnames(zmash)
+clrs = colorRampPalette((c("#D73027","#FC8D59","#FEE090","#FFFFBF", "#E0F3F8","#91BFDB","#4575B4")))(64)
+z.num[lower.tri(z.num)] = NA
+print(levelplot(z.num,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main=paste0(names(m$fitted_g$Ulist)[[i]])))
+}
+```
