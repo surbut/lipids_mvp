@@ -1,12 +1,12 @@
 ---
 title: "creating_merged_lipids"
 output:
-  html_document:
-    df_print: paged
+  workflowr::wflow_html:
+    code_folding: hide
     toc: no
   html_notebook: default
-  workflowr::wflow_html:
-    code_folding: show
+  html_document:
+    df_print: paged
     toc: no
 editor_options:
   chunk_output_type: inline
@@ -34,6 +34,13 @@ m=merge(hdl[,c(1,3,4,6)],ldl[,c(1,4,6)],by=1);names(m)[4]="hdl";names(m)[6]="ldl
 m=merge(m,tg[,c(1,4,6)],by=1);names(m)[8]="tg"
 m=merge(m,tc[,c(1,4,6)],by=1);names(m)[10]="tc"
 
+## Creating P Table
+p=merge(hdl[,c(1,3,9)],ldl[,c(1,9)],by=1);names(p)[3]="hdl";names(p)[4]="ldl"
+p=merge(p,tg[,c(1,9)],by=1);names(p)[5]="tg"
+p=merge(p,tc[,c(1,9)],by=1);names(p)[6]="tc"
+
+p=apply(p[,c(3:6)],2,function(x){as.numeric(x)})
+write.table(p,"merged_p.txt")
 ```
 
 
@@ -86,7 +93,7 @@ To run mashr, we need a matrix of maxes. The best way to do this is to choose th
 ```
 
 ```{r, eval=FALSE,echo=TRUE}
-znew=read.table("~/lipids_mvp/data/znew.txt")
+
 max_block=data.frame(matrix(ncol = ncol(znew), nrow = nrow(bed)))
 colnames(max_block)=colnames(znew)
 for(i in 1:nrow(bed)){
@@ -117,17 +124,23 @@ write.table(max_block,"max_ld_block.txt")
 ```
 
 Now, we're ready to mash!
-```{r}
+```{r,warning=FALSE}
+
+znew=read.table("~/lipids_mvp/data/znew.txt")
 library("mashr")
 library("flashr")
 max_block=read.table("~/lipids_mvp/data/max_ld_block.txt")
-## source('~/Dropbox/jointData/flashscript.R')
+source('~/Dropbox/jointData/flashscript.R')
 # identify a random subset of 20000 tests
 random.subset = sample(1:nrow(znew),20000)
 zmash=as.matrix(znew[,c("hdl","ldl","tg","tc")]);rownames(zmash)=znew$rsid
 data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
-
 Vhat = estimate_null_correlation_simple(data.temp)
+library("lattice")
+clrs = colorRampPalette((c("#D73027","#FC8D59","#FEE090","#FFFFBF", "#E0F3F8","#91BFDB","#4575B4")))(64)
+
+print(levelplot(Vhat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main="VHAT"))
+
 rm(data.temp)
 data.random = mash_set_data(zmash[random.subset,],alpha = 1,V=Vhat)
 
@@ -139,7 +152,7 @@ U.pca = cov_pca(data.strong,3)
 # U.flash=cov_flash(data.strong, non_canonical = TRUE)
 # X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
 # U.ed = cov_ed(data.strong, c(U.flash, U.pca, list("XX" = t(X.center) %*% X.center / nrow(X.center))))
-# saveRDS(U.ed,"EDcov.Rds")
+# saveRDS(U.ed,"~/lipids_mvp/data/EDcov.Rds")
 
 U.ed=readRDS("~/lipids_mvp/data/EDcov.Rds")
 U.c = cov_canonical(data.random)
@@ -152,15 +165,53 @@ colnames(pimat)=names(m$fitted_g$pi)[2:(k+1)]
 barplot(colSums(pimat),las=2)
 ```
 
-Now, let's plot the patterns of sharing:
+Now, let's plot the patterns of sharing as the correlation matrix of the estimated covariance matrices. We can see that from the barplot, there are the following matrices: `r names(m$fitted_g$pi)[2:(k+1)]`.
 
 ```{r,eval=T}
 library("lattice")
 for(i in 1:k){
-  z.num=as.matrix(m$fitted_g$Ulist[[i]])
+  z.num=as.matrix(cov2cor(m$fitted_g$Ulist[[i]]))
   colnames(z.num)=row.names(z.num)=colnames(zmash)
 clrs = colorRampPalette((c("#D73027","#FC8D59","#FEE090","#FFFFBF", "#E0F3F8","#91BFDB","#4575B4")))(64)
 z.num[lower.tri(z.num)] = NA
 print(levelplot(z.num,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main=paste0(names(m$fitted_g$Ulist)[[i]])))
 }
 ```
+
+Now we can compute posteriors,
+
+```{r, eval=FALSE,echo=TRUE}
+
+mash.data=mash_set_data(zmash,V = Vhat,alpha = 1)
+
+m$result=mash_compute_posterior_matrices(m, mash.data, algorithm.version = "Rcpp")
+saveRDS(m,"~/lipids_mvp/data/mashresult.rds")
+```
+
+Let's take a look:
+
+```{r}
+m=readRDS("~/lipids_mvp/data/mashcomplete.rds")
+head(m$result$PosteriorMean)
+head(m$result$lfsr)
+
+lfsr=m$result$lfsr
+s=rowSums(lfsr<=0.05)
+
+hist(s[s>1],freq=FALSE,main="Number of Conditions")
+
+
+
+
+#ash.z=apply(zmash,2,function(x){ashr::ash(x,sebetahat = rep(1,length(x)))})
+#saveRDS(ash.z,"../data/ash.rds")
+ash.z=readRDS("~/lipids_mvp/data/ash.rds")
+ashresults=cbind(ash.z$hdl$result$PosteriorMean,ash.z$ldl$result$PosteriorMean,ash.z$tg$result$PosteriorMean,ash.z$tc$result$PosteriorMean)
+ashlfsr=cbind(ash.z$hdl$result$lfsr,ash.z$ldl$result$lfsr,ash.z$tg$result$lfsr,ash.z$tc$result$lfsr)
+
+sum(ashlfsr<0.05)
+```
+
+Here `r sum(ashlfsr<0.05)` SNPS x Conditions are less than 0.05 using a univariate appropach and `r sum(lfsr<0.05)` are less than 0.05 with a joint approach, a roughly 250% increase. Furthermore, `r sum(s>0)` SNPS are significant in at least one condition wiht a juint approach, while `r sum(rowSums(ashlfsr<0.05)>0)` with a univariate one.
+
+

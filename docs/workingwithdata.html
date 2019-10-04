@@ -337,7 +337,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-10-03
+<strong>Last updated:</strong> 2019-10-04
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 4 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 3
@@ -361,7 +361,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -432,6 +432,12 @@ unnamed-chunk-4
 <li>
 unnamed-chunk-5
 </li>
+<li>
+unnamed-chunk-6
+</li>
+<li>
+unnamed-chunk-7
+</li>
 </ul>
 <p>To ensure reproducibility of the results, delete the cache directory <code>workingwithdata_cache</code> and re-run the analysis. To have workflowr automatically delete the cache directory prior to building the file, set <code>delete_cache = TRUE</code> when running <code>wflow_build()</code> or <code>wflow_publish()</code>.</p>
 </div>
@@ -492,6 +498,30 @@ data/max_ld_block.txt
 data/EDcov.Rds
 </td>
 </tr>
+<tr>
+<td style="text-align:left;">
+~/lipids_mvp/data/mashresult.rds
+</td>
+<td style="text-align:left;">
+data/mashresult.rds
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+~/lipids_mvp/data/mashcomplete.rds
+</td>
+<td style="text-align:left;">
+data/mashcomplete.rds
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+~/lipids_mvp/data/ash.rds
+</td>
+<td style="text-align:left;">
+data/ash.rds
+</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -500,10 +530,10 @@ data/EDcov.Rds
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreeca158bfe3fb11c32becd8beed2cd252e9229904ctargetblankca158bfa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/ca158bfe3fb11c32becd8beed2cd252e9229904c" target="_blank">ca158bf</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree73da9ad68a26424b93dbae5e6899fdfbe8b9053btargetblank73da9ada"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/73da9ad68a26424b93dbae5e6899fdfbe8b9053b" target="_blank">73da9ad</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreeca158bfe3fb11c32becd8beed2cd252e9229904ctargetblankca158bfa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree73da9ad68a26424b93dbae5e6899fdfbe8b9053btargetblank73da9ada" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -513,10 +543,15 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.RData
+    Ignored:    analysis/.Rhistory
     Ignored:    analysis/workingwithdata_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/Archive.zip.gz
     Ignored:    data/EDcov.Rds
+    Ignored:    data/ash.rds
+    Ignored:    data/mashcomplete.rds
+    Ignored:    data/mashcomplete.rds.zip
     Ignored:    data/max_ld_block.txt
     Ignored:    data/merged_betas.txt
     Ignored:    data/merged_se.txt
@@ -525,7 +560,11 @@ Ignored files:
     Ignored:    docs/.DS_Store
 
 Untracked files:
-    Untracked:  analysis/workingwithdata.Rmd
+    Untracked:  analysis/workingwithdata.knit.md
+    Untracked:  analysis/workingwithdata.utf8.md
+
+Unstaged changes:
+    Modified:   analysis/workingwithdata.Rmd
 
 </code></pre>
 <p>
@@ -564,6 +603,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/73da9ad68a26424b93dbae5e6899fdfbe8b9053b/analysis/workingwithdata.Rmd" target="_blank">73da9ad</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+<td>
+Update
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/surbut/lipids_mvp/73da9ad68a26424b93dbae5e6899fdfbe8b9053b/docs/workingwithdata.html" target="_blank">73da9ad</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-03
+</td>
+<td>
+Update
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -627,8 +700,7 @@ write.table(z,&quot;merged_z.txt&quot;)</code></pre>
 # znew=cbind(df$foo.Chr,df$foo.Pos,z[,-1])
 # maxes=apply(znew[,c(&quot;hdl&quot;,&quot;ldl&quot;,&quot;tg&quot;,&quot;tc&quot;)],1,function(x){max(abs(x))})
 # znew=cbind(znew,maxes)</code></pre>
-<pre class="r"><code>znew=read.table(&quot;~/lipids_mvp/data/znew.txt&quot;)
-max_block=data.frame(matrix(ncol = ncol(znew), nrow = nrow(bed)))
+<pre class="r"><code>max_block=data.frame(matrix(ncol = ncol(znew), nrow = nrow(bed)))
 colnames(max_block)=colnames(znew)
 for(i in 1:nrow(bed)){
   chr=bed[i,1]
@@ -652,41 +724,20 @@ for(i in 1:nrow(bed)){
 max_block=na.omit(max_block)
 write.table(max_block,&quot;max_ld_block.txt&quot;)</code></pre>
 <p>Now, we’re ready to mash!</p>
-<pre class="r"><code>library(&quot;mashr&quot;)
+<pre class="r"><code>znew=read.table(&quot;~/lipids_mvp/data/znew.txt&quot;)
+library(&quot;mashr&quot;)
 library(&quot;flashr&quot;)
 max_block=read.table(&quot;~/lipids_mvp/data/max_ld_block.txt&quot;)
-## source(&#39;~/Dropbox/jointData/flashscript.R&#39;)
+source(&#39;~/Dropbox/jointData/flashscript.R&#39;)
 # identify a random subset of 20000 tests
 random.subset = sample(1:nrow(znew),20000)
 zmash=as.matrix(znew[,c(&quot;hdl&quot;,&quot;ldl&quot;,&quot;tg&quot;,&quot;tc&quot;)]);rownames(zmash)=znew$rsid
 data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
-
 Vhat = estimate_null_correlation_simple(data.temp)
-rm(data.temp)
-data.random = mash_set_data(zmash[random.subset,],alpha = 1,V=Vhat)
+library(&quot;lattice&quot;)
+clrs = colorRampPalette((c(&quot;#D73027&quot;,&quot;#FC8D59&quot;,&quot;#FEE090&quot;,&quot;#FFFFBF&quot;, &quot;#E0F3F8&quot;,&quot;#91BFDB&quot;,&quot;#4575B4&quot;)))(64)
 
-zmax=apply(max_block[,c(4:7)],2,function(x){as.numeric(x)});rownames(zmax)=max_block$rsid
-data.strong = mash_set_data(zmax,alpha = 1,V=Vhat)
-
-U.pca = cov_pca(data.strong,3)
-
-# U.flash=cov_flash(data.strong, non_canonical = TRUE)
-# X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
-# U.ed = cov_ed(data.strong, c(U.flash, U.pca, list(&quot;XX&quot; = t(X.center) %*% X.center / nrow(X.center))))
-# saveRDS(U.ed,&quot;EDcov.Rds&quot;)
-
-U.ed=readRDS(&quot;~/lipids_mvp/data/EDcov.Rds&quot;)
-U.c = cov_canonical(data.random)
-m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)</code></pre>
-<pre><code> - Computing 20000 x 321 likelihood matrix.
- - Likelihood calculations took 0.73 seconds.
- - Fitting model with 321 mixture components.
- - Model fitting took 32.56 seconds.</code></pre>
-<pre class="r"><code>k=length(m$fitted_g$Ulist)
-l=length(m$fitted_g$grid)
-pimat=matrix(m$fitted_g$pi[-1],nrow=l,byrow=T)
-colnames(pimat)=names(m$fitted_g$pi)[2:(k+1)]
-barplot(colSums(pimat),las=2)</code></pre>
+print(levelplot(Vhat,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,colorkey = TRUE,main=&quot;VHAT&quot;))</code></pre>
 <p><img src="figure/workingwithdata.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
@@ -725,10 +776,36 @@ Sarah Urbut
 </table>
 </div>
 </div>
-<p>Now, let’s plot the patterns of sharing:</p>
+<pre class="r"><code>rm(data.temp)
+data.random = mash_set_data(zmash[random.subset,],alpha = 1,V=Vhat)
+
+zmax=apply(max_block[,c(4:7)],2,function(x){as.numeric(x)});rownames(zmax)=max_block$rsid
+data.strong = mash_set_data(zmax,alpha = 1,V=Vhat)
+
+U.pca = cov_pca(data.strong,3)
+
+# U.flash=cov_flash(data.strong, non_canonical = TRUE)
+# X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
+# U.ed = cov_ed(data.strong, c(U.flash, U.pca, list(&quot;XX&quot; = t(X.center) %*% X.center / nrow(X.center))))
+# saveRDS(U.ed,&quot;~/lipids_mvp/data/EDcov.Rds&quot;)
+
+U.ed=readRDS(&quot;~/lipids_mvp/data/EDcov.Rds&quot;)
+U.c = cov_canonical(data.random)
+m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)</code></pre>
+<pre><code> - Computing 20000 x 321 likelihood matrix.
+ - Likelihood calculations took 2.13 seconds.
+ - Fitting model with 321 mixture components.
+ - Model fitting took 31.55 seconds.</code></pre>
+<pre class="r"><code>k=length(m$fitted_g$Ulist)
+l=length(m$fitted_g$grid)
+pimat=matrix(m$fitted_g$pi[-1],nrow=l,byrow=T)
+colnames(pimat)=names(m$fitted_g$pi)[2:(k+1)]
+barplot(colSums(pimat),las=2)</code></pre>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Now, let’s plot the patterns of sharing as the correlation matrix of the estimated covariance matrices. We can see that from the barplot, there are the following matrices: ED_FLASH_1.1, ED_tFLASH.1, ED_PCA_1.1, ED_PCA_2.1, ED_PCA_3.1, ED_tPCA.1, ED_XX.1, identity.1, hdl.1, ldl.1, tg.1, tc.1, equal_effects.1, simple_het_1.1, simple_het_2.1, simple_het_3.1.</p>
 <pre class="r"><code>library(&quot;lattice&quot;)
 for(i in 1:k){
-  z.num=as.matrix(m$fitted_g$Ulist[[i]])
+  z.num=as.matrix(cov2cor(m$fitted_g$Ulist[[i]]))
   colnames(z.num)=row.names(z.num)=colnames(zmash)
 clrs = colorRampPalette((c(&quot;#D73027&quot;,&quot;#FC8D59&quot;,&quot;#FEE090&quot;,&quot;#FFFFBF&quot;, &quot;#E0F3F8&quot;,&quot;#91BFDB&quot;,&quot;#4575B4&quot;)))(64)
 z.num[lower.tri(z.num)] = NA
@@ -1000,6 +1077,8 @@ Sarah Urbut
 </table>
 </div>
 </div>
+<pre><code>Warning in cov2cor(m$fitted_g$Ulist[[i]]): diag(.) had 0 or NA entries;
+non-finite result is doubtful</code></pre>
 <p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-8.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-8">
@@ -1038,6 +1117,8 @@ Sarah Urbut
 </table>
 </div>
 </div>
+<pre><code>Warning in cov2cor(m$fitted_g$Ulist[[i]]): diag(.) had 0 or NA entries;
+non-finite result is doubtful</code></pre>
 <p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-9.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-9">
@@ -1076,6 +1157,8 @@ Sarah Urbut
 </table>
 </div>
 </div>
+<pre><code>Warning in cov2cor(m$fitted_g$Ulist[[i]]): diag(.) had 0 or NA entries;
+non-finite result is doubtful</code></pre>
 <p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-10.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-10">
@@ -1114,6 +1197,8 @@ Sarah Urbut
 </table>
 </div>
 </div>
+<pre><code>Warning in cov2cor(m$fitted_g$Ulist[[i]]): diag(.) had 0 or NA entries;
+non-finite result is doubtful</code></pre>
 <p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-11.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-11">
@@ -1342,6 +1427,43 @@ Sarah Urbut
 </table>
 </div>
 </div>
+<p>Now we can compute posteriors,</p>
+<pre class="r"><code>mash.data=mash_set_data(zmash,V = Vhat,alpha = 1)
+
+m$result=mash_compute_posterior_matrices(m, mash.data, algorithm.version = &quot;Rcpp&quot;)
+saveRDS(m,&quot;~/lipids_mvp/data/mashresult.rds&quot;)</code></pre>
+<p>Let’s take a look:</p>
+<pre class="r"><code>m=readRDS(&quot;~/lipids_mvp/data/mashcomplete.rds&quot;)
+head(m$result$PosteriorMean)</code></pre>
+<pre><code>                   hdl         ldl           tg          tc
+rs1172982   0.06015013  0.10542699  0.002012870  0.11805417
+rs1172981   0.28626776  0.05244131 -0.188875181  0.10104744
+rs11166327 -0.11849671 -0.01776064  0.085266561 -0.03603278
+rs4908018   0.31317283  0.05412064 -0.209288205  0.10681010
+rs2392072   0.05437422  0.09588751  0.002789049  0.10754994
+rs12129588  0.34618757  0.07306129 -0.225178675  0.13174043</code></pre>
+<pre class="r"><code>head(m$result$lfsr)</code></pre>
+<pre><code>                 hdl       ldl        tg        tc
+rs1172982  0.6283334 0.5228317 0.6311741 0.5223916
+rs1172981  0.4205101 0.4270629 0.4196412 0.4274541
+rs11166327 0.5462653 0.5541580 0.5434676 0.5553625
+rs4908018  0.4001065 0.4115782 0.3989821 0.4121384
+rs2392072  0.6310612 0.5339740 0.6339992 0.5334568
+rs12129588 0.3834876 0.3805365 0.3827029 0.3809647</code></pre>
+<pre class="r"><code>lfsr=m$result$lfsr
+s=rowSums(lfsr&lt;=0.05)
+
+hist(s[s&gt;1],freq=FALSE,main=&quot;Number of Conditions&quot;)</code></pre>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#ash.z=apply(zmash,2,function(x){ashr::ash(x,sebetahat = rep(1,length(x)))})
+#saveRDS(ash.z,&quot;../data/ash.rds&quot;)
+ash.z=readRDS(&quot;~/lipids_mvp/data/ash.rds&quot;)
+ashresults=cbind(ash.z$hdl$result$PosteriorMean,ash.z$ldl$result$PosteriorMean,ash.z$tg$result$PosteriorMean,ash.z$tc$result$PosteriorMean)
+ashlfsr=cbind(ash.z$hdl$result$lfsr,ash.z$ldl$result$lfsr,ash.z$tg$result$lfsr,ash.z$tc$result$lfsr)
+
+sum(ashlfsr&lt;0.05)</code></pre>
+<pre><code>[1] 29301</code></pre>
+<p>Here 29301 SNPS x Conditions are less than 0.05 using a univariate appropach and 80539 are less than 0.05 with a joint approach, a roughly 250% increase. Furthermore, 32176 SNPS are significant in at least one condition wiht a juint approach, while 18099 with a univariate one.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1438,7 +1560,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
+  window.initializeCodeFolding("hide" === "show");
 });
 </script>
 
