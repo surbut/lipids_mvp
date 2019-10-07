@@ -1,0 +1,89 @@
+---
+title: "looking_at_significance"
+output:
+  workflowr::wflow_html:
+    code_folding: hide
+    toc: no
+  html_notebook: default
+  html_document:
+    df_print: paged
+    toc: no
+editor_options:
+  chunk_output_type: inline
+---
+
+## Introduction
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache= TRUE)
+knitr::opts_chunk$set(autodep = TRUE)
+library("rmeta")
+```
+
+```{r load.data}
+setwd('~/lipids_mvp/analysis/')
+mash=readRDS("../data/mashcomplete.rds")
+ash=readRDS("../data/ash.rds")
+bf=read.table('../data/merged_betas.txt')
+sf=read.table('../data/merged_se.txt')
+z=read.table("../data/merged_z.txt")
+pm=mash$result$PosteriorMean
+pv=mash$result$PosteriorSD
+lfsr=mash$result$lfsr
+
+betas=bf[1:2437099,c("hdl","ldl","tg","tc")];rownames(betas)=bf$SNP_hg18[1:2437099]
+se=sf[1:2437099,c("hdl","ldl","tg","tc")];rownames(se)=sf$SNP_hg18[1:2437099]
+
+shrunk.beta=se*pm;colnames(shrunk.beta)=colnames(pm);rownames(shrunk.beta)=rownames(betas)
+shrunk.se=pv*se;colnames(shrunk.se)=colnames(pm);rownames(shrunk.se)=rownames(betas)
+```
+
+
+Let's print the maximum by hdl and then triglyceride:
+```{r}
+
+b=betas[order(abs(betas$hdl),decreasing=T),][1:100,]
+tg=b[order(abs(b$tg),decreasing=T),][1:100,]
+
+head(tg)
+j=which(rownames(betas)==rownames(tg)[1])
+
+# title=paste("MLE",bf[j,"rsid"])
+# par(mfrow=c(1,2))
+# metaplot(as.numeric(betas[j,]),as.numeric(se[j,]),colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta),xlab = "",ylab="")
+# title(title)
+
+
+title=paste("Mash",bf[j,"rsid"])
+sd=as.numeric(shrunk.se[j,])##to transform to posterior sd of beta
+x=as.numeric(shrunk.beta[j,])
+metaplot(x,sd,xlab = "",ylab="",colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta))
+title(title)
+
+```
+
+We can do the same for LDL and TG, sorting first by LDL and then by TG
+
+```{r}
+b=betas[order(abs(betas$ldl),decreasing=T),][1:100,]
+tg=b[order(abs(b$tg),decreasing=T),][1:100,]
+
+head(tg)
+j=which(rownames(betas)==rownames(tg)[1])
+
+# title=paste("MLE",bf[j,"rsid"])
+# par(mfrow=c(1,2))
+# metaplot(as.numeric(betas[j,]),as.numeric(se[j,]),colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta),xlab = "",ylab="")
+# title(title)
+
+
+title=paste("Mash",bf[j,"rsid"])
+sd=as.numeric(shrunk.se[j,])##to transform to posterior sd of beta
+x=as.numeric(shrunk.beta[j,])
+metaplot(x,sd,xlab = "",ylab="",colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta))
+title(title)
+
+```
+

@@ -215,3 +215,4 @@ sum(ashlfsr<0.05)
 Here `r sum(ashlfsr<0.05)` SNPS x Conditions are less than 0.05 using a univariate appropach and `r sum(lfsr<0.05)` are less than 0.05 with a joint approach, a roughly 250% increase. Furthermore, `r sum(s>0)` SNPS are significant in at least one condition wiht a juint approach, while `r sum(rowSums(ashlfsr<0.05)>0)` with a univariate one.
 
 
+
