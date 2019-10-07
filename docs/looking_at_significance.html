@@ -361,7 +361,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -412,10 +412,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 The following chunks had caches available:
 <ul>
 <li>
+load.data
+</li>
+<li>
 session-info-chunk-inserted-by-workflowr
 </li>
 <li>
 unnamed-chunk-1
+</li>
+<li>
+unnamed-chunk-2
 </li>
 </ul>
 <p>To ensure reproducibility of the results, delete the cache directory <code>looking_at_significance_cache</code> and re-run the analysis. To have workflowr automatically delete the cache directory prior to building the file, set <code>delete_cache = TRUE</code> when running <code>wflow_build()</code> or <code>wflow_publish()</code>.</p>
@@ -461,10 +467,10 @@ analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree7142cc6e1a1a240718b1ab5841a9010992d015f6targetblank7142cc6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/7142cc6e1a1a240718b1ab5841a9010992d015f6" target="_blank">7142cc6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree079589bbab8b0f2b017b6dc68671df3defa877bctargetblank079589ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/079589bbab8b0f2b017b6dc68671df3defa877bc" target="_blank">079589b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree7142cc6e1a1a240718b1ab5841a9010992d015f6targetblank7142cc6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree079589bbab8b0f2b017b6dc68671df3defa877bctargetblank079589ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -493,13 +499,11 @@ Ignored files:
     Ignored:    docs/.DS_Store
 
 Untracked files:
-    Untracked:  analysis/looking_at_significance.Rmd
     Untracked:  analysis/looking_at_significance.knit.md
     Untracked:  analysis/looking_at_significance.utf8.md
-    Untracked:  docs/figure/looking_at_significance.Rmd/
 
 Unstaged changes:
-    Modified:   analysis/workingwithdata.Rmd
+    Modified:   analysis/looking_at_significance.Rmd
 
 </code></pre>
 <p>
@@ -512,9 +516,69 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
+
 <p>
-There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
 </p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/079589bbab8b0f2b017b6dc68671df3defa877bc/analysis/looking_at_significance.Rmd" target="_blank">079589b</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-07
+</td>
+<td>
+Update
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/surbut/lipids_mvp/079589bbab8b0f2b017b6dc68671df3defa877bc/docs/looking_at_significance.html" target="_blank">079589b</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-07
+</td>
+<td>
+Update
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 </div>
 </div>
@@ -562,6 +626,48 @@ x=as.numeric(shrunk.beta[j,])
 metaplot(x,sd,xlab = &quot;&quot;,ylab=&quot;&quot;,colors=meta.colors(box=c(&quot;red&quot;,&quot;blue&quot;,&quot;green&quot;,&quot;yellow&quot;),lines=&quot;blue&quot;, zero=&quot;red&quot;, summary=&quot;orange&quot;,text=&quot;forestgreen&quot;),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta))
 title(title)</code></pre>
 <p><img src="figure/looking_at_significance.Rmd/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-1-1">
+Past versions of unnamed-chunk-1-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-1-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/079589bbab8b0f2b017b6dc68671df3defa877bc/docs/figure/looking_at_significance.Rmd/unnamed-chunk-1-1.png" target="_blank">079589b</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-07
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>print(&quot;LFSR of SNP&quot;)</code></pre>
+<pre><code>[1] &quot;LFSR of SNP&quot;</code></pre>
+<pre class="r"><code>lfsr[j,]</code></pre>
+<pre><code>         hdl          ldl           tg           tc 
+1.433870e-58 9.639228e-03 1.110223e-16 2.812616e-01 </code></pre>
 <p>We can do the same for LDL and TG, sorting first by LDL and then by TG</p>
 <pre class="r"><code>b=betas[order(abs(betas$ldl),decreasing=T),][1:100,]
 tg=b[order(abs(b$tg),decreasing=T),][1:100,]
@@ -588,6 +694,48 @@ x=as.numeric(shrunk.beta[j,])
 metaplot(x,sd,xlab = &quot;&quot;,ylab=&quot;&quot;,colors=meta.colors(box=c(&quot;red&quot;,&quot;blue&quot;,&quot;green&quot;,&quot;yellow&quot;),lines=&quot;blue&quot;, zero=&quot;red&quot;, summary=&quot;orange&quot;,text=&quot;forestgreen&quot;),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta))
 title(title)</code></pre>
 <p><img src="figure/looking_at_significance.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/079589bbab8b0f2b017b6dc68671df3defa877bc/docs/figure/looking_at_significance.Rmd/unnamed-chunk-2-1.png" target="_blank">079589b</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-07
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>print(&quot;LFSR of SNP&quot;)</code></pre>
+<pre><code>[1] &quot;LFSR of SNP&quot;</code></pre>
+<pre class="r"><code>lfsr[j,]</code></pre>
+<pre><code>         hdl          ldl           tg           tc 
+4.298489e-16 6.291464e-07 1.624161e-04 8.468237e-02 </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

@@ -62,6 +62,8 @@ x=as.numeric(shrunk.beta[j,])
 metaplot(x,sd,xlab = "",ylab="",colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta))
 title(title)
 
+print("LFSR of SNP")
+lfsr[j,]
 ```
 
 We can do the same for LDL and TG, sorting first by LDL and then by TG
@@ -85,5 +87,7 @@ x=as.numeric(shrunk.beta[j,])
 metaplot(x,sd,xlab = "",ylab="",colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta))
 title(title)
 
+print("LFSR of SNP")
+lfsr[j,]
 ```
 
