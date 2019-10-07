@@ -75,10 +75,10 @@ tg=b[order(abs(b$tg),decreasing=T),][1:100,]
 head(tg)
 j=which(rownames(betas)==rownames(tg)[1])
 
-# title=paste("MLE",bf[j,"rsid"])
-# par(mfrow=c(1,2))
-# metaplot(as.numeric(betas[j,]),as.numeric(se[j,]),colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta),xlab = "",ylab="")
-# title(title)
+title=paste("MLE",bf[j,"rsid"])
+par(mfrow=c(1,2))
+metaplot(as.numeric(betas[j,]),as.numeric(se[j,]),colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta),xlab = "",ylab="")
+title(title)
 
 
 title=paste("Mash",bf[j,"rsid"])

@@ -9,3 +9,8 @@ editor_options:
 ---
 
 Welcome to my research website.
+
+Here are the patterns of [sharing](workingwithdata.html).
+
+
+Here we tabulate significant [results](looking_at_significance.html).
