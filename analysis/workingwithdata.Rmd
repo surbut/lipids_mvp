@@ -214,5 +214,20 @@ sum(ashlfsr<0.05)
 
 Here `r sum(ashlfsr<0.05)` SNPS x Conditions are less than 0.05 using a univariate appropach and `r sum(lfsr<0.05)` are less than 0.05 with a joint approach, a roughly 250% increase. Furthermore, `r sum(s>0)` SNPS are significant in at least one condition wiht a juint approach, while `r sum(rowSums(ashlfsr<0.05)>0)` with a univariate one.
 
+```{r}
+p=read.table("~/lipids_mvp/data/merged_p.txt")
+library(knitr)
+library(kableExtra)
+dt <- cbind(c(paste("Bonferroni=",sum(p<=5e-8)),paste("univariate_ash=",sum(ashlfsr<0.05)),paste("mv_mash=",sum(lfsr<0.05))))
 
+dt <- cbind(c(sum(p<=5e-8),sum(ashlfsr<0.05),sum(lfsr<0.05)))
+dt=cbind(dt,c(sum(rowSums(p<=5e-8)>0),sum(rowSums(ashlfsr<0.05)>0),sum(rowSums(lfsr<0.05)>0)))
+rownames(dt)=c("Bonferroni","UnivariateAsh","Mash")
+colnames(dt)=c("Overall All Associations","Per Snp, in at least one")           
+              
+kable(dt)
+dt %>%
+  kable() %>%
+  kable_styling()
+```
 

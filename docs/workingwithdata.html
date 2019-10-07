@@ -24,6 +24,7 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -337,7 +338,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-10-05
+<strong>Last updated:</strong> 2019-10-07
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 4 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 3
@@ -522,6 +523,14 @@ data/mashcomplete.rds
 data/ash.rds
 </td>
 </tr>
+<tr>
+<td style="text-align:left;">
+~/lipids_mvp/data/merged_p.txt
+</td>
+<td style="text-align:left;">
+data/merged_p.txt
+</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -530,10 +539,10 @@ data/ash.rds
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree7142cc6e1a1a240718b1ab5841a9010992d015f6targetblank7142cc6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/7142cc6e1a1a240718b1ab5841a9010992d015f6" target="_blank">7142cc6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreed8023e7e317668a6f82201b9d20dd176cbefcdaftargetblankd8023e7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/d8023e7e317668a6f82201b9d20dd176cbefcdaf" target="_blank">d8023e7</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree7142cc6e1a1a240718b1ab5841a9010992d015f6targetblank7142cc6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreed8023e7e317668a6f82201b9d20dd176cbefcdaftargetblankd8023e7a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -545,22 +554,22 @@ Ignored files:
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
+    Ignored:    analysis/looking_at_significance_cache/
     Ignored:    analysis/workingwithdata_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/Archive.zip.gz
     Ignored:    data/EDcov.Rds
     Ignored:    data/ash.rds
+    Ignored:    data/gtexcolors.txt
     Ignored:    data/mashcomplete.rds
     Ignored:    data/mashcomplete.rds.zip
     Ignored:    data/max_ld_block.txt
     Ignored:    data/merged_betas.txt
+    Ignored:    data/merged_p.txt
     Ignored:    data/merged_se.txt
     Ignored:    data/merged_z.txt
     Ignored:    data/znew.txt
     Ignored:    docs/.DS_Store
-
-Untracked files:
-    Untracked:  analysis/looking_at_significance.Rmd
 
 Unstaged changes:
     Modified:   analysis/workingwithdata.Rmd
@@ -602,6 +611,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/079589bbab8b0f2b017b6dc68671df3defa877bc/analysis/workingwithdata.Rmd" target="_blank">079589b</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-07
+</td>
+<td>
+Update
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/surbut/lipids_mvp/079589bbab8b0f2b017b6dc68671df3defa877bc/docs/workingwithdata.html" target="_blank">079589b</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-07
+</td>
+<td>
+Update
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1497,6 +1540,118 @@ ashlfsr=cbind(ash.z$hdl$result$lfsr,ash.z$ldl$result$lfsr,ash.z$tg$result$lfsr,a
 sum(ashlfsr&lt;0.05)</code></pre>
 <pre><code>[1] 29301</code></pre>
 <p>Here 29301 SNPS x Conditions are less than 0.05 using a univariate appropach and 80539 are less than 0.05 with a joint approach, a roughly 250% increase. Furthermore, 32176 SNPS are significant in at least one condition wiht a juint approach, while 18099 with a univariate one.</p>
+<pre class="r"><code>p=read.table(&quot;~/lipids_mvp/data/merged_p.txt&quot;)
+library(knitr)
+library(kableExtra)
+dt &lt;- cbind(c(paste(&quot;Bonferroni=&quot;,sum(p&lt;=5e-8)),paste(&quot;univariate_ash=&quot;,sum(ashlfsr&lt;0.05)),paste(&quot;mv_mash=&quot;,sum(lfsr&lt;0.05))))
+
+dt &lt;- cbind(c(sum(p&lt;=5e-8),sum(ashlfsr&lt;0.05),sum(lfsr&lt;0.05)))
+dt=cbind(dt,c(sum(rowSums(p&lt;=5e-8)&gt;0),sum(rowSums(ashlfsr&lt;0.05)&gt;0),sum(rowSums(lfsr&lt;0.05)&gt;0)))
+rownames(dt)=c(&quot;Bonferroni&quot;,&quot;UnivariateAsh&quot;,&quot;Mash&quot;)
+colnames(dt)=c(&quot;Overall All Associations&quot;,&quot;Per Snp, in at least one&quot;)           
+              
+kable(dt)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Overall All Associations
+</th>
+<th style="text-align:right;">
+Per Snp, in at least one
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Bonferroni
+</td>
+<td style="text-align:right;">
+14005
+</td>
+<td style="text-align:right;">
+8595
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+UnivariateAsh
+</td>
+<td style="text-align:right;">
+29301
+</td>
+<td style="text-align:right;">
+18099
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mash
+</td>
+<td style="text-align:right;">
+80539
+</td>
+<td style="text-align:right;">
+32176
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>dt %&gt;%
+  kable() %&gt;%
+  kable_styling()</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Overall All Associations
+</th>
+<th style="text-align:right;">
+Per Snp, in at least one
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Bonferroni
+</td>
+<td style="text-align:right;">
+14005
+</td>
+<td style="text-align:right;">
+8595
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+UnivariateAsh
+</td>
+<td style="text-align:right;">
+29301
+</td>
+<td style="text-align:right;">
+18099
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mash
+</td>
+<td style="text-align:right;">
+80539
+</td>
+<td style="text-align:right;">
+32176
+</td>
+</tr>
+</tbody>
+</table>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
