@@ -19,6 +19,7 @@ Our goal is to simulate GWAS in a situation with
 1) weak signal (only 1% if associations are real)
 2) strongly correlated errors (i.e, cor(e_i,e_j)=0.8).
 
+We simulate the data, and then compute posteriors using univariate methods and configuration based joint methods. Then we compute RMSE (measure of accuracy) and produce the ROC curves demonstrating power.
 
 ```{r}
 setwd("~/lipids_mvp/analysis/")
@@ -38,6 +39,7 @@ zmat=bmat/semat
 
 ```
 
+Here we demonstrate the correlated error matrix:
 
 ```{r}
 zmash=zmat
@@ -65,10 +67,11 @@ data.strong = mash_set_data(zmax,alpha = 1,V=Vhat)
 
 U.pca = cov_pca(data.strong,3)
 
-U.flash=cov_flash(data.strong, non_canonical = TRUE)
-X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
-U.ed = cov_ed(data.strong, c(U.flash, U.pca, list("XX" = t(X.center) %*% X.center / nrow(X.center))))
-saveRDS(U.ed,"~/lipids_mvp/data/EDcov_sim.Rds")
+#U.flash=cov_flash(data.strong, non_canonical = TRUE)
+#X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
+#U.ed = cov_ed(data.strong, c(U.flash, U.pca, list("XX" = t(X.center) %*% X.center / nrow(X.center))))
+#saveRDS(U.ed,"~/lipids_mvp/data/EDcov_sim.Rds")
+
 
 U.ed=readRDS("~/lipids_mvp/data/EDcov_sim.Rds")
 U.c = cov_canonical(data.random)
@@ -116,10 +119,7 @@ U.c = cov_canonical(mash.data)
 print(names(U.c))
 ```
 
-# Step 3: fit the model
 
-Having set up the data and covariance matrices you are ready to fit
-the model using the `mash` function:
 
 ```{r}
 m.c = mash(mash.data, U.c)
@@ -136,11 +136,13 @@ mash.means=m$result$PosteriorMean
 lfsr.mash=m$result$lfsr
 
 standard=sqrt(mean((beta[1:10000,]-bmat[1:10000,])^2))
-sqrt(mean((beta[1:10000,]-mash.means[1:10000,]*sebetahat)^2))/standard
-sqrt(mean((beta[1:10000,]-univariate.ash.pm[1:10000,]*sebetahat)^2))/standard
-sqrt(mean((beta[1:10000,]-bma.pm[1:10000,]*sebetahat)^2))/standard
+# sqrt(mean((beta[1:10000,]-mash.means[1:10000,]*sebetahat)^2))/standard
+# sqrt(mean((beta[1:10000,]-univariate.ash.pm[1:10000,]*sebetahat)^2))/standard
+# sqrt(mean((beta[1:10000,]-bma.pm[1:10000,]*sebetahat)^2))/standard
 
 rmse.all.table=cbind(mash=sqrt(mean((beta[1:10000,]-mash.means[1:10000,]*sebetahat)^2))/standard,mash.bmalite=sqrt(mean((beta[1:10000,]-bma.pm[1:10000,]*sebetahat)^2))/standard,ash=sqrt(mean((beta[1:10000,]-univariate.ash.pm[1:10000,]*sebetahat)^2))/standard) 
+
+print("RMSE TABLE",rmse.all.table)
 
 barplot(as.numeric(rmse.all.table),main="Shared, Structured Effects",
         ylab="relative error (RRMSE)",xlab="",col=c("green","blue","red"),names=colnames(rmse.all.table),ylim=c(0,0.15),cex.main=1.5,cex.lab=1,cex.names=1,las=2)
