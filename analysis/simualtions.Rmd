@@ -1,0 +1,203 @@
+---
+title: "simualtions"
+output:
+  workflowr::wflow_html:
+    code_folding: hide
+    toc: no
+  html_notebook: default
+  html_document:
+    df_print: paged
+    toc: no
+editor_options:
+  chunk_output_type: inline
+---
+
+## Introduction
+
+
+Our goal is to simulate GWAS in a situation with 
+1) weak signal (only 1% if associations are real)
+2) strongly correlated errors (i.e, cor(e_i,e_j)=0.8).
+
+
+```{r}
+setwd("~/lipids_mvp/analysis/")
+source("../scripts/Sim_with_error.R")
+m.model=readRDS("../data/mashcomplete.rds")
+covmat=m.model$fitted_g$Ulist[1:7]
+set.seed(123)
+sim.data=sim.with.error(J=10000,d=4,rho=0.8,n=100,covmat = covmat,betasd = 0.0001,esd = 0.005) ##sample 100 from the K covariance matrices with equal probability
+
+bmat=sim.data$betahat
+semat=sim.data$sebetahat
+
+beta=sim.data$beta
+
+zmat=bmat/semat
+
+
+```
+
+
+```{r}
+zmash=zmat
+library("mashr")
+library("flashr")
+source('~/Dropbox/jointData/flashscript.R')
+# identify a random subset of 20000 tests
+random.subset = sample(1:nrow(zmash),2000)
+
+data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
+Vhat = estimate_null_correlation_simple(data.temp)
+library("lattice")
+clrs = colorRampPalette((c("#D73027","#FC8D59","#FEE090","#FFFFBF", "#E0F3F8","#91BFDB","#4575B4")))(64)
+
+print(levelplot(Vhat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main="VHAT"))
+
+rm(data.temp)
+data.random = mash_set_data(zmash[random.subset,],alpha = 1,V=Vhat)
+
+maxval=apply(zmash,1,function(x){max(abs(x))})
+zmax=zmash[order(maxval,decreasing = T),][1:100,]
+
+
+data.strong = mash_set_data(zmax,alpha = 1,V=Vhat)
+
+U.pca = cov_pca(data.strong,3)
+
+U.flash=cov_flash(data.strong, non_canonical = TRUE)
+X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
+U.ed = cov_ed(data.strong, c(U.flash, U.pca, list("XX" = t(X.center) %*% X.center / nrow(X.center))))
+saveRDS(U.ed,"~/lipids_mvp/data/EDcov_sim.Rds")
+
+U.ed=readRDS("~/lipids_mvp/data/EDcov_sim.Rds")
+U.c = cov_canonical(data.random)
+m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)
+
+mash.data=mash_set_data(zmash,V = Vhat,alpha = 1)
+
+m$result=mash_compute_posterior_matrices(m, mash.data, algorithm.version = "Rcpp")
+saveRDS(m,"~/lipids_mvp/data/mashresult_sim.rds")
+```
+
+```{r plotting}
+
+k=length(m$fitted_g$Ulist)
+l=length(m$fitted_g$grid)
+pimat=matrix(m$fitted_g$pi[-1],nrow=l,byrow=T)
+colnames(pimat)=names(m$fitted_g$pi)[2:(k+1)]
+barplot(colSums(pimat),las=2)
+
+# library("lattice")
+# for(i in 1:k){
+#   z.num=as.matrix(cov2cor(m$fitted_g$Ulist[[i]]))
+#   colnames(z.num)=row.names(z.num)=colnames(zmash)
+# clrs = colorRampPalette((c("#D73027","#FC8D59","#FEE090","#FFFFBF", "#E0F3F8","#91BFDB","#4575B4")))(64)
+# z.num[lower.tri(z.num)] = NA
+# print(levelplot(z.num,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main=paste0(names(m$fitted_g$Ulist)[[i]])))
+# }
+
+library("ashr")
+
+ash.z=apply(zmash,2,function(x){ashr::ash(x,sebetahat = rep(1,length(x)))})
+saveRDS(ash.z,"~/lipids_mvp/data/ash_sim.rds")
+univariate.ash.pm=cbind(ash.z[[1]]$result$PosteriorMean,ash.z[[2]]$result$PosteriorMean,ash.z[[3]]$result$PosteriorMean,ash.z[[4]]$result$PosteriorMean)
+
+lfsr.ash=cbind(ash.z[[1]]$result$lfsr,ash.z[[2]]$result$lfsr,ash.z[[3]]$result$lfsr,ash.z[[4]]$result$lfsr)
+
+
+```
+
+If we want to compare to eQTL bma, we use only canonical configurations:
+
+```{r}
+
+U.c = cov_canonical(mash.data)  
+print(names(U.c))
+```
+
+# Step 3: fit the model
+
+Having set up the data and covariance matrices you are ready to fit
+the model using the `mash` function:
+
+```{r}
+m.c = mash(mash.data, U.c)
+
+bma.pm=m.c$result$PosteriorMean
+lfsr.bma=m.c$result$lfsr
+```
+
+Now let's do some analysis;
+
+```{r}
+sebetahat=semat[1:10000,]
+mash.means=m$result$PosteriorMean
+lfsr.mash=m$result$lfsr
+
+standard=sqrt(mean((beta[1:10000,]-bmat[1:10000,])^2))
+sqrt(mean((beta[1:10000,]-mash.means[1:10000,]*sebetahat)^2))/standard
+sqrt(mean((beta[1:10000,]-univariate.ash.pm[1:10000,]*sebetahat)^2))/standard
+sqrt(mean((beta[1:10000,]-bma.pm[1:10000,]*sebetahat)^2))/standard
+
+rmse.all.table=cbind(mash=sqrt(mean((beta[1:10000,]-mash.means[1:10000,]*sebetahat)^2))/standard,mash.bmalite=sqrt(mean((beta[1:10000,]-bma.pm[1:10000,]*sebetahat)^2))/standard,ash=sqrt(mean((beta[1:10000,]-univariate.ash.pm[1:10000,]*sebetahat)^2))/standard) 
+
+barplot(as.numeric(rmse.all.table),main="Shared, Structured Effects",
+        ylab="relative error (RRMSE)",xlab="",col=c("green","blue","red"),names=colnames(rmse.all.table),ylim=c(0,0.15),cex.main=1.5,cex.lab=1,cex.names=1,las=2)
+```
+
+
+```{R}
+sign.test.mash=beta*mash.means
+sign.test.ash=beta*univariate.ash.pm
+sign.test.bma=beta*bma.pm
+
+
+mash.power=NULL
+ash.power=NULL
+bma.power=NULL
+
+mash.fp=NULL
+ash.fp=NULL
+bma.fp=NULL
+
+mash.td=NULL
+ash.td=NULL
+bma.td=NULL
+
+
+thresholds=seq(0.01,1,by=0.01)
+for(s in 1:length(thresholds)){
+thresh=thresholds[s]
+
+
+##sign power is the proportion of true effects correctly signed at a given threshold
+mash.power[s]=sum(sign.test.mash>0&lfsr.mash<=thresh)/sum(beta!=0)
+ash.power[s]=sum(sign.test.ash>0&lfsr.ash<=thresh)/sum(beta!=0)
+bma.power[s]=sum(sign.test.bma>0&lfsr.bma<=thresh)/sum(beta!=0)
+
+##false positives is the proportion of null effects called at a given threshold
+mash.fp[s]=sum(beta==0&lfsr.mash<=thresh)/sum(beta==0)
+ash.fp[s]=sum(beta==0&lfsr.ash<=thresh)/sum(beta==0)
+bma.fp[s]=sum(beta==0&lfsr.bma<=thresh)/sum(beta==0)
+
+##false sign rate is the proportion of significant effects that are incorrectly signed at a given threshold
+
+
+
+
+}
+
+#frow=c(1,2))
+
+plot(mash.fp,mash.power,cex=0.5,pch=1,col="green",ylab="True Positive Rate",xlab="False Positive Rate",type="l",main="",xlim=c(0,0.4),ylim=c(0,0.6))
+#title("True Positive vs False Positive",cex.main=1.5)
+lines(ash.fp,ash.power,cex=0.5,pch=1,ylim=c(0,1),col="red")
+lines(bma.fp,bma.power,cex=0.5,pch=1,ylim=c(0,1),col="blue")
+#lines(eskin.f.fp,eskin.f.power,cex=0.5,pch=1,ylim=c(0,1),col="pink")
+#lines(eskin.r.fp,eskin.r.power,cex=0.5,pch=1,ylim=c(0,1),col="purple")
+legend("topleft",legend = c("mash","bmalite","ash"),col=c("green","blue","red"),pch=c(1,1,1,1,1))
+
+
+
+```
