@@ -1,0 +1,61 @@
+---
+title: "LDL and TG Only"
+output:
+  workflowr::wflow_html:
+    code_folding: hide
+    toc: no
+  html_notebook: default
+  html_document:
+    df_print: paged
+    toc: no
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+
+Here we consider the SNPS which are significant in only TG and LDL
+
+```{r}
+setwd("~/lipids_mvp/analysis/")
+mash=readRDS("../data/mashcomplete.rds")
+tc=read.table("../data/tc_max.txt")
+tg=read.table("../data/tg_max.txt")
+hdl=read.table("../data/hdl_max.txt")
+ldl=read.table("../data/ldl_max.txt")
+bf=read.table('../data/merged_betas.txt')
+se=read.table('../data/merged_se.txt')
+
+ldl_tg=intersect(rownames(ldl),rownames(tg))
+a=ldl_tg[!(ldl_tg %in% rownames(hdl))]
+
+pimat=matrix(mash$fitted_g$pi[-1],byrow = T,ncol=length(mash$fitted_g$Ulist))
+barplot(colSums(pimat),names=names(mash$fitted_g$Ulist),las=2)
+
+library(lattice)
+
+
+clrs <- colorRampPalette(rev(c("#D73027","#FC8D59","#FEE090","#FFFFBF",
+                               "#E0F3F8","#91BFDB","#4575B4")))(64)
+for(i in 2:4)
+  {
+lat=cov2cor(mash$fitted_g$Ulist[[i]])
+colnames(lat)=rownames(lat)=colnames(se)[3:6]
+lat[lower.tri(lat)] <- NA
+print(levelplot(lat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE))
+}
+
+df=cbind(ldl[a,],tg[a,])
+t=apply(df,1,function(x){x[3]==x[6]})
+ldl_tg_match=df[t,]
+
+
+pm=mash$result$PosteriorMean
+rownames(pm)=bf$SNP_hg18[1:2437099]
+rownames(se)=bf$SNP_hg18
+sig=paste0(ldl_tg_match[,2],":",ldl_tg_match[,3])
+pm[sig,]*se[sig,c(3:6)]
+barplot(as.matrix(pm[sig,]*se[sig,c(3:6)]))
+```
+
