@@ -113,3 +113,46 @@ print(levelplot(lat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE))
 
 ```
 
+
+Now by significancs
+
+```{r generate,echo=F}
+thresh=0.05
+
+
+shared.fold.size=matrix(NA,nrow = ncol(lfsr.mash),ncol=ncol(lfsr.mash))
+colnames(shared.fold.size)=rownames(shared.fold.size)=colnames(lfsr.all)
+for(i in 1:ncol(lfsr.mash)){
+  for(j in 1:ncol(lfsr.mash)){
+    sig.row=which(lfsr.mash[,i]<thresh)
+    sig.col=which(lfsr.mash[,j]<thresh)
+    a=(union(sig.row,sig.col))
+    #a=(intersect(sig.row,sig.col))
+    #quotient=abs(pm.mash.beta[a,i]/pm.mash.beta[a,j])
+    ##divide effect sizes
+    shared.fold.size[i,j]=length(intersect(sig.row,sig.col))/length(a)
+   
+  }}
+
+```
+
+
+Here's if we do by absolute value:
+
+
+```{r}
+
+
+library(lattice)
+
+
+clrs <- colorRampPalette(rev(c("#D73027","#FC8D59","#FEE090","#FFFFBF",
+                               "#E0F3F8","#91BFDB","#4575B4")))(64)
+
+lat=shared.fold.size
+lat[lower.tri(lat)] <- NA
+print(levelplot(lat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE))
+
+```
+
+

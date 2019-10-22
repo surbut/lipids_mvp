@@ -12,7 +12,7 @@
 
 
 
-<title>LDL and TG Only</title>
+<title>Untitled</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,8 +20,10 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -247,10 +249,64 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
 
 
 
@@ -260,6 +316,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -302,17 +368,9 @@ div.section {
 
 <div class="fluid-row" id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
 
 
-
-<h1 class="title toc-ignore">LDL and TG Only</h1>
+<h1 class="title toc-ignore">Untitled</h1>
 
 </div>
 
@@ -361,7 +419,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -543,7 +601,6 @@ Ignored files:
 
 Untracked files:
     Untracked:  analysis/Untitled.Rmd
-    Untracked:  docs/figure/Untitled.Rmd/
 
 Unstaged changes:
     Modified:   analysis/looking_at_significance.Rmd
@@ -561,69 +618,9 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
-
 <p>
-These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
 </p>
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-File
-</th>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-<th>
-Message
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/dac92ebf98e91492bf378f42c4d301cf237d45d1/analysis/lookingatposteriorweights.Rmd" target="_blank">dac92eb</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-20
-</td>
-<td>
-update
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/surbut/lipids_mvp/dac92ebf98e91492bf378f42c4d301cf237d45d1/docs/lookingatposteriorweights.html" target="_blank">dac92eb</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-20
-</td>
-<td>
-update
-</td>
-</tr>
-</tbody>
-</table>
-</div>
 <hr>
 </div>
 </div>
@@ -645,41 +642,33 @@ pimat=matrix(mash$fitted_g$pi[-1],byrow = T,ncol=length(mash$fitted_g$Ulist))
 barplot(colSums(pimat),names=names(mash$fitted_g$Ulist),las=2)
 
 library(lattice)</code></pre>
-<p><img src="figure/lookingatposteriorweights.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Untitled.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>clrs &lt;- colorRampPalette(rev(c(&quot;#D73027&quot;,&quot;#FC8D59&quot;,&quot;#FEE090&quot;,&quot;#FFFFBF&quot;,
                                &quot;#E0F3F8&quot;,&quot;#91BFDB&quot;,&quot;#4575B4&quot;)))(64)
-i=2
-lat=mash$fitted_g$Ulist[[i]]
+# for(i in 2:4)
+#   {
+#   #dev.new()
+# lat=mash$fitted_g$Ulist[[i]]
+# s=svd(mash$fitted_g$Ulist[[i]])
+# colnames(lat)=rownames(lat)=colnames(se)[3:6]
+# lat[lower.tri(lat)] &lt;- NA
+# print(levelplot(lat,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,colorkey = TRUE))
+# title(main = names(mash$fitted_g$Ulist[[i]]))
+# 
+# }
 
-colnames(lat)=rownames(lat)=colnames(se)[3:6]
-lat[lower.tri(lat)] &lt;- NA
-print(levelplot(lat,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,colorkey = TRUE,main=paste0(names(mash$fitted_g$Ulist)[[i]])))</code></pre>
-<p><img src="figure/lookingatposteriorweights.Rmd/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>i=3
-lat=mash$fitted_g$Ulist[[i]]
+# for(i in 2:4)
+#   {
+#   #dev.new()
+# lat=mash$fitted_g$Ulist[[i]]
+# s=svd(mash$fitted_g$Ulist[[i]])
+# colnames(s$v)=rownames(s$v)=colnames(se)[3:6]
+# barplot(s$v[,1],main=paste0(&quot;uk&quot;,i))
+# }
 
-colnames(lat)=rownames(lat)=colnames(se)[3:6]
-lat[lower.tri(lat)] &lt;- NA
-print(levelplot(lat,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,colorkey = TRUE,main=paste0(names(mash$fitted_g$Ulist)[[i]])))</code></pre>
-<p><img src="figure/lookingatposteriorweights.Rmd/unnamed-chunk-2-3.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>i=4
-lat=mash$fitted_g$Ulist[[i]]
 
-colnames(lat)=rownames(lat)=colnames(se)[3:6]
-lat[lower.tri(lat)] &lt;- NA
-print(levelplot(lat,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,colorkey = TRUE,main=paste0(names(mash$fitted_g$Ulist)[[i]])))</code></pre>
-<p><img src="figure/lookingatposteriorweights.Rmd/unnamed-chunk-2-4.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code> for(i in 2:4)
-   {
-
-lat=mash$fitted_g$Ulist[[i]]
-s=svd(mash$fitted_g$Ulist[[i]])
-colnames(s$v)=rownames(s$v)=colnames(se)[3:6]
-barplot(s$v[,1],main=paste0(names(mash$fitted_g$Ulist)[[i]]))
-}</code></pre>
-<p><img src="figure/lookingatposteriorweights.Rmd/unnamed-chunk-2-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/lookingatposteriorweights.Rmd/unnamed-chunk-2-6.png" width="672" style="display: block; margin: auto;" /><img src="figure/lookingatposteriorweights.Rmd/unnamed-chunk-2-7.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>df=cbind(ldl[a,],tg[a,])
-#df=cbind(ldl[ldl_tg,],tg[ldl_tg,])
+df=cbind(ldl[a,],tg[a,])
+df=cbind(ldl[ldl_tg,],tg[ldl_tg,])
 t=apply(df,1,function(x){x[3]==x[6]})##also shared position
 ldl_tg_match=df[t,]
 
@@ -699,22 +688,22 @@ rownames(shrunk.beta)=rownames(shrunk.se)=rownames(pm)
 sig=paste0(ldl_tg_match[,2],&quot;:&quot;,ldl_tg_match[,3])
 good=shrunk.beta[sig,]
 good.sd=shrunk.se[sig,]</code></pre>
-<pre class="r"><code>rownames(bf)=rownames(shrunk.se)=rownames(shrunk.beta)=rownames(se)=bf$SNP_hg18
-library(&#39;rmeta&#39;)
+<pre class="r"><code>library(&#39;rmeta&#39;)
+j=1030669
 
-j=2
-
-title=paste(&quot;MLE&quot;,bf[sig[j],&quot;SNP_hg18&quot;])
+title=paste(&quot;MLE&quot;,bf[j,&quot;rsid&quot;])
 par(mfrow=c(1,2))
-metaplot(as.numeric(bf[sig[j],c(4,6,8,10)]),as.numeric(se[sig[j],c(3:6)]),colors=meta.colors(box=c(&quot;red&quot;,&quot;blue&quot;,&quot;green&quot;,&quot;yellow&quot;),lines=&quot;blue&quot;, zero=&quot;red&quot;, summary=&quot;orange&quot;,text=&quot;forestgreen&quot;),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta),xlab = &quot;&quot;,ylab=&quot;&quot;)
+metaplot(as.numeric(bf[j,c(4,6,8,10)]),as.numeric(se[j,c(3:6)]),colors=meta.colors(box=c(&quot;red&quot;,&quot;blue&quot;,&quot;green&quot;,&quot;yellow&quot;),lines=&quot;blue&quot;, zero=&quot;red&quot;, summary=&quot;orange&quot;,text=&quot;forestgreen&quot;),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta),xlab = &quot;&quot;,ylab=&quot;&quot;)
 title(title)
 
 title=paste(&quot;Mash&quot;,rownames(good)[j])
-sd=as.numeric(shrunk.se[sig[j],])##to transform to posterior sd of beta
-x=as.numeric(shrunk.beta[sig[j],])
+sd=as.numeric(shrunk.se[j,])##to transform to posterior sd of beta
+x=as.numeric(shrunk.beta[j,])
 metaplot(x,sd,xlab = &quot;&quot;,ylab=&quot;&quot;,colors=meta.colors(box=c(&quot;red&quot;,&quot;blue&quot;,&quot;green&quot;,&quot;yellow&quot;),lines=&quot;blue&quot;, zero=&quot;red&quot;, summary=&quot;orange&quot;,text=&quot;forestgreen&quot;),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta))
-title(title)</code></pre>
-<p><img src="figure/lookingatposteriorweights.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+title(title)
+
+print(&quot;LFSR of SNP&quot;)
+lfsr[j,]</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -738,15 +727,15 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] rmeta_3.0       lattice_0.20-38
+[1] lattice_0.20-38
 
 loaded via a namespace (and not attached):
  [1] workflowr_1.4.0 Rcpp_1.0.1      digest_0.6.20   rprojroot_1.3-2
  [5] grid_3.5.2      backports_1.1.4 git2r_0.26.1    magrittr_1.5   
  [9] evaluate_0.14   highr_0.8       stringi_1.4.3   fs_1.3.1       
-[13] whisker_0.3-2   rmarkdown_1.14  tools_3.5.2     stringr_1.4.0  
-[17] glue_1.3.1      xfun_0.8        yaml_2.2.0      compiler_3.5.2 
-[21] htmltools_0.3.6 knitr_1.23     </code></pre>
+[13] rmarkdown_1.14  tools_3.5.2     stringr_1.4.0   glue_1.3.1     
+[17] xfun_0.8        yaml_2.2.0      compiler_3.5.2  htmltools_0.3.6
+[21] knitr_1.23     </code></pre>
 </div>
 </div>
 
@@ -764,6 +753,8 @@ footer is added to webpages before the MathJax javascript. -->
 </script>
 
 
+</div>
+</div>
 
 </div>
 
@@ -795,12 +786,33 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+
 <script>
-$(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
 });
 </script>
-
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

@@ -1,16 +1,11 @@
 ---
-title: "LDL and TG Only"
-output:
-  workflowr::wflow_html:
-    code_folding: hide
-    toc: no
-  html_notebook: default
-  html_document:
-    df_print: paged
-    toc: no
-editor_options:
-  chunk_output_type: console
+title: "Untitled"
+output: html_document
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 ## Introduction
 
@@ -40,39 +35,28 @@ library(lattice)
 
 clrs <- colorRampPalette(rev(c("#D73027","#FC8D59","#FEE090","#FFFFBF",
                                "#E0F3F8","#91BFDB","#4575B4")))(64)
-i=2
+for(i in 2:4)
+ {
+#   #dev.new()
 lat=mash$fitted_g$Ulist[[i]]
-
+s=svd(mash$fitted_g$Ulist[[i]])
 colnames(lat)=rownames(lat)=colnames(se)[3:6]
 lat[lower.tri(lat)] <- NA
-print(levelplot(lat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main=paste0(names(mash$fitted_g$Ulist)[[i]])))
-
-i=3
-lat=mash$fitted_g$Ulist[[i]]
-
-colnames(lat)=rownames(lat)=colnames(se)[3:6]
-lat[lower.tri(lat)] <- NA
-print(levelplot(lat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main=paste0(names(mash$fitted_g$Ulist)[[i]])))
-
-i=4
-lat=mash$fitted_g$Ulist[[i]]
-
-colnames(lat)=rownames(lat)=colnames(se)[3:6]
-lat[lower.tri(lat)] <- NA
-print(levelplot(lat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main=paste0(names(mash$fitted_g$Ulist)[[i]])))
+print(levelplot(lat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE))
+title(main = names(mash$fitted_g$Ulist[[i]]))
+}
 
  for(i in 2:4)
    {
-
-lat=mash$fitted_g$Ulist[[i]]
+#   #dev.new(
 s=svd(mash$fitted_g$Ulist[[i]])
-colnames(s$v)=rownames(s$v)=colnames(se)[3:6]
-barplot(s$v[,1],main=paste0(names(mash$fitted_g$Ulist)[[i]]))
+ colnames(s$v)=rownames(s$v)=colnames(se)[3:6]
+ barplot(s$v[,1],main=paste0("uk",i))
 }
 
 
 df=cbind(ldl[a,],tg[a,])
-#df=cbind(ldl[ldl_tg,],tg[ldl_tg,])
+df=cbind(ldl[ldl_tg,],tg[ldl_tg,])
 t=apply(df,1,function(x){x[3]==x[6]})##also shared position
 ldl_tg_match=df[t,]
 
@@ -96,19 +80,21 @@ good.sd=shrunk.se[sig,]
 
 ```{r,eval=T}
 
-rownames(bf)=rownames(shrunk.se)=rownames(shrunk.beta)=rownames(se)=bf$SNP_hg18
+
 library('rmeta')
+j=1030669
 
-j=2
-
-title=paste("MLE",bf[sig[j],"SNP_hg18"])
+title=paste("MLE",bf[j,"rsid"])
 par(mfrow=c(1,2))
-metaplot(as.numeric(bf[sig[j],c(4,6,8,10)]),as.numeric(se[sig[j],c(3:6)]),colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta),xlab = "",ylab="")
+metaplot(as.numeric(bf[j,c(4,6,8,10)]),as.numeric(se[j,c(3:6)]),colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta),xlab = "",ylab="")
 title(title)
 
 title=paste("Mash",rownames(good)[j])
-sd=as.numeric(shrunk.se[sig[j],])##to transform to posterior sd of beta
-x=as.numeric(shrunk.beta[sig[j],])
+sd=as.numeric(shrunk.se[j,])##to transform to posterior sd of beta
+x=as.numeric(shrunk.beta[j,])
 metaplot(x,sd,xlab = "",ylab="",colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta))
 title(title)
+
+print("LFSR of SNP")
+lfsr[j,]
 ```

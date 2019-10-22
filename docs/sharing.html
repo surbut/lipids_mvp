@@ -337,7 +337,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-10-07
+<strong>Last updated:</strong> 2019-10-22
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
@@ -361,7 +361,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -452,10 +452,10 @@ analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreef8c288ee4b923c485aac8f704c438dc4ecaeeda8targetblankf8c288ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/f8c288ee4b923c485aac8f704c438dc4ecaeeda8" target="_blank">f8c288e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreedac92ebf98e91492bf378f42c4d301cf237d45d1targetblankdac92eba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/dac92ebf98e91492bf378f42c4d301cf237d45d1" target="_blank">dac92eb</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreef8c288ee4b923c485aac8f704c438dc4ecaeeda8targetblankf8c288ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreedac92ebf98e91492bf378f42c4d301cf237d45d1targetblankdac92eba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -467,17 +467,21 @@ Ignored files:
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
+    Ignored:    analysis/figure/
     Ignored:    analysis/looking_at_significance_cache/
     Ignored:    analysis/workingwithdata_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/Archive.zip.gz
     Ignored:    data/EDcov.Rds
+    Ignored:    data/EDcov_sim.Rds
     Ignored:    data/ash.rds
+    Ignored:    data/ash_sim.rds
     Ignored:    data/gtexcolors.txt
     Ignored:    data/hdl_max.txt
     Ignored:    data/ldl_max.txt
     Ignored:    data/mashcomplete.rds
     Ignored:    data/mashcomplete.rds.zip
+    Ignored:    data/mashresult_sim.rds
     Ignored:    data/max_ld_block.txt
     Ignored:    data/merged_betas.txt
     Ignored:    data/merged_p.txt
@@ -487,10 +491,12 @@ Ignored files:
     Ignored:    data/tg_max.txt
     Ignored:    data/znew.txt
     Ignored:    docs/.DS_Store
+    Ignored:    docs/figure/.DS_Store
 
-Untracked files:
-    Untracked:  analysis/sharing.Rmd
-    Untracked:  docs/figure/sharing.Rmd/
+Unstaged changes:
+    Modified:   analysis/looking_at_significance.Rmd
+    Modified:   analysis/lookingatposteriorweights.Rmd
+    Modified:   analysis/sharing.Rmd
 
 </code></pre>
 <p>
@@ -503,9 +509,69 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
+
 <p>
-There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
 </p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/72c5aec039ca1963bc128aed96db915a3f41206a/analysis/sharing.Rmd" target="_blank">72c5aec</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-08
+</td>
+<td>
+Update with absolute value
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/surbut/lipids_mvp/72c5aec039ca1963bc128aed96db915a3f41206a/docs/sharing.html" target="_blank">72c5aec</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-08
+</td>
+<td>
+Update with absolute value
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 </div>
 </div>
@@ -516,6 +582,43 @@ Attaching package: &#39;gplots&#39;</code></pre>
 
     lowess</code></pre>
 <p><img src="figure/sharing.Rmd/heatmap2sharingmagnitude-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-heatmap2sharingmagnitude-1">
+Past versions of heatmap2sharingmagnitude-1.png
+</button>
+</p>
+<div id="fig-heatmap2sharingmagnitude-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/72c5aec039ca1963bc128aed96db915a3f41206a/docs/figure/sharing.Rmd/heatmap2sharingmagnitude-1.png" target="_blank">72c5aec</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Now by absolute value:</p>
 <p>Here’s if we do by absolute value:</p>
 <pre class="r"><code>library(lattice)
@@ -528,6 +631,55 @@ lat=shared.fold.size
 lat[lower.tri(lat)] &lt;- NA
 print(levelplot(lat,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,colorkey = TRUE))</code></pre>
 <p><img src="figure/sharing.Rmd/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-1-1">
+Past versions of unnamed-chunk-1-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-1-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/72c5aec039ca1963bc128aed96db915a3f41206a/docs/figure/sharing.Rmd/unnamed-chunk-1-1.png" target="_blank">72c5aec</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Now by significancs</p>
+<p>Here’s if we do by absolute value:</p>
+<pre class="r"><code>library(lattice)
+
+
+clrs &lt;- colorRampPalette(rev(c(&quot;#D73027&quot;,&quot;#FC8D59&quot;,&quot;#FEE090&quot;,&quot;#FFFFBF&quot;,
+                               &quot;#E0F3F8&quot;,&quot;#91BFDB&quot;,&quot;#4575B4&quot;)))(64)
+
+lat=shared.fold.size
+lat[lower.tri(lat)] &lt;- NA
+print(levelplot(lat,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,colorkey = TRUE))</code></pre>
+<p><img src="figure/sharing.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -564,10 +716,11 @@ loaded via a namespace (and not attached):
 [22] gtools_3.8.1       caTools_1.17.1.2   rprojroot_1.3-2   
 [25] grid_3.5.2         tidyselect_0.2.5   glue_1.3.1        
 [28] R6_2.4.0           rmarkdown_1.14     gdata_2.18.0      
-[31] purrr_0.3.2        magrittr_1.5       backports_1.1.4   
-[34] scales_1.0.0       htmltools_0.3.6    assertthat_0.2.1  
-[37] colorspace_1.4-1   KernSmooth_2.23-15 stringi_1.4.3     
-[40] lazyeval_0.2.2     munsell_0.5.0      crayon_1.3.4      </code></pre>
+[31] purrr_0.3.2        magrittr_1.5       whisker_0.3-2     
+[34] backports_1.1.4    scales_1.0.0       htmltools_0.3.6   
+[37] assertthat_0.2.1   colorspace_1.4-1   KernSmooth_2.23-15
+[40] stringi_1.4.3      lazyeval_0.2.2     munsell_0.5.0     
+[43] crayon_1.3.4      </code></pre>
 </div>
 
 
