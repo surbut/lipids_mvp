@@ -24,11 +24,11 @@ library("rmeta")
 
 ```{r load.data}
 setwd('~/lipids_mvp/analysis/')
-mash=readRDS("../data/mashcomplete.rds")
-ash=readRDS("../data/ash.rds")
-bf=read.table('../data/merged_betas.txt')
-sf=read.table('../data/merged_se.txt')
-z=read.table("../data/merged_z.txt")
+mash=readRDS("../data/mashresult_mvp.rds")
+
+
+se=read.table('../data/merged_se_mvp_simple.txt')
+z=read.table("../data/merged_z_mvp.txt")
 pm=mash$result$PosteriorMean
 pv=mash$result$PosteriorSD
 lfsr=mash$result$lfsr
@@ -95,7 +95,22 @@ lfsr[j,]
 Let's tabulate bu LD block
 ```{r, eval=FALSE, echo=TRUE}
 
- for(i in 1:nrow(bed)){
+z=read.table("~/lipids_mvp/data/merged_z.txt")
+
+bed=read.table("~/Downloads/ld_chunk.bed")
+
+z=z[1:2437099,]### last 3 are rsIDs from mislabeled columns
+library("reshape")
+df=transform(z, foo = colsplit(z$SNP_hg18, split = "\\:", names = c('Chr', 'Pos')))
+
+t=transform(rownames(lfsr), foo = colsplit(rownames(lfsr), split = "\\:", names = c('Chr', 'Pos')))
+
+lfsr.mash=data.frame(t$foo.Chr,t$foo.Pos,lfsr,stringsAsFactors = T)
+
+max_block=data.frame(matrix(ncol = 12,nrow=nrow(bed)))
+colnames(lfsr.mash)=c("chr","pos","hdl","ldl","tg","tc")
+
+for(i in 1:nrow(bed)){
  
   chr=bed[i,1]
   start=bed[i,2]

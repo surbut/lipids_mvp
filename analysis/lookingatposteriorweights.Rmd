@@ -26,6 +26,8 @@ hdl=read.table("~/lipids_mvp/data/hdl_max.txt")
 ldl=read.table("~/lipids_mvp/data/ldl_max.txt")
 bf=read.table("~/lipids_mvp/data/merged_betas.txt")[c(1:2437099),]
 se=read.table("~/lipids_mvp/data/merged_se.txt")[c(1:2437099),]
+
+z=read.table("~/lipids_mvp/data/merged_z.txt")[c(1:2437099),]
 ```
 
 ```{r}
@@ -96,19 +98,46 @@ good.sd=shrunk.se[sig,]
 
 ```{r,eval=T}
 
-rownames(bf)=rownames(shrunk.se)=rownames(shrunk.beta)=rownames(se)=bf$SNP_hg18
+rownames(bf)=rownames(shrunk.se)=rownames(shrunk.beta)=rownames(se)=rownames(lfsr)=bf$SNP_hg18
 library('rmeta')
 
-j=2
-
+j=1
 title=paste("MLE",bf[sig[j],"SNP_hg18"])
 par(mfrow=c(1,2))
-metaplot(as.numeric(bf[sig[j],c(4,6,8,10)]),as.numeric(se[sig[j],c(3:6)]),colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta),xlab = "",ylab="")
+metaplot(as.numeric(z[sig[j],c(4,6,8,10)]),as.numeric(se[sig[j],c(3:6)]),colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta),xlab = "",ylab="")
 title(title)
 
 title=paste("Mash",rownames(good)[j])
-sd=as.numeric(shrunk.se[sig[j],])##to transform to posterior sd of beta
-x=as.numeric(shrunk.beta[sig[j],])
+sd=as.numeric(pv[sig[j],])##to transform to posterior sd of beta
+x=as.numeric(pm[sig[j],])
 metaplot(x,sd,xlab = "",ylab="",colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta))
 title(title)
+
+rbind(as.numeric(bf[sig[j],c(4,6,8,10)]),x)
+
+
+lfsr[sig[j],]<0.05
+
+pva=read.table("~/Dropbox/jointData/Ptable.txt")
+rownames(pva)=pva$SNP_hg18
+
+pva[sig[j],c(3:6)]<5e-8
+
+
+j=1146823 
+title=paste("MLE",bf[j,"SNP_hg18"])
+par(mfrow=c(1,2))
+metaplot(as.numeric(bf[j,c(4,6,8,10)]),as.numeric(se[j,c(3:6)]),colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta),xlab = "",ylab="")
+title(title)
+
+title=paste("Mash",bf[j,"SNP_hg18"])
+sd=as.numeric(shrunk.se[j,])##to transform to posterior sd of beta
+x=as.numeric(shrunk.beta[j,])
+metaplot(x,sd,xlab = "",ylab="",colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta))
+title(title)
+
+rbind(as.numeric(bf[sig[j],c(4,6,8,10)]),x)
+
+
+lfsr[sig[j],]<0.05
 ```

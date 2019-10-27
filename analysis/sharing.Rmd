@@ -17,19 +17,20 @@ library(gplots)
 library(ggplot2)
 
 
-m=readRDS("../data/mashcomplete.rds")
+m=readRDS("../data/mashresult_mvp.rds")
 pm.mash=m$result$PosteriorMean
-se=read.table("../data/merged_se.txt")[1:nrow(pm.mash),]
+se=read.table("../data/merged_se_mvp_simple.txt")
+colnames(pm.mash)=colnames(se[,c(4:7)])=c("hdl","ldl","tg","tc")
 lfsr.all=m$result$lfsr
 
 
 
 
-pm.mash.beta=pm.mash*se[,c(3:6)]
+pm.mash.beta=pm.mash*se[,c(4:7)]
 
 ```
 
-```{r generate matrix,echo=F}
+```{r generate matrix}
 thresh=0.05
 
 pm.mash.beta=pm.mash.beta[rowSums(lfsr.all<0.05)>0,]
@@ -56,7 +57,7 @@ for(i in 1:ncol(lfsr.mash)){
 
 
 
-```{r heatmap2sharingmagnitude,echo=F}
+```{r heatmap2sharingmagnitude}
 
 
 library(lattice)
@@ -73,7 +74,7 @@ print(levelplot(lat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE))
 
 Now by absolute value:
 
-```{r generate matrixabs,echo=F}
+```{r generate matrixabs}
 thresh=0.05
 
 
@@ -116,7 +117,7 @@ print(levelplot(lat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE))
 
 Now by significancs
 
-```{r generate,echo=F}
+```{r generate,echo}
 thresh=0.05
 
 

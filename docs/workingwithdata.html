@@ -338,7 +338,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-10-07
+<strong>Last updated:</strong> 2019-10-27
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 4 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 3
@@ -413,7 +413,19 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 The following chunks had caches available:
 <ul>
 <li>
+barplot
+</li>
+<li>
 create table
+</li>
+<li>
+mashblock
+</li>
+<li>
+maxblock
+</li>
+<li>
+posteriorblock
 </li>
 <li>
 session-info-chunk-inserted-by-workflowr
@@ -438,6 +450,12 @@ unnamed-chunk-6
 </li>
 <li>
 unnamed-chunk-7
+</li>
+<li>
+unnamed-chunk-8
+</li>
+<li>
+zstuff
 </li>
 </ul>
 <p>To ensure reproducibility of the results, delete the cache directory <code>workingwithdata_cache</code> and re-run the analysis. To have workflowr automatically delete the cache directory prior to building the file, set <code>delete_cache = TRUE</code> when running <code>wflow_build()</code> or <code>wflow_publish()</code>.</p>
@@ -469,18 +487,82 @@ relative
 <tbody>
 <tr>
 <td style="text-align:left;">
-~/lipids_mvp/data/merged_z.txt
+~/lipids_mvp/data/Basic_mvp_sarah_HDL.tsv
 </td>
 <td style="text-align:left;">
-data/merged_z.txt
+data/Basic_mvp_sarah_HDL.tsv
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-~/lipids_mvp/data/znew.txt
+~/lipids_mvp/data/Basic_mvp_sarah_LDL.tsv
 </td>
 <td style="text-align:left;">
-data/znew.txt
+data/Basic_mvp_sarah_LDL.tsv
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+~/lipids_mvp/data/Basic_mvp_sarah_TC.tsv
+</td>
+<td style="text-align:left;">
+data/Basic_mvp_sarah_TC.tsv
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+~/lipids_mvp/data/Basic_mvp_sarah_TG.tsv
+</td>
+<td style="text-align:left;">
+data/Basic_mvp_sarah_TG.tsv
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+~/lipids_mvp/data/merged_betas_mvp.txt
+</td>
+<td style="text-align:left;">
+data/merged_betas_mvp.txt
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+~/lipids_mvp/data/merged_betas_mvp_simple.txt
+</td>
+<td style="text-align:left;">
+data/merged_betas_mvp_simple.txt
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+~/lipids_mvp/data/merged_se_mvp_simple.txt
+</td>
+<td style="text-align:left;">
+data/merged_se_mvp_simple.txt
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+~/lipids_mvp/data/merged_p_mvp_simple.txt
+</td>
+<td style="text-align:left;">
+data/merged_p_mvp_simple.txt
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+~/lipids_mvp/data/merged_z_mvp.txt
+</td>
+<td style="text-align:left;">
+data/merged_z_mvp.txt
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+~/lipids_mvp/data/merged_z_mvp_withnames.txt
+</td>
+<td style="text-align:left;">
+data/merged_z_mvp_withnames.txt
 </td>
 </tr>
 <tr>
@@ -501,26 +583,26 @@ data/EDcov.Rds
 </tr>
 <tr>
 <td style="text-align:left;">
-~/lipids_mvp/data/mashresult.rds
+~/lipids_mvp/data/mashresult_mvp.rds
 </td>
 <td style="text-align:left;">
-data/mashresult.rds
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/mashcomplete.rds
-</td>
-<td style="text-align:left;">
-data/mashcomplete.rds
+data/mashresult_mvp.rds
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-~/lipids_mvp/data/ash.rds
+~/lipids_mvp/data/ash_pm.txt
 </td>
 <td style="text-align:left;">
-data/ash.rds
+data/ash_pm.txt
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+~/lipids_mvp/data/ash_lf.txt
+</td>
+<td style="text-align:left;">
+data/ash_lf.txt
 </td>
 </tr>
 <tr>
@@ -539,10 +621,10 @@ data/merged_p.txt
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreed8023e7e317668a6f82201b9d20dd176cbefcdaftargetblankd8023e7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/d8023e7e317668a6f82201b9d20dd176cbefcdaf" target="_blank">d8023e7</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreeb96bbe6b0bde745dbeb69def20b91e3864788c7ctargetblankb96bbe6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/b96bbe6b0bde745dbeb69def20b91e3864788c7c" target="_blank">b96bbe6</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreed8023e7e317668a6f82201b9d20dd176cbefcdaftargetblankd8023e7a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreeb96bbe6b0bde745dbeb69def20b91e3864788c7ctargetblankb96bbe6a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -558,18 +640,43 @@ Ignored files:
     Ignored:    analysis/workingwithdata_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/Archive.zip.gz
+    Ignored:    data/Basic_mvp_sarah_HDL.tsv
+    Ignored:    data/Basic_mvp_sarah_LDL.tsv
+    Ignored:    data/Basic_mvp_sarah_LDL.tsv.zip
+    Ignored:    data/Basic_mvp_sarah_TC.tsv
+    Ignored:    data/Basic_mvp_sarah_TG.tsv
     Ignored:    data/EDcov.Rds
+    Ignored:    data/EDcov_sim.Rds
     Ignored:    data/ash.rds
+    Ignored:    data/ash_lf.txt
+    Ignored:    data/ash_sim.rds
     Ignored:    data/gtexcolors.txt
+    Ignored:    data/hdl_max.txt
+    Ignored:    data/ldl_max.txt
     Ignored:    data/mashcomplete.rds
     Ignored:    data/mashcomplete.rds.zip
+    Ignored:    data/mashresult_mvp.rds
+    Ignored:    data/mashresult_sim.rds
     Ignored:    data/max_ld_block.txt
     Ignored:    data/merged_betas.txt
+    Ignored:    data/merged_betas_mvp.txt
+    Ignored:    data/merged_betas_mvp_simple.txt
     Ignored:    data/merged_p.txt
+    Ignored:    data/merged_p_mvp_simple.txt
     Ignored:    data/merged_se.txt
+    Ignored:    data/merged_se_mvp_simple.txt
     Ignored:    data/merged_z.txt
+    Ignored:    data/merged_z_mvp.txt
+    Ignored:    data/merged_z_mvp_withnames.txt
+    Ignored:    data/tc_max.txt
+    Ignored:    data/tg_max.txt
     Ignored:    data/znew.txt
     Ignored:    docs/.DS_Store
+    Ignored:    docs/figure/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/workingwithdata.knit.md
+    Untracked:  analysis/workingwithdata.utf8.md
 
 Unstaged changes:
     Modified:   analysis/workingwithdata.Rmd
@@ -611,6 +718,74 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/b96bbe6b0bde745dbeb69def20b91e3864788c7c/analysis/workingwithdata.Rmd" target="_blank">b96bbe6</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-27
+</td>
+<td>
+Update
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/surbut/lipids_mvp/b96bbe6b0bde745dbeb69def20b91e3864788c7c/docs/workingwithdata.html" target="_blank">b96bbe6</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-27
+</td>
+<td>
+Update
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/3f855862038d1fa59bbebf795d9a084e6b5e6020/analysis/workingwithdata.Rmd" target="_blank">3f85586</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-07
+</td>
+<td>
+Update
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/surbut/lipids_mvp/3f855862038d1fa59bbebf795d9a084e6b5e6020/docs/workingwithdata.html" target="_blank">3f85586</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-07
+</td>
+<td>
+Update
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -740,50 +915,28 @@ Update docs
 <div id="r-markdown" class="section level2">
 <h2>R Markdown</h2>
 <p>Here we will try to merge based on common chr.position (per Hg18) names.</p>
-<p>We recognize that the alleles have been flipped to make all effects positive Let’s use HDL as reference</p>
-<pre class="r"><code>ref=m[,3]
-
-for(x in seq(1:3)){
-  betaindex=4+2*x
-  beta=m[,betaindex]
-  allele=betaindex-1
-  a=m[,allele]
-  test=a==ref;test[test==&quot;FALSE&quot;]=-1
-  beta=beta*test
-  m[,betaindex]=beta}
-
-head(m)
-write.table(m,&quot;merged_betas.txt&quot;)
-
-## Creating SE Table
-n=merge(hdl[,c(1,3,7)],ldl[,c(1,7)],by=1);names(n)[3]=&quot;hdl&quot;;names(n)[4]=&quot;ldl&quot;
-n=merge(n,tg[,c(1,7)],by=1);names(n)[5]=&quot;tg&quot;
-n=merge(n,tc[,c(1,7)],by=1);names(n)[6]=&quot;tc&quot;
-write.table(n,&quot;merged_se.txt&quot;)
-
-z=m[,c(4,6,8,10)]/n[,c(3:6)]
-z=cbind(m[,c(1,2)],z)
-write.table(z,&quot;merged_z.txt&quot;)</code></pre>
 <p>To run mashr, we need a matrix of maxes. The best way to do this is to choose the max effect across conditions per LD block, as described in Pickrell et al. Only then can we assume the maxes used to create covariance matrices are truly linearly independent. We will select SNPS falling within each of the 1700 LD blocks and choose SNP with maximum absolute effect acrtoss conditions.</p>
-<pre class="r"><code>#z=read.table(&quot;~/lipids_mvp/data/merged_z.txt&quot;)
-# 
-# bed=read.table(&quot;~/Downloads/ld_chunk.bed&quot;)
-# head(bed)
-# z=z[1:2437099,]### last 3 are rsIDs from mislabeled columns
-# library(&quot;reshape&quot;)
-# df=transform(z, foo = colsplit(z$SNP_hg18, split = &quot;\\:&quot;, names = c(&#39;Chr&#39;, &#39;Pos&#39;)))
-# 
-# znew=cbind(df$foo.Chr,df$foo.Pos,z[,-1])
-# maxes=apply(znew[,c(&quot;hdl&quot;,&quot;ldl&quot;,&quot;tg&quot;,&quot;tc&quot;)],1,function(x){max(abs(x))})
-# znew=cbind(znew,maxes)</code></pre>
+<pre class="r"><code>ztab=read.table(&quot;~/lipids_mvp/data/merged_z_mvp_withnames.txt&quot;)
+bed=read.table(&quot;~/Downloads/ld_chunk.bed&quot;)
+head(bed)</code></pre>
+<pre><code>    V1      V2      V3
+1 chr1   10583 1892607
+2 chr1 1892607 3582736
+3 chr1 3582736 4380811
+4 chr1 4380811 5913893
+5 chr1 5913893 7247335
+6 chr1 7247335 9365199</code></pre>
+<pre class="r"><code>maxes=apply(ztab[,c(&quot;beta.x&quot;,&quot;beta.y&quot;,&quot;tgbeta&quot;,&quot;tcbeta&quot;)],1,function(x){max(abs(x))})
+znew=cbind(ztab,maxes)
+colnames(znew)[c(4:7)]=c(&quot;hdl&quot;,&quot;ldl&quot;,&quot;tg&quot;,&quot;tc&quot;)</code></pre>
 <pre class="r"><code>max_block=data.frame(matrix(ncol = ncol(znew), nrow = nrow(bed)))
 colnames(max_block)=colnames(znew)
 for(i in 1:nrow(bed)){
   chr=bed[i,1]
   start=bed[i,2]
   stop=bed[i,3]
-  in_chrom=znew[znew$`df$foo.Chr`==chr,]
-  goodguys=in_chrom[in_chrom$`df$foo.Pos`&gt;start&amp;in_chrom$`df$foo.Pos`&lt;stop,]
+  in_chrom=znew[znew$hg19chrc==chr,]
+  goodguys=in_chrom[in_chrom$bp&gt;start&amp;in_chrom$bp&lt;stop,]
  if(nrow(goodguys)&gt;0) {
     z.max=which.max(goodguys[,&quot;maxes&quot;])
     z_good=goodguys[z.max,]
@@ -791,762 +944,133 @@ for(i in 1:nrow(bed)){
       z_good=rep(0,ncol(max_block))
     }
   z_good=data.table(z_good,stringsAsFactors = T)
-  z_good$`df$foo.Chr`=as.character(z_good$`df$foo.Chr`)
-  z_good$rsid=as.character(z_good$rsid)
+  z_good$hg19chrc=as.character(z_good$hg19chrc)
+  z_good$snpid.x=as.character(z_good$snpid.x)
   max_block[i,]=z_good
-  #print(i)
+  print(i)
 }
 
 max_block=na.omit(max_block)
-write.table(max_block,&quot;max_ld_block.txt&quot;)</code></pre>
+write.table(max_block,&quot;~/lipids_mvp/data/max_ld_block.txt&quot;)</code></pre>
 <p>Now, we’re ready to mash!</p>
-<pre class="r"><code>znew=read.table(&quot;~/lipids_mvp/data/znew.txt&quot;)
+<pre class="r"><code>ztab=read.table(&quot;~/lipids_mvp/data/merged_z_mvp_withnames.txt&quot;)
+znew=read.table(&quot;~/lipids_mvp/data/merged_z_mvp.txt&quot;)
+colnames(znew)=c(&quot;hdl&quot;,&quot;ldl&quot;,&quot;tg&quot;,&quot;tc&quot;)
 library(&quot;mashr&quot;)
 library(&quot;flashr&quot;)
 max_block=read.table(&quot;~/lipids_mvp/data/max_ld_block.txt&quot;)
 source(&#39;~/Dropbox/jointData/flashscript.R&#39;)
 # identify a random subset of 20000 tests
-random.subset = sample(1:nrow(znew),20000)
-zmash=as.matrix(znew[,c(&quot;hdl&quot;,&quot;ldl&quot;,&quot;tg&quot;,&quot;tc&quot;)]);rownames(zmash)=znew$rsid
+random.subset = sample(1:nrow(znew),40000)
+zmash=as.matrix(znew[,c(&quot;hdl&quot;,&quot;ldl&quot;,&quot;tg&quot;,&quot;tc&quot;)]);rownames(zmash)=ztab$snpid.x
 data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
 Vhat = estimate_null_correlation_simple(data.temp)
 library(&quot;lattice&quot;)
 clrs = colorRampPalette((c(&quot;#D73027&quot;,&quot;#FC8D59&quot;,&quot;#FEE090&quot;,&quot;#FFFFBF&quot;, &quot;#E0F3F8&quot;,&quot;#91BFDB&quot;,&quot;#4575B4&quot;)))(64)
 
-print(levelplot(Vhat,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,colorkey = TRUE,main=&quot;VHAT&quot;))</code></pre>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
-Past versions of unnamed-chunk-4-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-4-1.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>rm(data.temp)
+print(levelplot(Vhat,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,colorkey = TRUE,main=&quot;VHAT&quot;))
+
+rm(data.temp)
 data.random = mash_set_data(zmash[random.subset,],alpha = 1,V=Vhat)
 
-zmax=apply(max_block[,c(4:7)],2,function(x){as.numeric(x)});rownames(zmax)=max_block$rsid
+zmax=apply(max_block[,c(4:7)],2,function(x){as.numeric(x)});rownames(zmax)=max_block$snpid.x
 data.strong = mash_set_data(zmax,alpha = 1,V=Vhat)
 
 U.pca = cov_pca(data.strong,3)
 
-# U.flash=cov_flash(data.strong, non_canonical = TRUE)
-# X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
-# U.ed = cov_ed(data.strong, c(U.flash, U.pca, list(&quot;XX&quot; = t(X.center) %*% X.center / nrow(X.center))))
-# saveRDS(U.ed,&quot;~/lipids_mvp/data/EDcov.Rds&quot;)
+U.flash=cov_flash(data.strong, non_canonical = TRUE)
+X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
+U.ed = cov_ed(data.strong, c(U.flash, U.pca, list(&quot;XX&quot; = t(X.center) %*% X.center / nrow(X.center))))
+saveRDS(U.ed,&quot;~/lipids_mvp/data/EDcov.Rds&quot;)
 
 U.ed=readRDS(&quot;~/lipids_mvp/data/EDcov.Rds&quot;)
 U.c = cov_canonical(data.random)
 m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)</code></pre>
-<pre><code> - Computing 20000 x 321 likelihood matrix.
- - Likelihood calculations took 2.13 seconds.
- - Fitting model with 321 mixture components.
- - Model fitting took 31.55 seconds.</code></pre>
-<pre class="r"><code>k=length(m$fitted_g$Ulist)
+<p>Now, let’s plot the patterns of sharing as the correlation matrix of the estimated covariance matrices..</p>
+<pre class="r"><code>zmash=read.table(&quot;~/lipids_mvp/data/merged_z_mvp.txt&quot;)
+colnames(zmash)=c(&quot;hdl&quot;,&quot;ldl&quot;,&quot;tg&quot;,&quot;tc&quot;)
+
+m=readRDS(&quot;~/lipids_mvp/data/mashresult_mvp.rds&quot;)
+k=length(m$fitted_g$Ulist)
 l=length(m$fitted_g$grid)
 pimat=matrix(m$fitted_g$pi[-1],nrow=l,byrow=T)
 colnames(pimat)=names(m$fitted_g$pi)[2:(k+1)]
 barplot(colSums(pimat),las=2)</code></pre>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Now, let’s plot the patterns of sharing as the correlation matrix of the estimated covariance matrices. We can see that from the barplot, there are the following matrices: ED_FLASH_1.1, ED_tFLASH.1, ED_PCA_1.1, ED_PCA_2.1, ED_PCA_3.1, ED_tPCA.1, ED_XX.1, identity.1, hdl.1, ldl.1, tg.1, tc.1, equal_effects.1, simple_het_1.1, simple_het_2.1, simple_het_3.1.</p>
+<p><img src="figure/workingwithdata.Rmd/barplot-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>library(&quot;lattice&quot;)
-for(i in 1:k){
+for(i in 2:8){
   z.num=as.matrix(cov2cor(m$fitted_g$Ulist[[i]]))
   colnames(z.num)=row.names(z.num)=colnames(zmash)
-clrs = colorRampPalette((c(&quot;#D73027&quot;,&quot;#FC8D59&quot;,&quot;#FEE090&quot;,&quot;#FFFFBF&quot;, &quot;#E0F3F8&quot;,&quot;#91BFDB&quot;,&quot;#4575B4&quot;)))(64)
+clrs = colorRampPalette(rev(c(&quot;#D73027&quot;,&quot;#FC8D59&quot;,&quot;#FEE090&quot;,&quot;#FFFFBF&quot;, &quot;#E0F3F8&quot;,&quot;#91BFDB&quot;,&quot;#4575B4&quot;)))(64)
 z.num[lower.tri(z.num)] = NA
 print(levelplot(z.num,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,colorkey = TRUE,main=paste0(names(m$fitted_g$Ulist)[[i]])))
 }</code></pre>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
-Past versions of unnamed-chunk-5-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-1.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-2">
-Past versions of unnamed-chunk-5-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-2.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-3.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-3">
-Past versions of unnamed-chunk-5-3.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-3.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-4.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-4">
-Past versions of unnamed-chunk-5-4.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-4" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-4.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-5.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-5">
-Past versions of unnamed-chunk-5-5.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-5" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-5.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-6.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-6">
-Past versions of unnamed-chunk-5-6.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-6" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-6.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-7.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-7">
-Past versions of unnamed-chunk-5-7.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-7" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-7.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre><code>Warning in cov2cor(m$fitted_g$Ulist[[i]]): diag(.) had 0 or NA entries;
-non-finite result is doubtful</code></pre>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-8.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-8">
-Past versions of unnamed-chunk-5-8.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-8" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-8.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre><code>Warning in cov2cor(m$fitted_g$Ulist[[i]]): diag(.) had 0 or NA entries;
-non-finite result is doubtful</code></pre>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-9.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-9">
-Past versions of unnamed-chunk-5-9.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-9" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-9.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre><code>Warning in cov2cor(m$fitted_g$Ulist[[i]]): diag(.) had 0 or NA entries;
-non-finite result is doubtful</code></pre>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-10.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-10">
-Past versions of unnamed-chunk-5-10.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-10" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-10.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre><code>Warning in cov2cor(m$fitted_g$Ulist[[i]]): diag(.) had 0 or NA entries;
-non-finite result is doubtful</code></pre>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-11.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-11">
-Past versions of unnamed-chunk-5-11.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-11" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-11.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-12.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-12">
-Past versions of unnamed-chunk-5-12.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-12" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-12.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-13.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-13">
-Past versions of unnamed-chunk-5-13.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-13" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-13.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-14.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-14">
-Past versions of unnamed-chunk-5-14.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-14" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-14.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-15.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-15">
-Past versions of unnamed-chunk-5-15.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-15" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-15.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-5-16.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-16">
-Past versions of unnamed-chunk-5-16.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-16" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/ca158bfe3fb11c32becd8beed2cd252e9229904c/docs/figure/workingwithdata.Rmd/unnamed-chunk-5-16.png" target="_blank">ca158bf</a>
-</td>
-<td>
-Sarah Urbut
-</td>
-<td>
-2019-10-03
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/workingwithdata.Rmd/barplot-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/barplot-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/barplot-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/barplot-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/barplot-6.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/barplot-7.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/barplot-8.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Now we can compute posteriors,</p>
 <pre class="r"><code>mash.data=mash_set_data(zmash,V = Vhat,alpha = 1)
 
 m$result=mash_compute_posterior_matrices(m, mash.data, algorithm.version = &quot;Rcpp&quot;)
-saveRDS(m,&quot;~/lipids_mvp/data/mashresult.rds&quot;)</code></pre>
+saveRDS(m,&quot;~/lipids_mvp/data/mashresult_mvp.rds&quot;)</code></pre>
 <p>Let’s take a look:</p>
-<pre class="r"><code>m=readRDS(&quot;~/lipids_mvp/data/mashcomplete.rds&quot;)
+<pre class="r"><code>m=readRDS(&quot;~/lipids_mvp/data/mashresult_mvp.rds&quot;)
 head(m$result$PosteriorMean)</code></pre>
-<pre><code>                   hdl         ldl           tg          tc
-rs1172982   0.06015013  0.10542699  0.002012870  0.11805417
-rs1172981   0.28626776  0.05244131 -0.188875181  0.10104744
-rs11166327 -0.11849671 -0.01776064  0.085266561 -0.03603278
-rs4908018   0.31317283  0.05412064 -0.209288205  0.10681010
-rs2392072   0.05437422  0.09588751  0.002789049  0.10754994
-rs12129588  0.34618757  0.07306129 -0.225178675  0.13174043</code></pre>
+<pre><code>                   hdl         ldl         tg          tc
+rs6678176    1.0629093  0.07148775 -0.8411636  0.04103405
+rs76909621   0.3901428 -0.18927773 -0.4152670 -0.21156310
+rs78642210   0.1458664  0.07404952 -0.1182961  0.05731219
+rs77140576   0.3656539 -0.18871989 -0.3827297 -0.20549333
+rs113470118 -0.1377051 -0.07017948  0.1158224 -0.05287451
+rs75635821   0.3603703 -0.18449444 -0.3773584 -0.20126912</code></pre>
 <pre class="r"><code>head(m$result$lfsr)</code></pre>
-<pre><code>                 hdl       ldl        tg        tc
-rs1172982  0.6283334 0.5228317 0.6311741 0.5223916
-rs1172981  0.4205101 0.4270629 0.4196412 0.4274541
-rs11166327 0.5462653 0.5541580 0.5434676 0.5553625
-rs4908018  0.4001065 0.4115782 0.3989821 0.4121384
-rs2392072  0.6310612 0.5339740 0.6339992 0.5334568
-rs12129588 0.3834876 0.3805365 0.3827029 0.3809647</code></pre>
+<pre><code>                  hdl       ldl        tg        tc
+rs6678176   0.1123920 0.4741408 0.1205983 0.5169807
+rs76909621  0.2961115 0.4053798 0.3025860 0.4295731
+rs78642210  0.4989478 0.5404176 0.4937694 0.5447642
+rs77140576  0.3110436 0.4119177 0.3205846 0.4379812
+rs113470118 0.5039852 0.5445682 0.4971376 0.5495551
+rs75635821  0.3143522 0.4154700 0.3236874 0.4409992</code></pre>
 <pre class="r"><code>lfsr=m$result$lfsr
 s=rowSums(lfsr&lt;=0.05)
 
 hist(s[s&gt;1],freq=FALSE,main=&quot;Number of Conditions&quot;)</code></pre>
-<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/workingwithdata.Rmd/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>#ash.z=apply(zmash,2,function(x){ashr::ash(x,sebetahat = rep(1,length(x)))})
-#saveRDS(ash.z,&quot;../data/ash.rds&quot;)
-ash.z=readRDS(&quot;~/lipids_mvp/data/ash.rds&quot;)
-ashresults=cbind(ash.z$hdl$result$PosteriorMean,ash.z$ldl$result$PosteriorMean,ash.z$tg$result$PosteriorMean,ash.z$tc$result$PosteriorMean)
-ashlfsr=cbind(ash.z$hdl$result$lfsr,ash.z$ldl$result$lfsr,ash.z$tg$result$lfsr,ash.z$tc$result$lfsr)
+# ash.pm=matrix(nrow=nrow(zmash),ncol=ncol(zmash))
+# ash.lf=matrix(nrow=nrow(zmash),ncol=ncol(zmash))
+# 
+# for(i in 1:ncol(zmash))
+#   
+# {
+#   x=zmash[,i]
+#   a=ashr::ash(x,sebetahat = rep(1,length(x)))
+#   ash.pm[,i]=a$result$PosteriorMean
+#   ash.lf[,i]=a$result$lfsr
+#   print(i)
+# }
+# 
+# 
+# colnames(ash.pm)=colnames(ash.lf)=colnames(zmash)
+# rownames(ash.pm)=rownames(ash.lf)=rownames(zmash)
+# 
+# write.table(ash.pm,&quot;~/lipids_mvp/data/ash_pm.txt&quot;)
+# write.table(ash.lf,&quot;~/lipids_mvp/data/ash_lf.txt&quot;)
 
-sum(ashlfsr&lt;0.05)</code></pre>
-<pre><code>[1] 29301</code></pre>
-<p>Here 29301 SNPS x Conditions are less than 0.05 using a univariate appropach and 80539 are less than 0.05 with a joint approach, a roughly 250% increase. Furthermore, 32176 SNPS are significant in at least one condition wiht a juint approach, while 18099 with a univariate one.</p>
+ash.lf=read.table(&quot;~/lipids_mvp/data/ash_lf.txt&quot;)
+
+ptab=apply(zmash,2,function(x){2*pnorm(-abs(x))})
+#write.table(ptab,&quot;~/lipids_mvp/data/merged_p.txt&quot;)
+sum(ash.lf&lt;0.05)</code></pre>
+<pre><code>[1] 106052</code></pre>
+<pre class="r"><code>sum(lfsr&lt;0.05)</code></pre>
+<pre><code>[1] 237730</code></pre>
+<p>Here 106052 SNPS x Conditions are less than 0.05 using a univariate appropach and 237730 are less than 0.05 with a joint approach, a roughly 250% increase. Furthermore, 102253 SNPS are significant in at least one condition wiht a juint approach, while 72875 with a univariate one.</p>
 <pre class="r"><code>p=read.table(&quot;~/lipids_mvp/data/merged_p.txt&quot;)
 library(knitr)
 library(kableExtra)
-dt &lt;- cbind(c(paste(&quot;Bonferroni=&quot;,sum(p&lt;=5e-8)),paste(&quot;univariate_ash=&quot;,sum(ashlfsr&lt;0.05)),paste(&quot;mv_mash=&quot;,sum(lfsr&lt;0.05))))
+dt &lt;- cbind(c(paste(&quot;Bonferroni=&quot;,sum(p&lt;=5e-8)),paste(&quot;univariate_ash=&quot;,sum(ash.lf&lt;0.05)),paste(&quot;mv_mash=&quot;,sum(lfsr&lt;0.05))))
 
-dt &lt;- cbind(c(sum(p&lt;=5e-8),sum(ashlfsr&lt;0.05),sum(lfsr&lt;0.05)))
-dt=cbind(dt,c(sum(rowSums(p&lt;=5e-8)&gt;0),sum(rowSums(ashlfsr&lt;0.05)&gt;0),sum(rowSums(lfsr&lt;0.05)&gt;0)))
+dt &lt;- cbind(c(sum(p&lt;=5e-8),sum(ash.lf&lt;0.05),sum(lfsr&lt;0.05)))
+dt=cbind(dt,c(sum(rowSums(p&lt;=5e-8)&gt;0),sum(rowSums(ash.lf&lt;0.05)&gt;0),sum(rowSums(lfsr&lt;0.05)&gt;0)))
 rownames(dt)=c(&quot;Bonferroni&quot;,&quot;UnivariateAsh&quot;,&quot;Mash&quot;)
 colnames(dt)=c(&quot;Overall All Associations&quot;,&quot;Per Snp, in at least one&quot;)           
               
@@ -1570,10 +1094,10 @@ Per Snp, in at least one
 Bonferroni
 </td>
 <td style="text-align:right;">
-14005
+25260
 </td>
 <td style="text-align:right;">
-8595
+16843
 </td>
 </tr>
 <tr>
@@ -1581,10 +1105,10 @@ Bonferroni
 UnivariateAsh
 </td>
 <td style="text-align:right;">
-29301
+106052
 </td>
 <td style="text-align:right;">
-18099
+72875
 </td>
 </tr>
 <tr>
@@ -1592,10 +1116,10 @@ UnivariateAsh
 Mash
 </td>
 <td style="text-align:right;">
-80539
+237730
 </td>
 <td style="text-align:right;">
-32176
+102253
 </td>
 </tr>
 </tbody>
@@ -1622,10 +1146,10 @@ Per Snp, in at least one
 Bonferroni
 </td>
 <td style="text-align:right;">
-14005
+25260
 </td>
 <td style="text-align:right;">
-8595
+16843
 </td>
 </tr>
 <tr>
@@ -1633,10 +1157,10 @@ Bonferroni
 UnivariateAsh
 </td>
 <td style="text-align:right;">
-29301
+106052
 </td>
 <td style="text-align:right;">
-18099
+72875
 </td>
 </tr>
 <tr>
@@ -1644,10 +1168,10 @@ UnivariateAsh
 Mash
 </td>
 <td style="text-align:right;">
-80539
+237730
 </td>
 <td style="text-align:right;">
-32176
+102253
 </td>
 </tr>
 </tbody>

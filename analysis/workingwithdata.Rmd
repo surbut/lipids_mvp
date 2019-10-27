@@ -23,76 +23,89 @@ Here we will try to merge based on common chr.position (per Hg18) names.
 
 ```{r  create table,echo=FALSE,eval=FALSE}
 library("data.table")
-hdl=fread("~/Dropbox/jointData/jointGwasMc_HDL.txt");ldl=fread("~/Dropbox/jointData/jointGwasMc_LDL.txt");tc=fread("~/Dropbox/jointData/jointGwasMc_TC.txt");tg=fread("~/Dropbox/jointData/jointGwasMc_TG.txt")
+hdl=fread("~/lipids_mvp/data/Basic_mvp_sarah_HDL.tsv");
+ldl=fread("~/lipids_mvp/data/Basic_mvp_sarah_LDL.tsv");
+tc=fread("~/lipids_mvp/data/Basic_mvp_sarah_TC.tsv");
+tg=fread("~/lipids_mvp/data/Basic_mvp_sarah_TG.tsv");
 hdl=data.frame(hdl);ldl=data.frame(ldl);tc=data.frame(tc);tg=data.frame(tg)
 
-length(intersect(intersect(intersect(hdl$SNP_hg18,ldl$SNP_hg18),tc$SNP_hg18),tg$SNP_hg18))
 
-## Creating Beta Table
+## Creating Beta Table, merge by shared chromosome and base pair
 
-m=merge(hdl[,c(1,3,4,6)],ldl[,c(1,4,6)],by=1);names(m)[4]="hdl";names(m)[6]="ldl"
-m=merge(m,tg[,c(1,4,6)],by=1);names(m)[8]="tg"
-m=merge(m,tc[,c(1,4,6)],by=1);names(m)[10]="tc"
+m1 <- merge(hdl, ldl, by.x=c("hg19chrc", "bp"), by.y=c("hg19chrc", "bp"))
+m2= merge(m1, tg, by.x=c("hg19chrc", "bp"), by.y=c("hg19chrc", "bp"))
+m3= merge(m2, tc, by.x=c("hg19chrc", "bp"), by.y=c("hg19chrc", "bp"))
 
-## Creating P Table
-p=merge(hdl[,c(1,3,9)],ldl[,c(1,9)],by=1);names(p)[3]="hdl";names(p)[4]="ldl"
-p=merge(p,tg[,c(1,9)],by=1);names(p)[5]="tg"
-p=merge(p,tc[,c(1,9)],by=1);names(p)[6]="tc"
+colnames(m3)[17]="tgsnp"
+colnames(m3)[18]="tga1"
+colnames(m3)[21]="tgp"
+colnames(m3)[22]="tgbeta"
+colnames(m3)[23]="tgSE"
 
-p=apply(p[,c(3:6)],2,function(x){as.numeric(x)})
-write.table(p,"merged_p.txt")
-```
+colnames(m3)[24]="tcsnp"
+colnames(m3)[25]="tca1"
+colnames(m3)[27]="tcp"
+colnames(m3)[29]="tcbeta"
+colnames(m3)[30]="tcSE"
 
 
-We recognize that the alleles have been flipped to make all effects positive
-Let's use HDL as reference
-```{r,eval=F}
+m3=m3[!duplicated(m3[,1:2]),] ###remove duplicated locations
 
-ref=m[,3]
+
+
+betas=m3[,c("hg19chrc","bp","snpid.x","a1.x","beta.x","a1.y","beta.y","tga1","tgbeta","tca1","tcbeta")]
+se=m3[,c("hg19chrc","bp","snpid.x","a1.x","stdErr.x","a1.y","stdErr.y","tga1","tgSE","tca1","tcSE")]
+p=m3[,c("hg19chrc","bp","snpid.x","a1.x","p.x","a1.y","p.y","tga1","tgp","tca1","tcp")]
+
+
+
+ref=betas[,"a1.x"] ###standardize to common reference allele for signing
+
+m=betas
 
 for(x in seq(1:3)){
-  betaindex=4+2*x
+  betaindex=5+2*x
   beta=m[,betaindex]
   allele=betaindex-1
   a=m[,allele]
-  test=a==ref;test[test=="FALSE"]=-1
+  test=a==ref
+  test[test=="FALSE"]=-1
   beta=beta*test
   m[,betaindex]=beta}
 
-head(m)
-write.table(m,"merged_betas.txt")
+write.table(m,"~/lipids_mvp/data/merged_betas_mvp.txt")
 
-## Creating SE Table
-n=merge(hdl[,c(1,3,7)],ldl[,c(1,7)],by=1);names(n)[3]="hdl";names(n)[4]="ldl"
-n=merge(n,tg[,c(1,7)],by=1);names(n)[5]="tg"
-n=merge(n,tc[,c(1,7)],by=1);names(n)[6]="tc"
-write.table(n,"merged_se.txt")
+num=m[,c(1,2,3,5,7,9,11)]
+denom=se[,c(1,2,3,5,7,9,11)]
+ptabl=p[,c(1,2,3,5,7,9,11)]
 
-z=m[,c(4,6,8,10)]/n[,c(3:6)]
-z=cbind(m[,c(1,2)],z)
-write.table(z,"merged_z.txt")
+write.table(num,"~/lipids_mvp/data/merged_betas_mvp_simple.txt")##without alleles
+write.table(denom,"~/lipids_mvp/data/merged_se_mvp_simple.txt")
+write.table(ptabl,"~/lipids_mvp/data/merged_p_mvp_simple.txt")
+
+z=num[,c(4:7)]/denom[,c(4:7)]
+ztab=cbind(num[,c("hg19chrc","bp","snpid.x")],z)
+write.table(z,"~/lipids_mvp/data/merged_z_mvp.txt")
+      
+write.table(ztab,"~/lipids_mvp/data/merged_z_mvp_withnames.txt")
 
 ```
 
 
 To run mashr, we need a matrix of maxes. The best way to do this is to choose the max effect across conditions per LD block, as described in Pickrell et al. Only then can we assume the maxes used to create covariance matrices are truly linearly independent. We will select SNPS falling within each of the 1700 LD blocks and choose SNP with maximum absolute effect acrtoss conditions.
 
-```{r}
-#z=read.table("~/lipids_mvp/data/merged_z.txt")
-# 
-# bed=read.table("~/Downloads/ld_chunk.bed")
-# head(bed)
-# z=z[1:2437099,]### last 3 are rsIDs from mislabeled columns
-# library("reshape")
-# df=transform(z, foo = colsplit(z$SNP_hg18, split = "\\:", names = c('Chr', 'Pos')))
-# 
-# znew=cbind(df$foo.Chr,df$foo.Pos,z[,-1])
-# maxes=apply(znew[,c("hdl","ldl","tg","tc")],1,function(x){max(abs(x))})
-# znew=cbind(znew,maxes)
+```{r zstuff,echo=T}
 
+ztab=read.table("~/lipids_mvp/data/merged_z_mvp_withnames.txt")
+bed=read.table("~/Downloads/ld_chunk.bed")
+head(bed)
+
+maxes=apply(ztab[,c("beta.x","beta.y","tgbeta","tcbeta")],1,function(x){max(abs(x))})
+znew=cbind(ztab,maxes)
+colnames(znew)[c(4:7)]=c("hdl","ldl","tg","tc")
 ```
 
-```{r, eval=FALSE,echo=TRUE}
+```{r maxblock, eval=FALSE,echo=TRUE}
 
 max_block=data.frame(matrix(ncol = ncol(znew), nrow = nrow(bed)))
 colnames(max_block)=colnames(znew)
@@ -100,8 +113,8 @@ for(i in 1:nrow(bed)){
   chr=bed[i,1]
   start=bed[i,2]
   stop=bed[i,3]
-  in_chrom=znew[znew$`df$foo.Chr`==chr,]
-  goodguys=in_chrom[in_chrom$`df$foo.Pos`>start&in_chrom$`df$foo.Pos`<stop,]
+  in_chrom=znew[znew$hg19chrc==chr,]
+  goodguys=in_chrom[in_chrom$bp>start&in_chrom$bp<stop,]
  if(nrow(goodguys)>0) {
     z.max=which.max(goodguys[,"maxes"])
     z_good=goodguys[z.max,]
@@ -109,14 +122,14 @@ for(i in 1:nrow(bed)){
       z_good=rep(0,ncol(max_block))
     }
   z_good=data.table(z_good,stringsAsFactors = T)
-  z_good$`df$foo.Chr`=as.character(z_good$`df$foo.Chr`)
-  z_good$rsid=as.character(z_good$rsid)
+  z_good$hg19chrc=as.character(z_good$hg19chrc)
+  z_good$snpid.x=as.character(z_good$snpid.x)
   max_block[i,]=z_good
-  #print(i)
+  print(i)
 }
 
 max_block=na.omit(max_block)
-write.table(max_block,"max_ld_block.txt")
+write.table(max_block,"~/lipids_mvp/data/max_ld_block.txt")
 
 
 
@@ -124,16 +137,17 @@ write.table(max_block,"max_ld_block.txt")
 ```
 
 Now, we're ready to mash!
-```{r,warning=FALSE}
-
-znew=read.table("~/lipids_mvp/data/znew.txt")
+```{r mashblock,eval=F,warning=FALSE}
+ztab=read.table("~/lipids_mvp/data/merged_z_mvp_withnames.txt")
+znew=read.table("~/lipids_mvp/data/merged_z_mvp.txt")
+colnames(znew)=c("hdl","ldl","tg","tc")
 library("mashr")
 library("flashr")
 max_block=read.table("~/lipids_mvp/data/max_ld_block.txt")
 source('~/Dropbox/jointData/flashscript.R')
 # identify a random subset of 20000 tests
-random.subset = sample(1:nrow(znew),20000)
-zmash=as.matrix(znew[,c("hdl","ldl","tg","tc")]);rownames(zmash)=znew$rsid
+random.subset = sample(1:nrow(znew),40000)
+zmash=as.matrix(znew[,c("hdl","ldl","tg","tc")]);rownames(zmash)=ztab$snpid.x
 data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
 Vhat = estimate_null_correlation_simple(data.temp)
 library("lattice")
@@ -144,35 +158,39 @@ print(levelplot(Vhat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main
 rm(data.temp)
 data.random = mash_set_data(zmash[random.subset,],alpha = 1,V=Vhat)
 
-zmax=apply(max_block[,c(4:7)],2,function(x){as.numeric(x)});rownames(zmax)=max_block$rsid
+zmax=apply(max_block[,c(4:7)],2,function(x){as.numeric(x)});rownames(zmax)=max_block$snpid.x
 data.strong = mash_set_data(zmax,alpha = 1,V=Vhat)
 
 U.pca = cov_pca(data.strong,3)
 
-# U.flash=cov_flash(data.strong, non_canonical = TRUE)
-# X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
-# U.ed = cov_ed(data.strong, c(U.flash, U.pca, list("XX" = t(X.center) %*% X.center / nrow(X.center))))
-# saveRDS(U.ed,"~/lipids_mvp/data/EDcov.Rds")
+U.flash=cov_flash(data.strong, non_canonical = TRUE)
+X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
+U.ed = cov_ed(data.strong, c(U.flash, U.pca, list("XX" = t(X.center) %*% X.center / nrow(X.center))))
+saveRDS(U.ed,"~/lipids_mvp/data/EDcov.Rds")
 
 U.ed=readRDS("~/lipids_mvp/data/EDcov.Rds")
 U.c = cov_canonical(data.random)
 m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)
+```
 
+Now, let's plot the patterns of sharing as the correlation matrix of the estimated covariance matrices..
+
+```{r barplot, eval=T}
+
+zmash=read.table("~/lipids_mvp/data/merged_z_mvp.txt")
+colnames(zmash)=c("hdl","ldl","tg","tc")
+
+m=readRDS("~/lipids_mvp/data/mashresult_mvp.rds")
 k=length(m$fitted_g$Ulist)
 l=length(m$fitted_g$grid)
 pimat=matrix(m$fitted_g$pi[-1],nrow=l,byrow=T)
 colnames(pimat)=names(m$fitted_g$pi)[2:(k+1)]
 barplot(colSums(pimat),las=2)
-```
-
-Now, let's plot the patterns of sharing as the correlation matrix of the estimated covariance matrices. We can see that from the barplot, there are the following matrices: `r names(m$fitted_g$pi)[2:(k+1)]`.
-
-```{r,eval=T}
 library("lattice")
-for(i in 1:k){
+for(i in 2:8){
   z.num=as.matrix(cov2cor(m$fitted_g$Ulist[[i]]))
   colnames(z.num)=row.names(z.num)=colnames(zmash)
-clrs = colorRampPalette((c("#D73027","#FC8D59","#FEE090","#FFFFBF", "#E0F3F8","#91BFDB","#4575B4")))(64)
+clrs = colorRampPalette(rev(c("#D73027","#FC8D59","#FEE090","#FFFFBF", "#E0F3F8","#91BFDB","#4575B4")))(64)
 z.num[lower.tri(z.num)] = NA
 print(levelplot(z.num,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main=paste0(names(m$fitted_g$Ulist)[[i]])))
 }
@@ -180,18 +198,18 @@ print(levelplot(z.num,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,mai
 
 Now we can compute posteriors,
 
-```{r, eval=FALSE,echo=TRUE}
+```{r posteriorblock, eval=FALSE,echo=TRUE}
 
 mash.data=mash_set_data(zmash,V = Vhat,alpha = 1)
 
 m$result=mash_compute_posterior_matrices(m, mash.data, algorithm.version = "Rcpp")
-saveRDS(m,"~/lipids_mvp/data/mashresult.rds")
+saveRDS(m,"~/lipids_mvp/data/mashresult_mvp.rds")
 ```
 
 Let's take a look:
 
 ```{r}
-m=readRDS("~/lipids_mvp/data/mashcomplete.rds")
+m=readRDS("~/lipids_mvp/data/mashresult_mvp.rds")
 head(m$result$PosteriorMean)
 head(m$result$lfsr)
 
@@ -204,24 +222,44 @@ hist(s[s>1],freq=FALSE,main="Number of Conditions")
 
 
 #ash.z=apply(zmash,2,function(x){ashr::ash(x,sebetahat = rep(1,length(x)))})
-#saveRDS(ash.z,"../data/ash.rds")
-ash.z=readRDS("~/lipids_mvp/data/ash.rds")
-ashresults=cbind(ash.z$hdl$result$PosteriorMean,ash.z$ldl$result$PosteriorMean,ash.z$tg$result$PosteriorMean,ash.z$tc$result$PosteriorMean)
-ashlfsr=cbind(ash.z$hdl$result$lfsr,ash.z$ldl$result$lfsr,ash.z$tg$result$lfsr,ash.z$tc$result$lfsr)
+# ash.pm=matrix(nrow=nrow(zmash),ncol=ncol(zmash))
+# ash.lf=matrix(nrow=nrow(zmash),ncol=ncol(zmash))
+# 
+# for(i in 1:ncol(zmash))
+#   
+# {
+#   x=zmash[,i]
+#   a=ashr::ash(x,sebetahat = rep(1,length(x)))
+#   ash.pm[,i]=a$result$PosteriorMean
+#   ash.lf[,i]=a$result$lfsr
+#   print(i)
+# }
+# 
+# 
+# colnames(ash.pm)=colnames(ash.lf)=colnames(zmash)
+# rownames(ash.pm)=rownames(ash.lf)=rownames(zmash)
+# 
+# write.table(ash.pm,"~/lipids_mvp/data/ash_pm.txt")
+# write.table(ash.lf,"~/lipids_mvp/data/ash_lf.txt")
 
-sum(ashlfsr<0.05)
+ash.lf=read.table("~/lipids_mvp/data/ash_lf.txt")
+
+ptab=apply(zmash,2,function(x){2*pnorm(-abs(x))})
+#write.table(ptab,"~/lipids_mvp/data/merged_p.txt")
+sum(ash.lf<0.05)
+sum(lfsr<0.05)
 ```
 
-Here `r sum(ashlfsr<0.05)` SNPS x Conditions are less than 0.05 using a univariate appropach and `r sum(lfsr<0.05)` are less than 0.05 with a joint approach, a roughly 250% increase. Furthermore, `r sum(s>0)` SNPS are significant in at least one condition wiht a juint approach, while `r sum(rowSums(ashlfsr<0.05)>0)` with a univariate one.
+Here `r sum(ash.lf<0.05)` SNPS x Conditions are less than 0.05 using a univariate appropach and `r sum(lfsr<0.05)` are less than 0.05 with a joint approach, a roughly 250% increase. Furthermore, `r sum(s>0)` SNPS are significant in at least one condition wiht a juint approach, while `r sum(rowSums(ash.lf<0.05)>0)` with a univariate one.
 
 ```{r}
 p=read.table("~/lipids_mvp/data/merged_p.txt")
 library(knitr)
 library(kableExtra)
-dt <- cbind(c(paste("Bonferroni=",sum(p<=5e-8)),paste("univariate_ash=",sum(ashlfsr<0.05)),paste("mv_mash=",sum(lfsr<0.05))))
+dt <- cbind(c(paste("Bonferroni=",sum(p<=5e-8)),paste("univariate_ash=",sum(ash.lf<0.05)),paste("mv_mash=",sum(lfsr<0.05))))
 
-dt <- cbind(c(sum(p<=5e-8),sum(ashlfsr<0.05),sum(lfsr<0.05)))
-dt=cbind(dt,c(sum(rowSums(p<=5e-8)>0),sum(rowSums(ashlfsr<0.05)>0),sum(rowSums(lfsr<0.05)>0)))
+dt <- cbind(c(sum(p<=5e-8),sum(ash.lf<0.05),sum(lfsr<0.05)))
+dt=cbind(dt,c(sum(rowSums(p<=5e-8)>0),sum(rowSums(ash.lf<0.05)>0),sum(rowSums(lfsr<0.05)>0)))
 rownames(dt)=c("Bonferroni","UnivariateAsh","Mash")
 colnames(dt)=c("Overall All Associations","Per Snp, in at least one")           
               
