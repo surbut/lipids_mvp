@@ -45,6 +45,12 @@ plot_tissuespecific("tg",lfsr,pm,"Number of Conditions")
 ```
 
 
+```{r plotts5}
+library("qtlcharts")
+plot_tissuespecific(c("ldl","tg"),lfsr,pm,"Number of Conditions")
+```
+
+
 ```{r plotts4}
 library("qtlcharts")
 plot_tissuespecific("tc",lfsr,pm,"Number of Conditions")
