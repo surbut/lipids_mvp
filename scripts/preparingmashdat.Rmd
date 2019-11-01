@@ -1,0 +1,57 @@
+---
+title: "forcluster"
+---
+
+
+Now, we're ready to mash!
+```{r mashblock,eval=F,warning=FALSE}
+ztab=read.table("~/lipids_mvp/data/merged_z_mvp_withnames.txt")
+znew=read.table("~/lipids_mvp/data/merged_z_mvp.txt")
+set.seed(123)
+colnames(znew)=c("hdl","ldl","tg","tc")
+library("mashr")
+library("flashr")
+
+max_block=read.table("~/lipids_mvp/data/max_ld_block.txt")
+source('~/Dropbox/jointData/flashscript.R')
+# identify a random subset of 20000 tests
+random.subset = sample(1:nrow(znew),40000)
+zmash=as.matrix(znew[,c("hdl","ldl","tg","tc")]);rownames(zmash)=ztab$snpid.x
+data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
+Vhat = estimate_null_correlation_simple(data.temp)
+saveRDS(Vhat,"~/lipids_mvp/data/MVPVhat.rds")
+
+
+rm(data.temp)
+data.random = mash_set_data(zmash[random.subset,],alpha = 1,V=Vhat)
+
+zmax=apply(max_block[,c(4:7)],2,function(x){as.numeric(x)});rownames(zmax)=max_block$snpid.x
+data.strong = mash_set_data(zmax,alpha = 1,V=Vhat)
+
+U.pca = cov_pca(data.strong,3)
+
+U.flash=cov_flash(data.strong, non_canonical = TRUE)
+X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
+U.ed = cov_ed(data.strong, c(U.flash, U.pca, list("XX" = t(X.center) %*% X.center / nrow(X.center))))
+saveRDS(U.ed,"~/lipids_mvp/data/EDcov.Rds")
+
+U.ed=readRDS("~/lipids_mvp/data/EDcov.Rds")
+U.c = cov_canonical(data.random)
+m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)
+
+
+saveRDS(m,"~/lipids_mvp/data/mfitMVP.rds")
+
+```
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

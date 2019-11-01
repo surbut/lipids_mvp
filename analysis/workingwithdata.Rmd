@@ -150,6 +150,7 @@ random.subset = sample(1:nrow(znew),40000)
 zmash=as.matrix(znew[,c("hdl","ldl","tg","tc")]);rownames(zmash)=ztab$snpid.x
 data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
 Vhat = estimate_null_correlation_simple(data.temp)
+saveRDS("~/lipids_mvp/data/MVPVhat.rds")
 library("lattice")
 clrs = colorRampPalette((c("#D73027","#FC8D59","#FEE090","#FFFFBF", "#E0F3F8","#91BFDB","#4575B4")))(64)
 
@@ -171,6 +172,7 @@ saveRDS(U.ed,"~/lipids_mvp/data/EDcov.Rds")
 U.ed=readRDS("~/lipids_mvp/data/EDcov.Rds")
 U.c = cov_canonical(data.random)
 m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)
+saveRDS(m,"~/lipids_mvp/data/mfitMVP.rds")
 ```
 
 Now, let's plot the patterns of sharing as the correlation matrix of the estimated covariance matrices..
@@ -180,7 +182,8 @@ Now, let's plot the patterns of sharing as the correlation matrix of the estimat
 zmash=read.table("~/lipids_mvp/data/merged_z_mvp.txt")
 colnames(zmash)=c("hdl","ldl","tg","tc")
 
-m=readRDS("~/lipids_mvp/data/mashresult_mvp.rds")
+#m=readRDS("~/lipids_mvp/data/mashresult_mvp.rds")
+
 k=length(m$fitted_g$Ulist)
 l=length(m$fitted_g$grid)
 pimat=matrix(m$fitted_g$pi[-1],nrow=l,byrow=T)

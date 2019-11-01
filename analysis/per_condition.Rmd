@@ -1,0 +1,56 @@
+---
+title: "per_condition"
+author: "Sarah Urbut"
+date: "2019-11-01"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+```{r}
+lfsr=readRDS("~/lipids_mvp/data/combined_lfsr_MVP.rds")
+pm=readRDS("~/lipids_mvp/data/combined_pm_MVP.rds")
+```
+
+```{r loadcode}
+
+plot_tissuespecific = function(tissuename,lfsr,curvedata,title,thresh=0.05,subset=1:4){
+  index_tissue=which(colnames(lfsr) %in% tissuename);
+  ybar=title
+  ##create a matrix showing whether or not lfsr satisfies threshold
+  sigmat = lfsr <= thresh;
+  sigs=which(rowSums(sigmat[,index_tissue,drop=FALSE])==length(tissuename) & rowSums(sigmat[,-index_tissue,drop=FALSE])==0)
+  sigs.it=which(lfsr[sigs,index_tissue]<thresh)
+  iplotCurves(curvedata[sigs,subset],chartOpts=list(curves_xlab="Lipid",curves_ylab=ybar))
+}  
+```
+
+```{r plotts}
+library("qtlcharts")
+plot_tissuespecific("hdl",lfsr,pm,"Number of Conditions")
+```
+
+
+```{r plotts2}
+library("qtlcharts")
+plot_tissuespecific("ldl",lfsr,pm,"Number of Conditions")
+```
+
+
+```{r plotts3}
+library("qtlcharts")
+plot_tissuespecific("tg",lfsr,pm,"Number of Conditions")
+```
+
+
+```{r plotts4}
+library("qtlcharts")
+plot_tissuespecific("tc",lfsr,pm,"Number of Conditions")
+```
+
+```{r sighist}
+sig=rowSums(lfsr<0.05)>0
+hist(rowSums(lfsr[sig,]<0.05),main="Number of Phenotypes Sig")
+```
