@@ -1,0 +1,63 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: inline
+---
+
+Test Train
+1) Load in model fit on train set
+2) compute likelihood on test set
+
+```{r}
+mash_fit=readRDS("~/lipids_mvp_old/data/mfitMVP.rds")
+bmafit=readRDS("~/lipids_mvp_old/data/m_eQTL_bma.rds")
+zmash=readRDS("~/lipids_mvp_old/data/zmash.rds")
+Vhat=readRDS("~/lipids_mvp_old/data/MVPVhat.rds")
+
+library("mashr")
+mash.data=mash_set_data(Bhat=zmash,alpha=1,V = Vhat)
+set.seed(123)
+t=sample(1:nrow(zmash),80000)
+train=t[1:40000]
+test=t[41000:80000]
+
+train.data=mash_set_data(Bhat=zmash[train,],alpha=1,V = Vhat)
+test.data=mash_set_data(Bhat=zmash[test,],alpha=1,V = Vhat)
+
+## fit model on training data to estimate pis
+m = mash(train.data, Ulist = mash_fit$fitted_g$Ulist,outputlevel = 1)
+
+## compute log likelihood on test data
+mash_compute_loglik(m,data=test.data,algorithm.version = "Rcpp")
+
+m = mash(train.data, Ulist = bmafit$fitted_g$Ulist,outputlevel = 1)
+mash_compute_loglik(m,data=test.data,algorithm.version = "Rcpp")
+
+```
+
+WE can also compare the ranked matches among the two methods:
+
+```{r, echo=T,eval=FALSE}
+for(i in 1:ncol(ukbb_mash)){
+  mvp_share=mvp_mash[u,i]
+  ukbb_share=ukbb_mash[u,i]
+  o=data.frame(sort(mvp_share,decreasing = F))
+  o[o<0]=0
+  o2=data.frame(sort(ukbb_share,decreasing = F))
+  o2[o2<0]=0
+  for(j in seq(1:length(thresholds))){
+    t=thresholds[j]
+    a=length(intersect(rownames(o)[1:t],rownames(o2)[1:t]))
+    shared[j,i]=a
+  }
+}
+```
+
+```{r}
+(shared_bma=readRDS("~/Dropbox/sharedBMA_newfit.rds"))
+(shared_mash=readRDS("~/Dropbox/sharedmash_newfit.rds"))
+(shared_z=readRDS("~/Dropbox/sharedmash_Zraw.rds"))
+```

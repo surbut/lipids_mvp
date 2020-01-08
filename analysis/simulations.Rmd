@@ -24,7 +24,8 @@ We simulate the data, and then compute posteriors using univariate methods and c
 ```{r}
 setwd("~/lipids_mvp/analysis/")
 source("../scripts/Sim_with_error.R")
-m.model=readRDS("../data/mashcomplete.rds")
+#m.model=readRDS("../data/mashcomplete.rds")
+m.model=readRDS("../data/mfitMVP.rds")
 covmat=m.model$fitted_g$Ulist[1:7]
 set.seed(123)
 sim.data=sim.with.error(J=10000,d=4,rho=0.8,n=100,covmat = covmat,betasd = 0.0001,esd = 0.005) ##sample 100 from the K covariance matrices with equal probability
@@ -67,20 +68,20 @@ data.strong = mash_set_data(zmax,alpha = 1,V=Vhat)
 
 U.pca = cov_pca(data.strong,3)
 
-#U.flash=cov_flash(data.strong, non_canonical = TRUE)
-#X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
-#U.ed = cov_ed(data.strong, c(U.flash, U.pca, list("XX" = t(X.center) %*% X.center / nrow(X.center))))
-#saveRDS(U.ed,"~/lipids_mvp/data/EDcov_sim.Rds")
+U.flash=cov_flash(data.strong, non_canonical = TRUE)
+X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
+U.ed = cov_ed(data.strong, c(U.flash, U.pca, list("XX" = t(X.center) %*% X.center / nrow(X.center))))
+saveRDS(U.ed,"~/lipids_mvp/data/EDcov_sim_MVP.Rds")
 
 
-U.ed=readRDS("~/lipids_mvp/data/EDcov_sim.Rds")
+U.ed=readRDS("~/lipids_mvp/data/EDcov_sim_MVP.Rds")
 U.c = cov_canonical(data.random)
 m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)
 
 mash.data=mash_set_data(zmash,V = Vhat,alpha = 1)
 
 m$result=mash_compute_posterior_matrices(m, mash.data, algorithm.version = "Rcpp")
-saveRDS(m,"~/lipids_mvp/data/mashresult_sim.rds")
+saveRDS(m,"~/lipids_mvp/data/mashresult_sim_MVP.rds")
 ```
 
 ```{r plotting}
@@ -100,7 +101,6 @@ barplot(colSums(pimat),las=2)
 # print(levelplot(z.num,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main=paste0(names(m$fitted_g$Ulist)[[i]])))
 # }
 
-library("ashr")
 
 ash.z=apply(zmash,2,function(x){ashr::ash(x,sebetahat = rep(1,length(x)))})
 saveRDS(ash.z,"~/lipids_mvp/data/ash_sim.rds")

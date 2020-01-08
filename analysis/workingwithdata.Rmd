@@ -171,8 +171,31 @@ saveRDS(U.ed,"~/lipids_mvp/data/EDcov.Rds")
 
 U.ed=readRDS("~/lipids_mvp/data/EDcov.Rds")
 U.c = cov_canonical(data.random)
+U.c = cov_canonical(data.random)
 m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)
-saveRDS(m,"~/lipids_mvp/data/mfitMVP.rds")
+saveRDS(m,"mfitMVP.rds")
+
+########## refit covmats with ukbbdata##
+z_ukbb=as.matrix(readRDS("~/ukbb/z_ukbb.rds"))
+random.subset=sample(1:nrow(z_ukbb),40000)
+data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
+Vhat = estimate_null_correlation_simple(data.temp)
+saveRDS(Vhat,"~/ukbb/ukbbVHAT.rds")
+rm(data.temp)
+
+####
+mfitMVP=readRDS("~/mfitMVP.rds")##get the matrices from the MVP fit since they used the maxes and the ED 
+U.c = cov_canonical(data.random)
+
+Vhat=readRDS("~/ukbb/ukbbVHAT.rds")
+data.random = mash_set_data(z_ukbb[random.subset,],alpha = 1,V=Vhat)
+
+###model fit with weights and matrices
+m_mash_ukbb = mash(data.random, Ulist = mfitMVP$fitted_g$Ulist,outputlevel = 1)
+m_bma_ukbb=mash(data.random, Ulist = U.c,outputlevel = 1)
+
+saveRDS(m_mash_ukbb,"~/ukbb/m_mash_ukbb.rds")
+saveRDS(m_bma_ukbb,"~/ukbb/m_ukbb_bma.rds")
 ```
 
 Now, let's plot the patterns of sharing as the correlation matrix of the estimated covariance matrices..
@@ -182,7 +205,7 @@ Now, let's plot the patterns of sharing as the correlation matrix of the estimat
 zmash=read.table("~/lipids_mvp/data/merged_z_mvp.txt")
 colnames(zmash)=c("hdl","ldl","tg","tc")
 
-#m=readRDS("~/lipids_mvp/data/mashresult_mvp.rds")
+m=readRDS("~/lipids_mvp/data/mfitMVP.rds")
 
 k=length(m$fitted_g$Ulist)
 l=length(m$fitted_g$grid)
@@ -190,7 +213,7 @@ pimat=matrix(m$fitted_g$pi[-1],nrow=l,byrow=T)
 colnames(pimat)=names(m$fitted_g$pi)[2:(k+1)]
 barplot(colSums(pimat),las=2)
 library("lattice")
-for(i in 2:8){
+for(i in 1:8){
   z.num=as.matrix(cov2cor(m$fitted_g$Ulist[[i]]))
   colnames(z.num)=row.names(z.num)=colnames(zmash)
 clrs = colorRampPalette(rev(c("#D73027","#FC8D59","#FEE090","#FFFFBF", "#E0F3F8","#91BFDB","#4575B4")))(64)
@@ -270,5 +293,17 @@ kable(dt)
 dt %>%
   kable() %>%
   kable_styling()
+
+lfsr=readRDS("~/lipids_mvp/data/combined_lfsr_MVP.rds")
+pm=readRDS("~/lipids_mvp/data/combined_pm_MVP.rds")
+zmash=readRDS("~/lipids_mvp/data/zmash.rds")
+ptab=2*pnorm(-abs(zmash))
+sum(lfsr<0.05)
+sum(ptab<5e-8)
+r=sample(nrow(pm),100000)
+plot(zmash[r,],pm[r,],xlab="MLE",ylab="MASH",main="MashEstimatesvsZ")
+
+
+ukbbVHAT.rds
 ```
 

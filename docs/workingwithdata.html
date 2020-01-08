@@ -338,13 +338,13 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2019-10-27
+<strong>Last updated:</strong> 2019-12-17
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 4 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 3
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
 </p>
 <p>
-<strong>Knit directory:</strong> <code>lipids_mvp/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>newlipids/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
@@ -353,7 +353,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <hr>
 </div>
 <div id="checks" class="tab-pane fade">
-<div class="panel-group" id="workflowr-checks">
+<div id="workflowr-checks" class="panel-group">
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
@@ -465,166 +465,22 @@ zstuff
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
 </p>
 </div>
-<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
 <div class="panel-body">
-<p>
-Using absolute paths to the files within your workflowr project makes it difficult for you and others to run your code on a different machine. Change the absolute path(s) below to the suggested relative path(s) to make your code more reproducible.
-</p>
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th style="text-align:left;">
-absolute
-</th>
-<th style="text-align:left;">
-relative
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/Basic_mvp_sarah_HDL.tsv
-</td>
-<td style="text-align:left;">
-data/Basic_mvp_sarah_HDL.tsv
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/Basic_mvp_sarah_LDL.tsv
-</td>
-<td style="text-align:left;">
-data/Basic_mvp_sarah_LDL.tsv
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/Basic_mvp_sarah_TC.tsv
-</td>
-<td style="text-align:left;">
-data/Basic_mvp_sarah_TC.tsv
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/Basic_mvp_sarah_TG.tsv
-</td>
-<td style="text-align:left;">
-data/Basic_mvp_sarah_TG.tsv
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/merged_betas_mvp.txt
-</td>
-<td style="text-align:left;">
-data/merged_betas_mvp.txt
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/merged_betas_mvp_simple.txt
-</td>
-<td style="text-align:left;">
-data/merged_betas_mvp_simple.txt
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/merged_se_mvp_simple.txt
-</td>
-<td style="text-align:left;">
-data/merged_se_mvp_simple.txt
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/merged_p_mvp_simple.txt
-</td>
-<td style="text-align:left;">
-data/merged_p_mvp_simple.txt
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/merged_z_mvp.txt
-</td>
-<td style="text-align:left;">
-data/merged_z_mvp.txt
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/merged_z_mvp_withnames.txt
-</td>
-<td style="text-align:left;">
-data/merged_z_mvp_withnames.txt
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/max_ld_block.txt
-</td>
-<td style="text-align:left;">
-data/max_ld_block.txt
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/EDcov.Rds
-</td>
-<td style="text-align:left;">
-data/EDcov.Rds
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/mashresult_mvp.rds
-</td>
-<td style="text-align:left;">
-data/mashresult_mvp.rds
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/ash_pm.txt
-</td>
-<td style="text-align:left;">
-data/ash_pm.txt
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/ash_lf.txt
-</td>
-<td style="text-align:left;">
-data/ash_lf.txt
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/merged_p.txt
-</td>
-<td style="text-align:left;">
-data/merged_p.txt
-</td>
-</tr>
-</tbody>
-</table>
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreeb96bbe6b0bde745dbeb69def20b91e3864788c7ctargetblankb96bbe6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/b96bbe6b0bde745dbeb69def20b91e3864788c7c" target="_blank">b96bbe6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree392178a7b4e70268b9b5b71cbd2671df91663389targetblank392178aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/392178a7b4e70268b9b5b71cbd2671df91663389" target="_blank">392178a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreeb96bbe6b0bde745dbeb69def20b91e3864788c7ctargetblankb96bbe6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree392178a7b4e70268b9b5b71cbd2671df91663389targetblank392178aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -632,9 +488,7 @@ Great! You are using Git for version control. Tracking code development and conn
 <pre><code>
 Ignored files:
     Ignored:    .DS_Store
-    Ignored:    .Rhistory
     Ignored:    analysis/.DS_Store
-    Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
     Ignored:    analysis/looking_at_significance_cache/
     Ignored:    analysis/workingwithdata_cache/
@@ -674,11 +528,8 @@ Ignored files:
     Ignored:    docs/.DS_Store
     Ignored:    docs/figure/.DS_Store
 
-Untracked files:
-    Untracked:  analysis/workingwithdata.knit.md
-    Untracked:  analysis/workingwithdata.utf8.md
-
 Unstaged changes:
+    Modified:   analysis/simulations.Rmd
     Modified:   analysis/workingwithdata.Rmd
 
 </code></pre>
@@ -723,7 +574,24 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/surbut/lipids_mvp/blob/b96bbe6b0bde745dbeb69def20b91e3864788c7c/analysis/workingwithdata.Rmd" target="_blank">b96bbe6</a>
+<a href="https://github.com/surbut/lipids_mvp/blob/52c52c7eece45f0c14d091c7fa4006d938bb9f9b/analysis/workingwithdata.Rmd" target="_blank">52c52c7</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-11-01
+</td>
+<td>
+Update
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/76cc40a41ae4350dae01520f3d14754af8ac8f0d/analysis/workingwithdata.Rmd" target="_blank">76cc40a</a>
 </td>
 <td>
 Sarah Urbut
@@ -740,7 +608,7 @@ Update
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/surbut/lipids_mvp/b96bbe6b0bde745dbeb69def20b91e3864788c7c/docs/workingwithdata.html" target="_blank">b96bbe6</a>
+<a href="https://rawcdn.githack.com/surbut/lipids_mvp/76cc40a41ae4350dae01520f3d14754af8ac8f0d/docs/workingwithdata.html" target="_blank">76cc40a</a>
 </td>
 <td>
 Sarah Urbut
@@ -965,6 +833,7 @@ random.subset = sample(1:nrow(znew),40000)
 zmash=as.matrix(znew[,c(&quot;hdl&quot;,&quot;ldl&quot;,&quot;tg&quot;,&quot;tc&quot;)]);rownames(zmash)=ztab$snpid.x
 data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
 Vhat = estimate_null_correlation_simple(data.temp)
+saveRDS(&quot;~/lipids_mvp/data/MVPVhat.rds&quot;)
 library(&quot;lattice&quot;)
 clrs = colorRampPalette((c(&quot;#D73027&quot;,&quot;#FC8D59&quot;,&quot;#FEE090&quot;,&quot;#FFFFBF&quot;, &quot;#E0F3F8&quot;,&quot;#91BFDB&quot;,&quot;#4575B4&quot;)))(64)
 
@@ -985,27 +854,369 @@ saveRDS(U.ed,&quot;~/lipids_mvp/data/EDcov.Rds&quot;)
 
 U.ed=readRDS(&quot;~/lipids_mvp/data/EDcov.Rds&quot;)
 U.c = cov_canonical(data.random)
-m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)</code></pre>
+m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)
+saveRDS(m,&quot;~/lipids_mvp/data/mfitMVP.rds&quot;)</code></pre>
 <p>Now, let’s plot the patterns of sharing as the correlation matrix of the estimated covariance matrices..</p>
 <pre class="r"><code>zmash=read.table(&quot;~/lipids_mvp/data/merged_z_mvp.txt&quot;)
 colnames(zmash)=c(&quot;hdl&quot;,&quot;ldl&quot;,&quot;tg&quot;,&quot;tc&quot;)
 
-m=readRDS(&quot;~/lipids_mvp/data/mashresult_mvp.rds&quot;)
+m=readRDS(&quot;~/lipids_mvp/data/mfitMVP.rds&quot;)
+
 k=length(m$fitted_g$Ulist)
 l=length(m$fitted_g$grid)
 pimat=matrix(m$fitted_g$pi[-1],nrow=l,byrow=T)
 colnames(pimat)=names(m$fitted_g$pi)[2:(k+1)]
 barplot(colSums(pimat),las=2)</code></pre>
 <p><img src="figure/workingwithdata.Rmd/barplot-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-barplot-1">
+Past versions of barplot-1.png
+</button>
+</p>
+<div id="fig-barplot-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/76cc40a41ae4350dae01520f3d14754af8ac8f0d/docs/figure/workingwithdata.Rmd/barplot-1.png" target="_blank">76cc40a</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>library(&quot;lattice&quot;)
-for(i in 2:8){
+for(i in 1:8){
   z.num=as.matrix(cov2cor(m$fitted_g$Ulist[[i]]))
   colnames(z.num)=row.names(z.num)=colnames(zmash)
 clrs = colorRampPalette(rev(c(&quot;#D73027&quot;,&quot;#FC8D59&quot;,&quot;#FEE090&quot;,&quot;#FFFFBF&quot;, &quot;#E0F3F8&quot;,&quot;#91BFDB&quot;,&quot;#4575B4&quot;)))(64)
 z.num[lower.tri(z.num)] = NA
 print(levelplot(z.num,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,colorkey = TRUE,main=paste0(names(m$fitted_g$Ulist)[[i]])))
 }</code></pre>
-<p><img src="figure/workingwithdata.Rmd/barplot-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/barplot-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/barplot-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/barplot-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/barplot-6.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/barplot-7.png" width="672" style="display: block; margin: auto;" /><img src="figure/workingwithdata.Rmd/barplot-8.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/workingwithdata.Rmd/barplot-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-barplot-2">
+Past versions of barplot-2.png
+</button>
+</p>
+<div id="fig-barplot-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/76cc40a41ae4350dae01520f3d14754af8ac8f0d/docs/figure/workingwithdata.Rmd/barplot-2.png" target="_blank">76cc40a</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/barplot-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-barplot-3">
+Past versions of barplot-3.png
+</button>
+</p>
+<div id="fig-barplot-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/76cc40a41ae4350dae01520f3d14754af8ac8f0d/docs/figure/workingwithdata.Rmd/barplot-3.png" target="_blank">76cc40a</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/barplot-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-barplot-4">
+Past versions of barplot-4.png
+</button>
+</p>
+<div id="fig-barplot-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/76cc40a41ae4350dae01520f3d14754af8ac8f0d/docs/figure/workingwithdata.Rmd/barplot-4.png" target="_blank">76cc40a</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/barplot-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-barplot-5">
+Past versions of barplot-5.png
+</button>
+</p>
+<div id="fig-barplot-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/76cc40a41ae4350dae01520f3d14754af8ac8f0d/docs/figure/workingwithdata.Rmd/barplot-5.png" target="_blank">76cc40a</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/barplot-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-barplot-6">
+Past versions of barplot-6.png
+</button>
+</p>
+<div id="fig-barplot-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/76cc40a41ae4350dae01520f3d14754af8ac8f0d/docs/figure/workingwithdata.Rmd/barplot-6.png" target="_blank">76cc40a</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/barplot-7.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-barplot-7">
+Past versions of barplot-7.png
+</button>
+</p>
+<div id="fig-barplot-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/76cc40a41ae4350dae01520f3d14754af8ac8f0d/docs/figure/workingwithdata.Rmd/barplot-7.png" target="_blank">76cc40a</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/barplot-8.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-barplot-8">
+Past versions of barplot-8.png
+</button>
+</p>
+<div id="fig-barplot-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/76cc40a41ae4350dae01520f3d14754af8ac8f0d/docs/figure/workingwithdata.Rmd/barplot-8.png" target="_blank">76cc40a</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/workingwithdata.Rmd/barplot-9.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-barplot-9">
+Past versions of barplot-9.png
+</button>
+</p>
+<div id="fig-barplot-9" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/76cc40a41ae4350dae01520f3d14754af8ac8f0d/docs/figure/workingwithdata.Rmd/barplot-9.png" target="_blank">76cc40a</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Now we can compute posteriors,</p>
 <pre class="r"><code>mash.data=mash_set_data(zmash,V = Vhat,alpha = 1)
 
@@ -1034,6 +1245,43 @@ s=rowSums(lfsr&lt;=0.05)
 
 hist(s[s&gt;1],freq=FALSE,main=&quot;Number of Conditions&quot;)</code></pre>
 <p><img src="figure/workingwithdata.Rmd/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-1-1">
+Past versions of unnamed-chunk-1-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-1-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/76cc40a41ae4350dae01520f3d14754af8ac8f0d/docs/figure/workingwithdata.Rmd/unnamed-chunk-1-1.png" target="_blank">76cc40a</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2019-10-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>#ash.z=apply(zmash,2,function(x){ashr::ash(x,sebetahat = rep(1,length(x)))})
 # ash.pm=matrix(nrow=nrow(zmash),ncol=ncol(zmash))
 # ash.lf=matrix(nrow=nrow(zmash),ncol=ncol(zmash))
