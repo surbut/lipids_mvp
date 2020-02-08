@@ -160,11 +160,12 @@ for(i in 1:ncol(ukbb_mash)){
   ukbb_share=ukbb_mash[u,i]
   o=data.frame(sort(mvp_share,decreasing = F))
   o[o<0]=0
-  o2=data.frame(sort(ukbb_share,decreasing = F))
-  o2[o2<0]=0
-  for(j in seq(1:length(thresholds))){
-    t=thresholds[j]
-    a=length(intersect(rownames(o)[1:t],rownames(o2)[1:t]))
+  # o2=data.frame(sort(ukbb_share,decreasing = F))
+  # o2[o2<0]=0
+for(j in seq(1:length(thresholds))){
+t=thresholds[j]
+  #   #a=length(intersect(rownames(o)[1:t],rownames(o2)[1:t]))
+a=mean(ukbb_share[rownames(o)[1:t]])###RETURN THE MEAN LFSR OF THE TOP T MVP SNPS IN UKBB
     shared[j,i]=a
   }
 }
