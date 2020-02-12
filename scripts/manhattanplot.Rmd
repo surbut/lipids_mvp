@@ -1,0 +1,50 @@
+---
+title: "MHPlot"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+library("ramwas")
+#ukbb_mash=readRDS("~/Dropbox/combinedlfsr_ukbb_newfit_mash_v.rds")
+z=readRDS("~/Dropbox/max_p_mvp_raw.rds")
+df=readRDS("~/Dropbox/sharedchrbp.rds")
+library('stringr')
+numextract <- function(string){
+str_extract(string, "\\-*\\d+\\.*\\d*")
+}
+
+
+#ukbb=cbind(df,ukbb_mash[share,])
+
+mvp_mash=readRDS("~/Dropbox/combinedlfsrMVP_mash_v.rds")
+share=readRDS("~/Dropbox/sharednames_ukbbmvp.rds")
+df=readRDS("~/Dropbox/sharedchrbp.rds")
+c=numextract(df$chr)
+#ukbb=cbind(df,ukbb_mash[share,])
+mvp=mvp_mash[share,]
+#maxp=readRDS("~/Dropbox/max_p_mvp_raw.rds");maxp=cbind(df,maxp)
+
+#min_ukbb=apply(ukbb[,c(3:6)],1,function(x){min(x)})
+min_mvp=apply(mvp,1,function(x){min(x)})
+mvp=cbind(df,min_mvp)
+#ukbb=cbind(df,min_ukbb)
+
+mvp$chr=as.numeric(c)
+mvp$bp=as.numeric(as.character(df$bp))
+mvp$min_mvp[min_mvp<0]=0
+
+mvp=readRDS("~/Dropbox/formplot.rds")
+qqman::manhattan(mvp,chr="chr",bp="bp",p="min_mvp",genomewideline = -log10(5e-1),ylim=c(0,100))
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
