@@ -21,3 +21,16 @@ mvp$min_mvp[min_mvp<0]=0
 
 mvp=cbind(c,as.numeric(as.character(df$bp),min_mvp)
 qqman::manhattan(mvp,chr="chr",bp="bp",p="min_mvp",genomewideline = -log10(5e-1),ylim=c(0,100))
+
+png("mymanhattan.png", width=950, height=500)
+print(manhattan.plot(chr, pos, pvalue, sig.level=5e-8))
+dev.off()
+
+
+pval=c(min_mvp,maxp$psha)
+bp=c(mvp$bp,mvp$bp)
+chr=c(mvp$chr,mvp$chr)
+groups=rep( c("MASH", "naiive"), each=length(mvp$bp) )
+png("mymanhattan.png", width=950, height=500)
+manhattan_plot( pval, bp, chr, groups, main="MASHvsNaiive")
+dev.off()
