@@ -1,0 +1,7 @@
+INFO [2020-03-13 11:11:15] [[1]]
+INFO [2020-03-13 11:11:15] list(mvp = which(f$V4 == 1), ukbb = which(f2$V4 == 1), previous = which(df$ldl == 
+INFO [2020-03-13 11:11:15]     1))
+INFO [2020-03-13 11:11:15] 
+INFO [2020-03-13 11:11:15] [[2]]
+INFO [2020-03-13 11:11:15] [1] "~/lipids_mvp/docs/figure//ldl.png"
+INFO [2020-03-13 11:11:15] 

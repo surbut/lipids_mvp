@@ -16,28 +16,27 @@ setwd(("~/lipids_mvp/analysis/"))
 library(gplots)
 library(ggplot2)
 
+library("data.table")
 
-m=readRDS("../data/mashresult_mvp.rds")
-pm.mash=m$result$PosteriorMean
-se=read.table("../data/merged_se_mvp_simple.txt")
-colnames(pm.mash)=colnames(se[,c(4:7)])=c("hdl","ldl","tg","tc")
-lfsr.all=m$result$lfsr
+pm.mash=fread("~/Dropbox/post_means_mvp_for_ldpred.txt")
+lfsr.all=readRDS("~/Dropbox/combined_shared_lfsr_mvp_mash_chr_bp.rds")
 
 
 
 
-pm.mash.beta=pm.mash*se[,c(4:7)]
 
 ```
 
 ```{r generate matrix}
 thresh=0.05
 
-pm.mash.beta=pm.mash.beta[rowSums(lfsr.all<0.05)>0,]
-lfsr.mash=lfsr.all[rowSums(lfsr.all<0.05)>0,]
+pm.mash.beta=pm.mash[rowSums(lfsr.all[,c(3:6)]<0.05)>0,]
+lfsr.mash=lfsr.all[rowSums(lfsr.all[,c(3:6)]<0.05)>0,]
 
+pm.mash.beta=data.frame(pm.mash.beta[,c("hdl","ldl","tg","tc")])
+lfsr.mash=lfsr.mash[,c("hdl","ldl","tg","tc")]
 shared.fold.size=matrix(NA,nrow = ncol(lfsr.mash),ncol=ncol(lfsr.mash))
-colnames(shared.fold.size)=rownames(shared.fold.size)=colnames(lfsr.all)
+colnames(shared.fold.size)=rownames(shared.fold.size)=colnames(lfsr.mash)
 for(i in 1:ncol(lfsr.mash)){
   for(j in 1:ncol(lfsr.mash)){
     sig.row=which(lfsr.mash[,i]<thresh)
@@ -79,7 +78,7 @@ thresh=0.05
 
 
 shared.fold.size=matrix(NA,nrow = ncol(lfsr.mash),ncol=ncol(lfsr.mash))
-colnames(shared.fold.size)=rownames(shared.fold.size)=colnames(lfsr.all)
+colnames(shared.fold.size)=rownames(shared.fold.size)=colnames(lfsr.mash)
 for(i in 1:ncol(lfsr.mash)){
   for(j in 1:ncol(lfsr.mash)){
     sig.row=which(lfsr.mash[,i]<thresh)
@@ -122,7 +121,7 @@ thresh=0.05
 
 
 shared.fold.size=matrix(NA,nrow = ncol(lfsr.mash),ncol=ncol(lfsr.mash))
-colnames(shared.fold.size)=rownames(shared.fold.size)=colnames(lfsr.all)
+colnames(shared.fold.size)=rownames(shared.fold.size)=colnames(lfsr.mash)
 for(i in 1:ncol(lfsr.mash)){
   for(j in 1:ncol(lfsr.mash)){
     sig.row=which(lfsr.mash[,i]<thresh)

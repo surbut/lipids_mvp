@@ -1,0 +1,29 @@
+---
+title: "Comparingwithklarin"
+author: "Sarah Urbut"
+date: "2020-02-14"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+In this document, we wish to compare with Klarin et al. The idea of compariosn hinges on the choice of threshold, and using an lfsr threshold is a bit problematic, as such as a threshold guarantees a limite to false discoveries, that is p(H=0|Data) rather than p(data|h_0). However, in Urbut et al, we used an lfsr threshold of 0.05.
+
+```{r}
+lfsr.mash=readRDS("~/Dropbox/combinedlfsrMVP_mash_v.rds")
+disco=read.csv("~/Dropbox/all_disco.csv")
+
+thresh=0.05
+
+for(i in 1:ncol(lfsr.mash)){
+  lfsr_sig=rownames(lfsr.mash)[lfsr.mash[,i]<thresh]
+  print(colnames(lfsr.mash)[i])
+  prev=unique(disco[,i])
+  intersection=intersect(prev,lfsr_sig)
+
+  print(paste0("proportion reproduced:",round(length(intersection)/length(prev),2)))##number of discoveries from previous recaptured)
+}
+```
+

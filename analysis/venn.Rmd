@@ -1,0 +1,19 @@
+---
+title: "venn"
+author: "Sarah Urbut"
+date: "2020-03-13"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+
+Here, we plot venn diagrams of the 500 kb blocks which contain a SNP with an lfsr less than 0.05 in MVP, UKBB and previously documented.
+
+
+
+```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("~/lipids_mvp//docs/figure/hdl.png")
+```
