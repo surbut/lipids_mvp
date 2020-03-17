@@ -1,0 +1,36 @@
+Lipids MVP
+========================================================
+author: Sarah Urbut and Pradeep Natarajan
+date: 27 Mar 2020
+autosize: true
+
+First Slide
+========================================================
+
+The Problem: Interrogate 28 million SNPS across 4 traits jointly
+
+- MLE summary statistics available across LDL, HDL, TG and TC from N = 89K 
+The goal: to combine information across SNPs and across phenotypes to improve power and reveal underlying patterns of sharing
+Avoid simply looking for intersection underestimates sharing, misses power
+
+- Report an Effect size rather than Simply Significance
+existing methods typically focus only on testing for significant effects in each condition, and not on estimating effect sizes
+
+- Capture systematic heterogeneity (structured effects)
+identify new characteristic patterns of sharing: not same size or sign in all tissues
+
+Slide With Code
+========================================================
+
+Imagine Two conditions, typical fixed effect allows for perfect correlation of the same sized effects.
+
+```{r}
+xmat=matrix(c(2,1,1,4),byrow=TRUE,nrow=2)
+```
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+plot(cars)
+```
