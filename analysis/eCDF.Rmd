@@ -20,7 +20,7 @@ We can consider if there is an enrichment of low lfsr GWAS hits for SNPS that ar
 
 First we consider finding SNPS that are significant in GTEx as eQTLs and interrogating equivlanet SNPs in the GWAS analysis:
 
-```{r eval=FALSE}
+```{r}
 load("~/Downloads/AllHDLmerged_filtered_11M.RData")
 subcut=which(AdipSubHDL_11M_filtered$pval_nominal<5e-8)##These SNPS were significant at nominal pval threshold of 5e-8
 s=sample(nrow(AdipSubHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
@@ -49,7 +49,7 @@ lines(ecdf(x =abs(LiverHDL_11M_filtered$lfsr[visc])),col="Red")
 Now, let's do the opposite: find SNPs called significant in GWAS and see how their eQTL effects are distributed:
 
 
-```{r eval=FALSE}
+```{r eval=T}
 subcut=which(AdipSubHDL_11M_filtered$lfsr<5e-2)##These SNPS were significant at nominal pval threshold of 5e-8
 s=sample(nrow(AdipSubHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
 
