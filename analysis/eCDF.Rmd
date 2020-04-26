@@ -1,0 +1,77 @@
+---
+title: "Enrichment by Empirical CDF"
+output:
+  workflowr::wflow_html:
+    code_folding: show
+    toc: no
+  html_notebook: default
+  html_document:
+    df_print: paged
+    toc: no
+editor_options:
+  chunk_output_type: console
+---
+
+
+
+## eCDF Analysis
+
+We can consider if there is an enrichment of low lfsr GWAS hits for SNPS that are considered significant in an eQTL analysis (at a low p value threshold for example) and similarly, we can consider if there is an enrichment of low p-vals among SNPS interrogated against gene expression that are considered significant in a GWAS associations.
+
+First we consider finding SNPS that are significant in GTEx as eQTLs and interrogating equivlanet SNPs in the GWAS analysis:
+
+```{r eval=FALSE}
+load("~/Downloads/AllHDLmerged_filtered_11M.RData")
+subcut=which(AdipSubHDL_11M_filtered$pval_nominal<5e-8)##These SNPS were significant at nominal pval threshold of 5e-8
+s=sample(nrow(AdipSubHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
+
+
+plot(ecdf(x =abs(AdipSubHDL_11M_filtered$lfsr[s])),ylab = "Empirical CDF",xlab="lfsr against HDL",main="eCDF of GWAS lfsr for SNPS that are eQTL in Adipose Subcutaneous")
+lines(ecdf(x =abs(AdipSubHDL_11M_filtered$lfsr[subcut])),col="Red")
+
+
+#########
+visc=which(AdipVisHDL_11M_filtered$pval_nominal<5e-8)##These SNPS were significant at nominal pval threshold of 5e-8
+s=sample(nrow(AdipVisHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
+
+
+plot(ecdf(x =abs(AdipVisHDL_11M_filtered$lfsr[s])),ylab = "Empirical CDF",xlab="lfsr against HDL",main="eCDF of GWAS lfsr for SNPS that are eQTL in Adipose Visceral")
+lines(ecdf(x =abs(AdipVisHDL_11M_filtered$lfsr[visc])),col="Red")
+#####
+visc=which(LiverHDL_11M_filtered$pval_nominal<5e-8)##These SNPS were significant at nominal pval threshold of 5e-8
+s=sample(nrow(LiverHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
+
+
+plot(ecdf(x =abs(LiverHDL_11M_filtered$lfsr[s])),ylab = "Empirical CDF",xlab="lfsr against HDL",main="eCDF of GWAS lfsr for SNPS that are eQTL in Liver")
+lines(ecdf(x =abs(LiverHDL_11M_filtered$lfsr[visc])),col="Red")
+```
+
+Now, let's do the opposite: find SNPs called significant in GWAS and see how their eQTL effects are distributed:
+
+
+```{r eval=FALSE}
+subcut=which(AdipSubHDL_11M_filtered$lfsr<5e-2)##These SNPS were significant at nominal pval threshold of 5e-8
+s=sample(nrow(AdipSubHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
+
+
+plot(ecdf(x =abs(AdipSubHDL_11M_filtered$pval_nominal[s])),ylab = "Empirical CDF",xlab="Pval against AdiSubc",main="eCDF of eQTL Pval for SNPS that are GWAS hits in HDL")
+lines(ecdf(x =abs(AdipSubHDL_11M_filtered$pval_nominal[subcut])),col="Red")
+
+
+#########
+visc=which(AdipVisHDL_11M_filtered$lfsr<5e-2)##These SNPS were significant at nominal pval threshold of 5e-8
+s=sample(nrow(AdipVisHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
+
+
+plot(ecdf(x =abs(AdipVisHDL_11M_filtered$pval_nominal[s])),ylab = "Empirical CDF",xlab="Pval against AdiVisceral",main="eCDF of eQTL Pval for SNPS that are GWAS hits in HDL")
+lines(ecdf(x =abs(AdipVisHDL_11M_filtered$pval_nominal[visc])),col="Red")
+#####
+visc=which(LiverHDL_11M_filtered$lfsr<5e-2)##These SNPS were significant at nominal pval threshold of 5e-8
+s=sample(nrow(LiverHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
+
+
+plot(ecdf(x =abs(LiverHDL_11M_filtered$pval_nominal[s])),ylab = "Empirical CDF",xlab="Pval against Liver",main="eCDF of eQTL Pval for SNPS that are GWAS hits in HDL")
+lines(ecdf(x =abs(LiverHDL_11M_filtered$pval_nominal[visc])),col="Red")
+```
+
+
