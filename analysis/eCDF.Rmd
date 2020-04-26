@@ -37,13 +37,14 @@ s=sample(nrow(AdipVisHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plo
 
 plot(ecdf(x =abs(AdipVisHDL_11M_filtered$lfsr[s])),ylab = "Empirical CDF",xlab="lfsr against HDL",main="eCDF of GWAS lfsr for SNPS that are eQTL in Adipose Visceral")
 lines(ecdf(x =abs(AdipVisHDL_11M_filtered$lfsr[visc])),col="Red")
+
 #####
-visc=which(LiverHDL_11M_filtered$pval_nominal<5e-8)##These SNPS were significant at nominal pval threshold of 5e-8
+liver=which(LiverHDL_11M_filtered$pval_nominal<5e-8)##These SNPS were significant at nominal pval threshold of 5e-8
 s=sample(nrow(LiverHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
 
 
 plot(ecdf(x =abs(LiverHDL_11M_filtered$lfsr[s])),ylab = "Empirical CDF",xlab="lfsr against HDL",main="eCDF of GWAS lfsr for SNPS that are eQTL in Liver")
-lines(ecdf(x =abs(LiverHDL_11M_filtered$lfsr[visc])),col="Red")
+lines(ecdf(x =abs(LiverHDL_11M_filtered$lfsr[liver])),col="Red")
 ```
 
 Now, let's do the opposite: find SNPs called significant in GWAS and see how their eQTL effects are distributed:
@@ -66,12 +67,12 @@ s=sample(nrow(AdipVisHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plo
 plot(ecdf(x =abs(AdipVisHDL_11M_filtered$pval_nominal[s])),ylab = "Empirical CDF",xlab="Pval against AdiVisceral",main="eCDF of eQTL Pval for SNPS that are GWAS hits in HDL")
 lines(ecdf(x =abs(AdipVisHDL_11M_filtered$pval_nominal[visc])),col="Red")
 #####
-visc=which(LiverHDL_11M_filtered$lfsr<5e-2)##These SNPS were significant at nominal pval threshold of 5e-8
+liver=which(LiverHDL_11M_filtered$lfsr<5e-2)##These SNPS were significant at nominal pval threshold of 5e-8
 s=sample(nrow(LiverHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
 
 
 plot(ecdf(x =abs(LiverHDL_11M_filtered$pval_nominal[s])),ylab = "Empirical CDF",xlab="Pval against Liver",main="eCDF of eQTL Pval for SNPS that are GWAS hits in HDL")
-lines(ecdf(x =abs(LiverHDL_11M_filtered$pval_nominal[visc])),col="Red")
+lines(ecdf(x =abs(LiverHDL_11M_filtered$pval_nominal[liver])),col="Red")
 ```
 
 
