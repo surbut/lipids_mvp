@@ -337,7 +337,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-04-26
+<strong>Last updated:</strong> 2020-04-27
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -428,16 +428,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree4af58e094d11c6a7a717ba23c0c5b4789a9e3e64targetblank4af58e0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/4af58e094d11c6a7a717ba23c0c5b4789a9e3e64" target="_blank">4af58e0</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree220be320ccb16f0b9c403f391b13f1f10c924c02targetblank220be32a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/220be320ccb16f0b9c403f391b13f1f10c924c02" target="_blank">220be32</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree4af58e094d11c6a7a717ba23c0c5b4789a9e3e64targetblank4af58e0a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree220be320ccb16f0b9c403f391b13f1f10c924c02targetblank220be32a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/surbut/lipids_mvp/tree/4af58e094d11c6a7a717ba23c0c5b4789a9e3e64" target="_blank">4af58e0</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/surbut/lipids_mvp/tree/220be320ccb16f0b9c403f391b13f1f10c924c02" target="_blank">220be32</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -450,7 +450,6 @@ Ignored files:
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.Rhistory
     Ignored:    analysis/analysingrepro.nb.html
-    Ignored:    analysis/figure/
     Ignored:    analysis/looking_at_significance.nb.html
     Ignored:    analysis/looking_at_significance_cache/
     Ignored:    analysis/simualtions.nb.html
@@ -499,6 +498,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/220be320ccb16f0b9c403f391b13f1f10c924c02/analysis/eCDF.Rmd" target="_blank">220be32</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2020-04-26
+</td>
+<td>
+update
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/surbut/lipids_mvp/220be320ccb16f0b9c403f391b13f1f10c924c02/docs/eCDF.html" target="_blank">220be32</a>
+</td>
+<td>
+Sarah Urbut
+</td>
+<td>
+2020-04-26
+</td>
+<td>
+update
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -597,10 +630,10 @@ wflow_publish(“~/lipids_mvp/analysis/eCDF.Rmd”)
 <p>First we consider finding SNPS that are significant in GTEx as eQTLs and interrogating equivlanet SNPs in the GWAS analysis:</p>
 <pre class="r"><code>load(&quot;~/Downloads/AllHDLmerged_filtered_11M.RData&quot;)
 subcut=which(AdipSubHDL_11M_filtered$pval_nominal&lt;5e-8)##These SNPS were significant at nominal pval threshold of 5e-8
-s=sample(nrow(AdipSubHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
+#s=sample(nrow(AdipSubHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
 
 
-plot(ecdf(x =abs(AdipSubHDL_11M_filtered$lfsr[s])),ylab = &quot;Empirical CDF&quot;,xlab=&quot;lfsr against HDL&quot;,main=&quot;eCDF of GWAS lfsr for SNPS that are eQTL in Adipose Subcutaneous&quot;)
+plot(ecdf(x =abs(AdipSubHDL_11M_filtered$lfsr)),ylab = &quot;Empirical CDF&quot;,xlab=&quot;lfsr against HDL&quot;,main=&quot;eCDF of GWAS lfsr for SNPS that are eQTL in Adipose Subcutaneous&quot;)
 lines(ecdf(x =abs(AdipSubHDL_11M_filtered$lfsr[subcut])),col=&quot;Red&quot;)</code></pre>
 <p><img src="figure/eCDF.Rmd/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -642,10 +675,10 @@ Sarah Urbut
 </div>
 <pre class="r"><code>#########
 visc=which(AdipVisHDL_11M_filtered$pval_nominal&lt;5e-8)##These SNPS were significant at nominal pval threshold of 5e-8
-s=sample(nrow(AdipVisHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
+#s=sample(nrow(AdipVisHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
 
 
-plot(ecdf(x =abs(AdipVisHDL_11M_filtered$lfsr[s])),ylab = &quot;Empirical CDF&quot;,xlab=&quot;lfsr against HDL&quot;,main=&quot;eCDF of GWAS lfsr for SNPS that are eQTL in Adipose Visceral&quot;)
+plot(ecdf(x =abs(AdipVisHDL_11M_filtered$lfsr)),ylab = &quot;Empirical CDF&quot;,xlab=&quot;lfsr against HDL&quot;,main=&quot;eCDF of GWAS lfsr for SNPS that are eQTL in Adipose Visceral&quot;)
 lines(ecdf(x =abs(AdipVisHDL_11M_filtered$lfsr[visc])),col=&quot;Red&quot;)</code></pre>
 <p><img src="figure/eCDF.Rmd/unnamed-chunk-1-2.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -687,10 +720,10 @@ Sarah Urbut
 </div>
 <pre class="r"><code>#####
 liver=which(LiverHDL_11M_filtered$pval_nominal&lt;5e-8)##These SNPS were significant at nominal pval threshold of 5e-8
-s=sample(nrow(LiverHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
+#s=sample(nrow(LiverHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
 
 
-plot(ecdf(x =abs(LiverHDL_11M_filtered$lfsr[s])),ylab = &quot;Empirical CDF&quot;,xlab=&quot;lfsr against HDL&quot;,main=&quot;eCDF of GWAS lfsr for SNPS that are eQTL in Liver&quot;)
+plot(ecdf(x =abs(LiverHDL_11M_filtered$lfsr)),ylab = &quot;Empirical CDF&quot;,xlab=&quot;lfsr against HDL&quot;,main=&quot;eCDF of GWAS lfsr for SNPS that are eQTL in Liver&quot;)
 lines(ecdf(x =abs(LiverHDL_11M_filtered$lfsr[liver])),col=&quot;Red&quot;)</code></pre>
 <p><img src="figure/eCDF.Rmd/unnamed-chunk-1-3.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -732,10 +765,8 @@ Sarah Urbut
 </div>
 <p>Now, let’s do the opposite: find SNPs called significant in GWAS and see how their eQTL effects are distributed:</p>
 <pre class="r"><code>subcut=which(AdipSubHDL_11M_filtered$lfsr&lt;5e-2)##These SNPS were significant at nominal pval threshold of 5e-8
-s=sample(nrow(AdipSubHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
 
-
-plot(ecdf(x =abs(AdipSubHDL_11M_filtered$pval_nominal[s])),ylab = &quot;Empirical CDF&quot;,xlab=&quot;Pval against AdiSubc&quot;,main=&quot;eCDF of eQTL Pval for SNPS that are GWAS hits in HDL&quot;)
+plot(ecdf(x =abs(AdipSubHDL_11M_filtered$pval_nominal)),ylab = &quot;Empirical CDF&quot;,xlab=&quot;Pval against AdiSubc&quot;,main=&quot;eCDF of eQTL Pval for SNPS that are GWAS hits in HDL&quot;)
 lines(ecdf(x =abs(AdipSubHDL_11M_filtered$pval_nominal[subcut])),col=&quot;Red&quot;)</code></pre>
 <p><img src="figure/eCDF.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -777,10 +808,8 @@ Sarah Urbut
 </div>
 <pre class="r"><code>#########
 visc=which(AdipVisHDL_11M_filtered$lfsr&lt;5e-2)##These SNPS were significant at nominal pval threshold of 5e-8
-s=sample(nrow(AdipVisHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
 
-
-plot(ecdf(x =abs(AdipVisHDL_11M_filtered$pval_nominal[s])),ylab = &quot;Empirical CDF&quot;,xlab=&quot;Pval against AdiVisceral&quot;,main=&quot;eCDF of eQTL Pval for SNPS that are GWAS hits in HDL&quot;)
+plot(ecdf(x =abs(AdipVisHDL_11M_filtered$pval_nominal)),ylab = &quot;Empirical CDF&quot;,xlab=&quot;Pval against AdiVisceral&quot;,main=&quot;eCDF of eQTL Pval for SNPS that are GWAS hits in HDL&quot;)
 lines(ecdf(x =abs(AdipVisHDL_11M_filtered$pval_nominal[visc])),col=&quot;Red&quot;)</code></pre>
 <p><img src="figure/eCDF.Rmd/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -822,10 +851,9 @@ Sarah Urbut
 </div>
 <pre class="r"><code>#####
 liver=which(LiverHDL_11M_filtered$lfsr&lt;5e-2)##These SNPS were significant at nominal pval threshold of 5e-8
-s=sample(nrow(LiverHDL_11M_filtered),1e5)### randomly chosen SNPS (to thin plot)
 
 
-plot(ecdf(x =abs(LiverHDL_11M_filtered$pval_nominal[s])),ylab = &quot;Empirical CDF&quot;,xlab=&quot;Pval against Liver&quot;,main=&quot;eCDF of eQTL Pval for SNPS that are GWAS hits in HDL&quot;)
+plot(ecdf(x =abs(LiverHDL_11M_filtered$pval_nominal)),ylab = &quot;Empirical CDF&quot;,xlab=&quot;Pval against Liver&quot;,main=&quot;eCDF of eQTL Pval for SNPS that are GWAS hits in HDL&quot;)
 lines(ecdf(x =abs(LiverHDL_11M_filtered$pval_nominal[liver])),col=&quot;Red&quot;)</code></pre>
 <p><img src="figure/eCDF.Rmd/unnamed-chunk-2-3.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
