@@ -50,6 +50,7 @@ The clumping procedure takes all SNPs that are significant at threshold p1 (or l
 In our application, we filter in two additional ways:
 
 #1 Only those variants that exist both in MVP and in 1000 genomes (1kg) are retained for clumping and thresholding
+
 #2 Only the independent `index` snp is used for potential scoring.
 
 The potential loss of useful infomration thus occurs in two steps, as we choose only SNPs that are genotyped and present in all 650K 'proportional individuals and the MVP individuals
@@ -66,7 +67,7 @@ The potential loss of useful infomration thus occurs in two steps, as we choose 
 
 In order to use the genotype information from 1kg but also the depth of our MVP coverage, I propose a two fold thresholding step, $t_{0}$.
 
-#1 First, using the 1kg data, `clump` with a relaxed lfsr threshold $t_{0}$ of, suppose 0.5, or even 0.7. The goal here is not to capture true index SNPs, but really to define independent LD blocks, for which we will later threshold MVP (and not 1kg variants). Perform the usual steps of removing all variants within some distance $w_{c}$ that exceed an $r^{2}$ threshold. It is not necessary to retain the `clumped` SNPs (column p2) so to ease the computational burden p2 in this case can be very low (i.e. 1e-7).
+#1 First, using the 1kg data that overlaps MVP (i.e., the ~4M variants), `clump` with a relaxed lfsr threshold $t_{0}$ of, suppose 0.5, or even 0.7. The goal here is not to capture true index SNPs, but really to define independent LD blocks, for which we will later threshold MVP (and not 1kg variants). Perform the usual steps of removing all variants within some distance $w_{c}$ that exceed an $r^{2}$ threshold. It is not necessary to retain the `clumped` SNPs (column p2) so to ease the computational burden p2 in this case can be very low (i.e. 1e-7).
 
 #2 After defending these soft-index SNPS, define a new window A' and B' with boundaries 250 kb from soft index SNP. Choose the minimum MVP SNP in this window such that it satisfies the true lfsr threshold we are interested in. This can be significantly stringent, but ideally given the depth of coverage in MVP, we will identify both more independent signals and estimates that are stronger in magnitude in precision.
 
