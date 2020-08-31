@@ -1,0 +1,84 @@
+---
+title: "R Notebook"
+output:
+  pdf_document: default
+  html_notebook: default
+editor_options:
+  chunk_output_type: inline
+---
+
+Abstract;
+
+```{r,echo=FALSE}
+f=readRDS("~/Dropbox/chr1500kb.rds")
+for(i in 2:22){file=readRDS(paste0("~/Dropbox/chr",i,"500kb.rds"));f=rbind(f,file)}
+
+mvp=f
+
+f2=readRDS("~/Dropbox/chr1500kb_ukbb.rds")
+for(i in 2:22){file=readRDS(paste0("~/Dropbox/chr",i,"500kb_ukbb.rds"));f2=rbind(f2,file)}
+
+ukbb=f2
+# 
+f3=readRDS("~/Dropbox/chr1hdlmin_per_block_derek.rds")
+for(i in 2:22){file=readRDS(paste0("~/Dropbox/chr",i,"hdlmin_per_block_derek.rds"));f3=rbind(f3,file)}
+
+f4=readRDS("~/Dropbox/chr1ldlmin_per_block_derek.rds")
+for(i in 2:22){file=readRDS(paste0("~/Dropbox/chr",i,"ldlmin_per_block_derek.rds"));f4=rbind(f4,file)}
+
+f5=readRDS("~/Dropbox/chr1tgmin_per_block_derek.rds")
+for(i in 2:22){file=readRDS(paste0("~/Dropbox/chr",i,"tgmin_per_block_derek.rds"));f5=rbind(f5,file)}
+
+f6=readRDS("~/Dropbox/chr1tcmin_per_block_derek.rds")
+for(i in 2:22){file=readRDS(paste0("~/Dropbox/chr",i,"tcmin_per_block_derek.rds"));f6=rbind(f6,file)}
+
+derek=data.frame(start=f3$V1,stop=f3$V2,hdl=f3$V3,ldl=f4$V3,tg=f5$V3,tc=f6$V3)
+
+colnames(ukbb)=colnames(mvp)=colnames(derek)
+```
+
+
+```{r}
+head(derek)
+head(ukbb)
+head(mvp)
+sum(rowSums(mvp[,c(3:6)])>0)
+sum(rowSums(derek[,c(3:6)])>0)
+sum(rowSums(mvp[,c(3:6)])==0)
+sum(rowSums(mvp[,c(3:6)]==0)!=0)
+
+```
+
+
+We identified XXX novel loci associated with lipids with summary-level data using mashR. FInd the number of nonzero rows in MVP that are zero in derek
+```{r}
+mvp_list=which(rowSums(mvp[,c(3:6)])>0)
+d_list=which(rowSums(derek[,c(3:6)])>0)
+length(setdiff(mvp_list,d_list))
+```
+
+We increase the total loci linked to lipids by XXX-fold. 
+
+```{r}
+
+sum(rowSums(mvp[,c(3:6)])!=0)/sum(rowSums(derek[,c(3:6)])!=0)
+```
+
+
+In joint replication, XXX of XXX total loci (XXX%) detected in 297,626 MVP participants replicated in XXX UK Biobank participants, 
+
+```{r}
+mvp_list=which(rowSums(mvp[,c(3:6)])>0)
+ukb_list=which(rowSums(ukbb[,c(3:6)])>0)
+
+length(mvp_list)
+length(ukb_list)
+length(intersect(mvp_list,ukb_list))
+length(intersect(mvp_list,ukb_list))/length(mvp_list)
+```
+
+and XXX of XXX total loci (XXX%) detected in UK Biobank replicated in MVP. 
+
+```{r}
+length(intersect(mvp_list,ukb_list))/length(ukb_list)
+```
