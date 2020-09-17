@@ -1,0 +1,51 @@
+---
+title: "thresholding"
+author: "Sarah Urbut"
+date: "2020-09-02"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+Here we explore the use of various thresholds the compare with univariate threhsolds
+
+```{r,eval=T}
+zmash=readRDS("~/Dropbox/zmash.rds")
+pmash=apply(zmash,2,function(x){
+  2*pnorm(-abs(x))
+})
+
+#library("ashr")
+#n=1e6
+#rs=sample(1:nrow(zmash),n)
+#saveRDS(rs,"~/Dropbox/ashindices.rds")
+
+rs=readRDS("~/Dropbox/ashindices.rds")
+ps=pmash[rs,]
+# i=1
+# ashmat=ash(zmash[rs,i],sebetahat = rep(1,n),mixcompdist = "norm")$result$lfsr
+#   for(i in 2:ncol(zmash)){
+#      a=ash(zmash[rs,i],sebetahat = rep(1,n),mixcompdist = "norm")$result$lfsr
+#      ashmat=cbind(ashmat,a)
+#   }
+# 
+# saveRDS(ashmat,"~/Dropbox/ashmat_mvp.rds")
+```
+
+```{r}
+ashmat=readRDS("~/Dropbox/ashmat_mvp.rds")
+
+o=apply(ps,2,order)
+par(mfrow=c(2,2))
+
+for(i in 1:ncol(o)){
+c=cbind(ps[o[,i],i],ashmat[o[,i],i])
+plot(c[,1],c[,2],main=colnames(ps)[i],xlab="Pvalue",ylab="lfsr",xlim=c(0,9e-8),ylim=c(0,0.005))
+abline(v=5e-8)
+  
+}
+
+```
+
