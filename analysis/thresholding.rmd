@@ -24,6 +24,7 @@ pmash=apply(zmash,2,function(x){
 
 rs=readRDS("~/Dropbox/ashindices.rds")
 ps=pmash[rs,]
+
 # i=1
 # ashmat=ash(zmash[rs,i],sebetahat = rep(1,n),mixcompdist = "norm")$result$lfsr
 #   for(i in 2:ncol(zmash)){
