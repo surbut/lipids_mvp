@@ -1,0 +1,136 @@
+---
+title: "cad_workflow"
+output:
+  workflowr::wflow_html:
+    code_folding: hide
+    toc: no
+  html_notebook: default
+  html_document:
+    df_print: paged
+    toc: no
+editor_options:
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## R Markdown
+```{r packageload,eval=F}
+library("mashr")
+source("~/Downloads/flashscript.R")
+library("stringr")
+library('data.table')
+library("flashr")
+
+```
+
+
+```{r data.mutate,eval=F}
+ztab=read.table("~/Dropbox/ALL_lipid_CAD_Z-scores_merged_no_NA.txt",header=T)
+
+a=do.call(rbind, strsplit(ztab$MarkerName, ':'))
+chr=a[,1]
+bp=do.call(rbind, strsplit(a[,2], '\\|'))[,1]
+
+zframe=data.frame("chr"=chr,"bp"=as.numeric(bp),ztab$CAD_Z,ztab$HDL_Z,ztab$LDL_Z,ztab$logTG_Z,ztab$TC_Z)
+rownames(zframe)=ztab$MarkerName
+
+bed=read.table("~/Dropbox//ld_chunk.bed")
+head(bed)
+
+maxes=apply(zframe[,c(3:7)],1,function(x){max(abs(x))})##get max abs Z across phenotypes
+znew=cbind(zframe,maxes)
+saveRDS(znew,"~/Dropbox/cadproject/znew.rds")
+```
+
+Retrieve max Z per block
+
+```{r pressure, eval=F}
+max_block=data.frame(matrix(ncol = ncol(znew)+1, nrow = nrow(bed)))
+colnames(max_block)=c(colnames(znew),"snpid")
+
+bed$V1=do.call(rbind, strsplit(bed$V1, 'chr'))[,2]
+
+for(i in 1:nrow(bed)){
+  chr=bed[i,1]
+  start=bed[i,2]
+  stop=bed[i,3]
+  in_chrom=znew[znew$chr==chr,]##extract those of the same
+  goodguys=in_chrom[in_chrom$bp>start&in_chrom$bp<stop,]
+ if(nrow(goodguys)>0) {
+    z.max=which.max(goodguys[,"maxes"])
+    z_good=goodguys[z.max,]
+    } else {
+      z_good=rep(0,ncol(max_block))
+    }
+  z_good=data.table(z_good,stringsAsFactors = T)
+  z_good$chr=as.character(z_good$chr)
+  z_good$snpid.x=rownames(goodguys)[z.max]
+  max_block[i,]=z_good
+  print(i)
+}
+
+max_block=na.omit(max_block)
+write.table(max_block,"~/Dropbox/cad_project/max_ld_block.txt")
+```
+
+```{r,eval=F}
+
+install.packages("devtools")
+library(devtools)
+install_github("stephenslab/flashr",build_vignettes = FALSE)
+library("flashr")
+source('~/Dropbox/jointData/flashscript.R')
+
+# identify a random subset of 20000 tests
+random.subset = sample(1:nrow(znew),40000)
+zmash=as.matrix(znew[,c(3:7)])
+data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
+Vhat = estimate_null_correlation_simple(data.temp)##correlation matrix of the errors
+saveRDS(Vhat,"~/Dropbox/cadproject/cadVhat.rds")
+library("lattice")
+clrs = colorRampPalette((c("#D73027","#FC8D59","#FEE090","#FFFFBF", "#E0F3F8","#91BFDB","#4575B4")))(64)
+
+print(levelplot(Vhat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main="VHAT"))
+
+rm(data.temp)
+data.random = mash_set_data(zmash[random.subset,],alpha = 1,V=Vhat)##use for E(Z)model
+
+zmax=apply(max_block[,c(3:7)],2,function(x){as.numeric(x)});rownames(zmax)=max_block$snpid.x
+data.strong = mash_set_data(zmax,alpha = 1,V=Vhat)
+
+U.pca = cov_pca(data.strong,3)
+
+#U.flash=cov_flash(data.strong, non_canonical = TRUE)
+X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
+U.ed = cov_ed(data.strong, c(U.pca, list("XX" = t(X.center) %*% X.center / nrow(X.center))))
+saveRDS(U.ed,"~/Dropbox/cadproject/EDcov.Rds")
+
+#U.ed=readRDS("~/lipids_mvp/data/EDcov.Rds")
+U.c = cov_canonical(data.random)
+
+m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)
+saveRDS(m,"~/Dropbox/cadproject/mfitCAD.rds")
+saveRDS(zmash,"~/Dropbox/cadproject/zmash_mat.rds")
+```
+
+
+```{r,eval=T}
+library("lattice")
+zmash=readRDS("~/Dropbox/cadproject/zmash_mat.rds")
+m=readRDS("~/Dropbox/cadproject/mfitCAD.rds")
+k=length(m$fitted_g$Ulist)
+l=length(m$fitted_g$grid)
+pimat=matrix(m$fitted_g$pi[-1],nrow=l,byrow=T)
+colnames(pimat)=names(m$fitted_g$pi)[2:(k+1)]
+barplot(colSums(pimat),las=2)
+library("lattice")
+for(i in 2:6){
+  z.num=as.matrix(cov2cor(m$fitted_g$Ulist[[i]]))
+  colnames(z.num)=row.names(z.num)=colnames(zmash)
+clrs = colorRampPalette(rev(c("#D73027","#FC8D59","#FEE090","#FFFFBF", "#E0F3F8","#91BFDB","#4575B4")))(64)
+z.num[lower.tri(z.num)] = NA
+print(levelplot(z.num,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main=paste0(names(m$fitted_g$Ulist)[[i]])))
+}
+```
