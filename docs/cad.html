@@ -469,16 +469,16 @@ data/EDcov.Rds
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree35d6f17ff5d88ede1d084d6d79de05ffab6ac69btargetblank35d6f17a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/35d6f17ff5d88ede1d084d6d79de05ffab6ac69b" target="_blank">35d6f17</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree0b322f37e5294e5214c70f6ba5c8d806698d5327targetblank0b322f3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/0b322f37e5294e5214c70f6ba5c8d806698d5327" target="_blank">0b322f3</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree35d6f17ff5d88ede1d084d6d79de05ffab6ac69btargetblank35d6f17a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree0b322f37e5294e5214c70f6ba5c8d806698d5327targetblank0b322f3a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/surbut/lipids_mvp/tree/35d6f17ff5d88ede1d084d6d79de05ffab6ac69b" target="_blank">35d6f17</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/surbut/lipids_mvp/tree/0b322f37e5294e5214c70f6ba5c8d806698d5327" target="_blank">0b322f3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -525,6 +525,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/surbut/lipids_mvp/0b322f37e5294e5214c70f6ba5c8d806698d5327/docs/cad.html" target="_blank">0b322f3</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -660,6 +677,43 @@ pimat=matrix(m$fitted_g$pi[-1],nrow=l,byrow=T)
 colnames(pimat)=names(m$fitted_g$pi)[2:(k+1)]
 barplot(colSums(pimat),las=2)</code></pre>
 <p><img src="figure/cad.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/0b322f37e5294e5214c70f6ba5c8d806698d5327/docs/figure/cad.Rmd/unnamed-chunk-2-1.png" target="_blank">0b322f3</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>library(&quot;lattice&quot;)
 for(i in 2:6){
   z.num=as.matrix(cov2cor(m$fitted_g$Ulist[[i]]))
@@ -668,7 +722,196 @@ clrs = colorRampPalette(rev(c(&quot;#D73027&quot;,&quot;#FC8D59&quot;,&quot;#FEE
 z.num[lower.tri(z.num)] = NA
 print(levelplot(z.num,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,colorkey = TRUE,main=paste0(names(m$fitted_g$Ulist)[[i]])))
 }</code></pre>
-<p><img src="figure/cad.Rmd/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/cad.Rmd/unnamed-chunk-2-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/cad.Rmd/unnamed-chunk-2-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/cad.Rmd/unnamed-chunk-2-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/cad.Rmd/unnamed-chunk-2-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/cad.Rmd/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-2">
+Past versions of unnamed-chunk-2-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/0b322f37e5294e5214c70f6ba5c8d806698d5327/docs/figure/cad.Rmd/unnamed-chunk-2-2.png" target="_blank">0b322f3</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/cad.Rmd/unnamed-chunk-2-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-3">
+Past versions of unnamed-chunk-2-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/0b322f37e5294e5214c70f6ba5c8d806698d5327/docs/figure/cad.Rmd/unnamed-chunk-2-3.png" target="_blank">0b322f3</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/cad.Rmd/unnamed-chunk-2-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-4">
+Past versions of unnamed-chunk-2-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/0b322f37e5294e5214c70f6ba5c8d806698d5327/docs/figure/cad.Rmd/unnamed-chunk-2-4.png" target="_blank">0b322f3</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/cad.Rmd/unnamed-chunk-2-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-5">
+Past versions of unnamed-chunk-2-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/0b322f37e5294e5214c70f6ba5c8d806698d5327/docs/figure/cad.Rmd/unnamed-chunk-2-5.png" target="_blank">0b322f3</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/cad.Rmd/unnamed-chunk-2-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-6">
+Past versions of unnamed-chunk-2-6.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/0b322f37e5294e5214c70f6ba5c8d806698d5327/docs/figure/cad.Rmd/unnamed-chunk-2-6.png" target="_blank">0b322f3</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -692,18 +935,18 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] lattice_0.20-41
+[1] lattice_0.20-41 workflowr_1.6.2
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.5      rstudioapi_0.13 whisker_0.4     knitr_1.30     
- [5] magrittr_2.0.1  workflowr_1.6.2 R6_2.5.0        rlang_0.4.9    
- [9] highr_0.8       stringr_1.4.0   tools_4.0.2     grid_4.0.2     
-[13] xfun_0.18       git2r_0.27.1    htmltools_0.5.0 ellipsis_0.3.1 
-[17] yaml_2.2.1      digest_0.6.27   rprojroot_2.0.2 tibble_3.0.4   
-[21] lifecycle_0.2.0 crayon_1.3.4    later_1.1.0.1   vctrs_0.3.5    
-[25] fs_1.5.0        promises_1.1.1  glue_1.4.2      evaluate_0.14  
-[29] rmarkdown_2.4   stringi_1.5.3   compiler_4.0.2  pillar_1.4.7   
-[33] httpuv_1.5.4    pkgconfig_2.0.3</code></pre>
+ [5] magrittr_2.0.1  R6_2.5.0        rlang_0.4.9     highr_0.8      
+ [9] stringr_1.4.0   tools_4.0.2     grid_4.0.2      xfun_0.18      
+[13] git2r_0.27.1    htmltools_0.5.0 ellipsis_0.3.1  rprojroot_2.0.2
+[17] yaml_2.2.1      digest_0.6.27   tibble_3.0.4    lifecycle_0.2.0
+[21] crayon_1.3.4    later_1.1.0.1   vctrs_0.3.5     promises_1.1.1 
+[25] fs_1.5.0        glue_1.4.2      evaluate_0.14   rmarkdown_2.4  
+[29] stringi_1.5.3   compiler_4.0.2  pillar_1.4.7    httpuv_1.5.4   
+[33] pkgconfig_2.0.3</code></pre>
 </div>
 </div>
 
