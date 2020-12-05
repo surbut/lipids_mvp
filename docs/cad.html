@@ -445,16 +445,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree26a6964e0ce0c8579a0b3195a563443d503ef269targetblank26a6964a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/26a6964e0ce0c8579a0b3195a563443d503ef269" target="_blank">26a6964</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree34099aec58a0a4fde8eb26b408ab65cd4943da93targetblank34099aea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/34099aec58a0a4fde8eb26b408ab65cd4943da93" target="_blank">34099ae</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree26a6964e0ce0c8579a0b3195a563443d503ef269targetblank26a6964a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree34099aec58a0a4fde8eb26b408ab65cd4943da93targetblank34099aea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/surbut/lipids_mvp/tree/26a6964e0ce0c8579a0b3195a563443d503ef269" target="_blank">26a6964</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/surbut/lipids_mvp/tree/34099aec58a0a4fde8eb26b408ab65cd4943da93" target="_blank">34099ae</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -505,6 +505,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/34099aec58a0a4fde8eb26b408ab65cd4943da93/analysis/cad.Rmd" target="_blank">34099ae</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+<td>
+wflow_publish(“analysis/cad.Rmd”)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/surbut/lipids_mvp/1e1715f647675847c4caf2944ed6f24deb316176/docs/cad.html" target="_blank">1e1715f</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -654,7 +688,8 @@ library(&quot;flashr&quot;)
 source(&#39;~/Downloads//flashscript.R&#39;)
 zmash=readRDS(&quot;~/Dropbox/cadproject/zmash_mat.rds&quot;)
 # identify a random subset of 20000 tests
-random.subset = sample(1:nrow(zmash),40000)
+#random.subset = sample(1:nrow(zmash),40000)
+random.subset=readRDS(&quot;~/Dropbox/cadproject/randomsubset.rds&quot;)
 #zmash=as.matrix(znew[,c(3:7)])
 data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
 Vhat = estimate_null_correlation_simple(data.temp)##correlation matrix of the errors
@@ -674,7 +709,7 @@ data.strong = mash_set_data(zmax,alpha = 1,V=Vhat)
 U.pca = cov_pca(data.strong,3)
 U.flash=cov_flash(data.strong, non_canonical = TRUE)
 X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
-U.ed = cov_ed(data.strong, c(U.pca, list(&quot;XX&quot; = t(X.center) %*% X.center / nrow(X.center))))
+U.ed = cov_ed(data.strong, c(U.pca,U.flash,list(&quot;XX&quot; = t(X.center) %*% X.center / nrow(X.center))))
 saveRDS(U.ed,&quot;~/Dropbox/cadproject/EDcov.Rds&quot;)
 
 U.c = cov_canonical(data.random)
@@ -691,6 +726,43 @@ pimat=matrix(m$fitted_g$pi[-1],nrow=l,byrow=T)
 colnames(pimat)=names(m$fitted_g$pi)[2:(k+1)]
 barplot(colSums(pimat),las=2)</code></pre>
 <p><img src="figure/cad.Rmd/plotting-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plotting-1">
+Past versions of plotting-1.png
+</button>
+</p>
+<div id="fig-plotting-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/1e1715f647675847c4caf2944ed6f24deb316176/docs/figure/cad.Rmd/plotting-1.png" target="_blank">1e1715f</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>library(&quot;lattice&quot;)
 for(i in 2:6){
   z.num=as.matrix(cov2cor(m$fitted_g$Ulist[[i]]))
@@ -699,7 +771,196 @@ clrs = colorRampPalette(rev(c(&quot;#D73027&quot;,&quot;#FC8D59&quot;,&quot;#FEE
 z.num[lower.tri(z.num)] = NA
 print(levelplot(z.num,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,colorkey = TRUE,main=paste0(names(m$fitted_g$Ulist)[[i]])))
 }</code></pre>
-<p><img src="figure/cad.Rmd/plotting-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/cad.Rmd/plotting-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/cad.Rmd/plotting-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/cad.Rmd/plotting-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/cad.Rmd/plotting-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/cad.Rmd/plotting-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plotting-2">
+Past versions of plotting-2.png
+</button>
+</p>
+<div id="fig-plotting-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/1e1715f647675847c4caf2944ed6f24deb316176/docs/figure/cad.Rmd/plotting-2.png" target="_blank">1e1715f</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/cad.Rmd/plotting-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plotting-3">
+Past versions of plotting-3.png
+</button>
+</p>
+<div id="fig-plotting-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/1e1715f647675847c4caf2944ed6f24deb316176/docs/figure/cad.Rmd/plotting-3.png" target="_blank">1e1715f</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/cad.Rmd/plotting-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plotting-4">
+Past versions of plotting-4.png
+</button>
+</p>
+<div id="fig-plotting-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/1e1715f647675847c4caf2944ed6f24deb316176/docs/figure/cad.Rmd/plotting-4.png" target="_blank">1e1715f</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/cad.Rmd/plotting-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plotting-5">
+Past versions of plotting-5.png
+</button>
+</p>
+<div id="fig-plotting-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/1e1715f647675847c4caf2944ed6f24deb316176/docs/figure/cad.Rmd/plotting-5.png" target="_blank">1e1715f</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/cad.Rmd/plotting-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plotting-6">
+Past versions of plotting-6.png
+</button>
+</p>
+<div id="fig-plotting-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/1e1715f647675847c4caf2944ed6f24deb316176/docs/figure/cad.Rmd/plotting-6.png" target="_blank">1e1715f</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>To compute posterior:</p>
 <pre class="r"><code>for(i in 0:3){
   start=i*2e6+1
@@ -724,7 +985,7 @@ saveRDS(p,file = paste0(&quot;~/Dropbox/cadproject/mash_cad_batch&quot;,i,&quot;
   p=file$PosteriorMean
   lfsr=file$lfsr
 
-for(i in 1:5){
+for(i in 1:4){
   file=readRDS(paste0(&quot;~/Dropbox/cadproject/mash_cad_batch&quot;,i,&quot;.rds&quot;))
   pm=file$PosteriorMean
   lf=file$lfsr
@@ -733,7 +994,10 @@ for(i in 1:5){
 }
   
 saveRDS(p,&quot;~/Dropbox/cadproject/posterio_z.rds&quot;)
-saveRDS(lfsr,&quot;~/Dropbox/cadproject/posterio_lfsr.rds&quot;)</code></pre>
+saveRDS(lfsr,&quot;~/Dropbox/cadproject/posterio_lfsr.rds&quot;)
+
+apply(lfsr,2,function(x){sum(x&lt;0.05)})
+apply(abs(zmash),2,function(x){sum(x&gt;qnorm(1-5e-8/2))})</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
