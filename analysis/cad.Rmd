@@ -85,7 +85,8 @@ library("flashr")
 source('~/Downloads//flashscript.R')
 zmash=readRDS("~/Dropbox/cadproject/zmash_mat.rds")
 # identify a random subset of 20000 tests
-random.subset = sample(1:nrow(zmash),40000)
+#random.subset = sample(1:nrow(zmash),40000)
+random.subset=readRDS("~/Dropbox/cadproject/randomsubset.rds")
 #zmash=as.matrix(znew[,c(3:7)])
 data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
 Vhat = estimate_null_correlation_simple(data.temp)##correlation matrix of the errors
@@ -105,7 +106,7 @@ data.strong = mash_set_data(zmax,alpha = 1,V=Vhat)
 U.pca = cov_pca(data.strong,3)
 U.flash=cov_flash(data.strong, non_canonical = TRUE)
 X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
-U.ed = cov_ed(data.strong, c(U.pca, list("XX" = t(X.center) %*% X.center / nrow(X.center))))
+U.ed = cov_ed(data.strong, c(U.pca,U.flash,list("XX" = t(X.center) %*% X.center / nrow(X.center))))
 saveRDS(U.ed,"~/Dropbox/cadproject/EDcov.Rds")
 
 U.c = cov_canonical(data.random)
@@ -166,7 +167,7 @@ i=0
   p=file$PosteriorMean
   lfsr=file$lfsr
 
-for(i in 1:5){
+for(i in 1:4){
   file=readRDS(paste0("~/Dropbox/cadproject/mash_cad_batch",i,".rds"))
   pm=file$PosteriorMean
   lf=file$lfsr
@@ -176,5 +177,9 @@ for(i in 1:5){
   
 saveRDS(p,"~/Dropbox/cadproject/posterio_z.rds")
 saveRDS(lfsr,"~/Dropbox/cadproject/posterio_lfsr.rds")
+
+apply(lfsr,2,function(x){sum(x<0.05)})
+apply(abs(zmash),2,function(x){sum(x>qnorm(1-5e-8/2))})
+
 ```
   
