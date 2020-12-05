@@ -47,6 +47,7 @@ saveRDS(znew,"~/Dropbox/cadproject/znew.rds")
 Retrieve max Z per block
 
 ```{r pressure, eval=F}
+znew=readRDS("~/Dropbox/cadproject/znew.rds")
 max_block=data.frame(matrix(ncol = ncol(znew)+1, nrow = nrow(bed)))
 colnames(max_block)=c(colnames(znew),"snpid")
 
@@ -72,20 +73,20 @@ for(i in 1:nrow(bed)){
 }
 
 max_block=na.omit(max_block)
-write.table(max_block,"~/Dropbox/cad_project/max_ld_block.txt")
+write.table(max_block,"~/Dropbox/cadproject/max_ld_block.txt")
 ```
 
 ```{r,eval=F}
 
 install.packages("devtools")
 library(devtools)
-install_github("stephenslab/flashr",build_vignettes = FALSE)
+#install_github("stephenslab/flashr",build_vignettes = FALSE)
 library("flashr")
-source('~/Dropbox/jointData/flashscript.R')
-
+source('~/Downloads//flashscript.R')
+zmash=readRDS("~/Dropbox/cadproject/zmash_mat.rds")
 # identify a random subset of 20000 tests
-random.subset = sample(1:nrow(znew),40000)
-zmash=as.matrix(znew[,c(3:7)])
+random.subset = sample(1:nrow(zmash),40000)
+#zmash=as.matrix(znew[,c(3:7)])
 data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
 Vhat = estimate_null_correlation_simple(data.temp)##correlation matrix of the errors
 saveRDS(Vhat,"~/Dropbox/cadproject/cadVhat.rds")
@@ -97,17 +98,16 @@ print(levelplot(Vhat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main
 rm(data.temp)
 data.random = mash_set_data(zmash[random.subset,],alpha = 1,V=Vhat)##use for E(Z)model
 
+max_block=read.table(("~/Dropbox/cadproject/max_ld_block.txt"))
 zmax=apply(max_block[,c(3:7)],2,function(x){as.numeric(x)});rownames(zmax)=max_block$snpid.x
 data.strong = mash_set_data(zmax,alpha = 1,V=Vhat)
 
 U.pca = cov_pca(data.strong,3)
-
-#U.flash=cov_flash(data.strong, non_canonical = TRUE)
+U.flash=cov_flash(data.strong, non_canonical = TRUE)
 X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
 U.ed = cov_ed(data.strong, c(U.pca, list("XX" = t(X.center) %*% X.center / nrow(X.center))))
 saveRDS(U.ed,"~/Dropbox/cadproject/EDcov.Rds")
 
-#U.ed=readRDS("~/lipids_mvp/data/EDcov.Rds")
 U.c = cov_canonical(data.random)
 
 m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)
@@ -116,7 +116,7 @@ saveRDS(zmash,"~/Dropbox/cadproject/zmash_mat.rds")
 ```
 
 
-```{r,eval=T}
+```{r plotting,eval=T}
 library("lattice")
 zmash=readRDS("~/Dropbox/cadproject/zmash_mat.rds")
 m=readRDS("~/Dropbox/cadproject/mfitCAD.rds")
@@ -134,3 +134,47 @@ z.num[lower.tri(z.num)] = NA
 print(levelplot(z.num,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main=paste0(names(m$fitted_g$Ulist)[[i]])))
 }
 ```
+
+To compute posterior:
+
+```{r,eval=F}
+
+
+for(i in 0:3){
+  start=i*2e6+1
+  stop=(i+1)*2e6
+  print(c(start,stop))
+  library("mashr")
+  mash.data=mash_set_data(zmash[start:stop,],V = Vhat,alpha = 1)
+  p=mash_compute_posterior_matrices(m$fitted_g, mash.data, algorithm.version = "Rcpp")
+  saveRDS(p,file = paste0("~/Dropbox/cadproject/mash_cad_batch",i,".rds"))
+}
+  
+i=4
+start=i*2e6+1
+stop=nrow(zmash)
+print(c(start,stop))
+library("mashr")
+mash.data=mash_set_data(zmash[start:stop,],V = Vhat,alpha = 1)
+p=mash_compute_posterior_matrices(m$fitted_g, mash.data, algorithm.version = "Rcpp")
+saveRDS(p,file = paste0("~/Dropbox/cadproject/mash_cad_batch",i,".rds"))
+```
+
+```{r,eval=F}
+i=0
+  file=readRDS(paste0("~/Dropbox/cadproject/mash_cad_batch",i,".rds"))
+  p=file$PosteriorMean
+  lfsr=file$lfsr
+
+for(i in 1:5){
+  file=readRDS(paste0("~/Dropbox/cadproject/mash_cad_batch",i,".rds"))
+  pm=file$PosteriorMean
+  lf=file$lfsr
+  p=rbind(p,pm)
+  lfsr=rbind(lfsr,lf)
+}
+  
+saveRDS(p,"~/Dropbox/cadproject/posterio_z.rds")
+saveRDS(lfsr,"~/Dropbox/cadproject/posterio_lfsr.rds")
+```
+  
