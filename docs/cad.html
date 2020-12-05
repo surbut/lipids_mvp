@@ -336,7 +336,7 @@ $(document).ready(function () {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -345,7 +345,7 @@ $(document).ready(function () {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -357,7 +357,7 @@ $(document).ready(function () {
 <strong>Last updated:</strong> 2020-12-04
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>lipids_mvp/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -369,7 +369,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <hr>
 </div>
 <div id="checks" class="tab-pane fade">
-<div class="panel-group" id="workflowr-checks">
+<div id="workflowr-checks" class="panel-group">
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
@@ -433,60 +433,40 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
 </p>
 </div>
-<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
 <div class="panel-body">
-<p>
-Using absolute paths to the files within your workflowr project makes it difficult for you and others to run your code on a different machine. Change the absolute path(s) below to the suggested relative path(s) to make your code more reproducible.
-</p>
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th style="text-align:left;">
-absolute
-</th>
-<th style="text-align:left;">
-relative
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-~/lipids_mvp/data/EDcov.Rds
-</td>
-<td style="text-align:left;">
-data/EDcov.Rds
-</td>
-</tr>
-</tbody>
-</table>
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree0b322f37e5294e5214c70f6ba5c8d806698d5327targetblank0b322f3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/0b322f37e5294e5214c70f6ba5c8d806698d5327" target="_blank">0b322f3</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree26a6964e0ce0c8579a0b3195a563443d503ef269targetblank26a6964a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/26a6964e0ce0c8579a0b3195a563443d503ef269" target="_blank">26a6964</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree0b322f37e5294e5214c70f6ba5c8d806698d5327targetblank0b322f3a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree26a6964e0ce0c8579a0b3195a563443d503ef269targetblank26a6964a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/surbut/lipids_mvp/tree/0b322f37e5294e5214c70f6ba5c8d806698d5327" target="_blank">0b322f3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/surbut/lipids_mvp/tree/26a6964e0ce0c8579a0b3195a563443d503ef269" target="_blank">26a6964</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .DS_Store
     Ignored:    analysis/.Rhistory
     Ignored:    analysis/cad.nb.html
+
+Unstaged changes:
+    Modified:   analysis/workingwithdata.Rmd
 
 </code></pre>
 <p>
@@ -525,6 +505,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/26a6964e0ce0c8579a0b3195a563443d503ef269/analysis/cad.Rmd" target="_blank">26a6964</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+<td>
+wflow_publish(“analysis/cad.Rmd”)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/surbut/lipids_mvp/4d46f89a9081211e152d76fdd818b1292de31a1c/docs/cad.html" target="_blank">4d46f89</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-04
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -606,7 +620,8 @@ maxes=apply(zframe[,c(3:7)],1,function(x){max(abs(x))})##get max abs Z across ph
 znew=cbind(zframe,maxes)
 saveRDS(znew,&quot;~/Dropbox/cadproject/znew.rds&quot;)</code></pre>
 <p>Retrieve max Z per block</p>
-<pre class="r"><code>max_block=data.frame(matrix(ncol = ncol(znew)+1, nrow = nrow(bed)))
+<pre class="r"><code>znew=readRDS(&quot;~/Dropbox/cadproject/znew.rds&quot;)
+max_block=data.frame(matrix(ncol = ncol(znew)+1, nrow = nrow(bed)))
 colnames(max_block)=c(colnames(znew),&quot;snpid&quot;)
 
 bed$V1=do.call(rbind, strsplit(bed$V1, &#39;chr&#39;))[,2]
@@ -631,16 +646,16 @@ for(i in 1:nrow(bed)){
 }
 
 max_block=na.omit(max_block)
-write.table(max_block,&quot;~/Dropbox/cad_project/max_ld_block.txt&quot;)</code></pre>
+write.table(max_block,&quot;~/Dropbox/cadproject/max_ld_block.txt&quot;)</code></pre>
 <pre class="r"><code>install.packages(&quot;devtools&quot;)
 library(devtools)
-install_github(&quot;stephenslab/flashr&quot;,build_vignettes = FALSE)
+#install_github(&quot;stephenslab/flashr&quot;,build_vignettes = FALSE)
 library(&quot;flashr&quot;)
-source(&#39;~/Dropbox/jointData/flashscript.R&#39;)
-
+source(&#39;~/Downloads//flashscript.R&#39;)
+zmash=readRDS(&quot;~/Dropbox/cadproject/zmash_mat.rds&quot;)
 # identify a random subset of 20000 tests
-random.subset = sample(1:nrow(znew),40000)
-zmash=as.matrix(znew[,c(3:7)])
+random.subset = sample(1:nrow(zmash),40000)
+#zmash=as.matrix(znew[,c(3:7)])
 data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
 Vhat = estimate_null_correlation_simple(data.temp)##correlation matrix of the errors
 saveRDS(Vhat,&quot;~/Dropbox/cadproject/cadVhat.rds&quot;)
@@ -652,17 +667,16 @@ print(levelplot(Vhat,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,
 rm(data.temp)
 data.random = mash_set_data(zmash[random.subset,],alpha = 1,V=Vhat)##use for E(Z)model
 
+max_block=read.table((&quot;~/Dropbox/cadproject/max_ld_block.txt&quot;))
 zmax=apply(max_block[,c(3:7)],2,function(x){as.numeric(x)});rownames(zmax)=max_block$snpid.x
 data.strong = mash_set_data(zmax,alpha = 1,V=Vhat)
 
 U.pca = cov_pca(data.strong,3)
-
-#U.flash=cov_flash(data.strong, non_canonical = TRUE)
+U.flash=cov_flash(data.strong, non_canonical = TRUE)
 X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
 U.ed = cov_ed(data.strong, c(U.pca, list(&quot;XX&quot; = t(X.center) %*% X.center / nrow(X.center))))
 saveRDS(U.ed,&quot;~/Dropbox/cadproject/EDcov.Rds&quot;)
 
-#U.ed=readRDS(&quot;~/lipids_mvp/data/EDcov.Rds&quot;)
 U.c = cov_canonical(data.random)
 
 m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)
@@ -676,44 +690,7 @@ l=length(m$fitted_g$grid)
 pimat=matrix(m$fitted_g$pi[-1],nrow=l,byrow=T)
 colnames(pimat)=names(m$fitted_g$pi)[2:(k+1)]
 barplot(colSums(pimat),las=2)</code></pre>
-<p><img src="figure/cad.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
-Past versions of unnamed-chunk-2-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-2-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/0b322f37e5294e5214c70f6ba5c8d806698d5327/docs/figure/cad.Rmd/unnamed-chunk-2-1.png" target="_blank">0b322f3</a>
-</td>
-<td>
-Your Name
-</td>
-<td>
-2020-12-04
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/cad.Rmd/plotting-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>library(&quot;lattice&quot;)
 for(i in 2:6){
   z.num=as.matrix(cov2cor(m$fitted_g$Ulist[[i]]))
@@ -722,196 +699,41 @@ clrs = colorRampPalette(rev(c(&quot;#D73027&quot;,&quot;#FC8D59&quot;,&quot;#FEE
 z.num[lower.tri(z.num)] = NA
 print(levelplot(z.num,col.regions = clrs,xlab = &quot;&quot;,ylab = &quot;&quot;,colorkey = TRUE,main=paste0(names(m$fitted_g$Ulist)[[i]])))
 }</code></pre>
-<p><img src="figure/cad.Rmd/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-2">
-Past versions of unnamed-chunk-2-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-2-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/0b322f37e5294e5214c70f6ba5c8d806698d5327/docs/figure/cad.Rmd/unnamed-chunk-2-2.png" target="_blank">0b322f3</a>
-</td>
-<td>
-Your Name
-</td>
-<td>
-2020-12-04
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/cad.Rmd/unnamed-chunk-2-3.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-3">
-Past versions of unnamed-chunk-2-3.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-2-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/0b322f37e5294e5214c70f6ba5c8d806698d5327/docs/figure/cad.Rmd/unnamed-chunk-2-3.png" target="_blank">0b322f3</a>
-</td>
-<td>
-Your Name
-</td>
-<td>
-2020-12-04
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/cad.Rmd/unnamed-chunk-2-4.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-4">
-Past versions of unnamed-chunk-2-4.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-2-4" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/0b322f37e5294e5214c70f6ba5c8d806698d5327/docs/figure/cad.Rmd/unnamed-chunk-2-4.png" target="_blank">0b322f3</a>
-</td>
-<td>
-Your Name
-</td>
-<td>
-2020-12-04
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/cad.Rmd/unnamed-chunk-2-5.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-5">
-Past versions of unnamed-chunk-2-5.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-2-5" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/0b322f37e5294e5214c70f6ba5c8d806698d5327/docs/figure/cad.Rmd/unnamed-chunk-2-5.png" target="_blank">0b322f3</a>
-</td>
-<td>
-Your Name
-</td>
-<td>
-2020-12-04
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/cad.Rmd/unnamed-chunk-2-6.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-6">
-Past versions of unnamed-chunk-2-6.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-2-6" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/surbut/lipids_mvp/blob/0b322f37e5294e5214c70f6ba5c8d806698d5327/docs/figure/cad.Rmd/unnamed-chunk-2-6.png" target="_blank">0b322f3</a>
-</td>
-<td>
-Your Name
-</td>
-<td>
-2020-12-04
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/cad.Rmd/plotting-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/cad.Rmd/plotting-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/cad.Rmd/plotting-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/cad.Rmd/plotting-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/cad.Rmd/plotting-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>To compute posterior:</p>
+<pre class="r"><code>for(i in 0:3){
+  start=i*2e6+1
+  stop=(i+1)*2e6
+  print(c(start,stop))
+  library(&quot;mashr&quot;)
+  mash.data=mash_set_data(zmash[start:stop,],V = Vhat,alpha = 1)
+  p=mash_compute_posterior_matrices(m$fitted_g, mash.data, algorithm.version = &quot;Rcpp&quot;)
+  saveRDS(p,file = paste0(&quot;~/Dropbox/cadproject/mash_cad_batch&quot;,i,&quot;.rds&quot;))
+}
+  
+i=4
+start=i*2e6+1
+stop=nrow(zmash)
+print(c(start,stop))
+library(&quot;mashr&quot;)
+mash.data=mash_set_data(zmash[start:stop,],V = Vhat,alpha = 1)
+p=mash_compute_posterior_matrices(m$fitted_g, mash.data, algorithm.version = &quot;Rcpp&quot;)
+saveRDS(p,file = paste0(&quot;~/Dropbox/cadproject/mash_cad_batch&quot;,i,&quot;.rds&quot;))</code></pre>
+<pre class="r"><code>i=0
+  file=readRDS(paste0(&quot;~/Dropbox/cadproject/mash_cad_batch&quot;,i,&quot;.rds&quot;))
+  p=file$PosteriorMean
+  lfsr=file$lfsr
+
+for(i in 1:5){
+  file=readRDS(paste0(&quot;~/Dropbox/cadproject/mash_cad_batch&quot;,i,&quot;.rds&quot;))
+  pm=file$PosteriorMean
+  lf=file$lfsr
+  p=rbind(p,pm)
+  lfsr=rbind(lfsr,lf)
+}
+  
+saveRDS(p,&quot;~/Dropbox/cadproject/posterio_z.rds&quot;)
+saveRDS(lfsr,&quot;~/Dropbox/cadproject/posterio_lfsr.rds&quot;)</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -939,14 +761,13 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.5      rstudioapi_0.13 whisker_0.4     knitr_1.30     
- [5] magrittr_2.0.1  R6_2.5.0        rlang_0.4.9     highr_0.8      
- [9] stringr_1.4.0   tools_4.0.2     grid_4.0.2      xfun_0.18      
-[13] git2r_0.27.1    htmltools_0.5.0 ellipsis_0.3.1  rprojroot_2.0.2
-[17] yaml_2.2.1      digest_0.6.27   tibble_3.0.4    lifecycle_0.2.0
-[21] crayon_1.3.4    later_1.1.0.1   vctrs_0.3.5     promises_1.1.1 
-[25] fs_1.5.0        glue_1.4.2      evaluate_0.14   rmarkdown_2.4  
-[29] stringi_1.5.3   compiler_4.0.2  pillar_1.4.7    httpuv_1.5.4   
-[33] pkgconfig_2.0.3</code></pre>
+ [5] magrittr_2.0.1  R6_2.5.0        rlang_0.4.9     stringr_1.4.0  
+ [9] tools_4.0.2     grid_4.0.2      xfun_0.18       git2r_0.27.1   
+[13] htmltools_0.5.0 ellipsis_0.3.1  rprojroot_2.0.2 yaml_2.2.1     
+[17] digest_0.6.27   tibble_3.0.4    lifecycle_0.2.0 crayon_1.3.4   
+[21] later_1.1.0.1   vctrs_0.3.5     promises_1.1.1  fs_1.5.0       
+[25] glue_1.4.2      evaluate_0.14   rmarkdown_2.4   stringi_1.5.3  
+[29] compiler_4.0.2  pillar_1.4.7    httpuv_1.5.4    pkgconfig_2.0.3</code></pre>
 </div>
 </div>
 
