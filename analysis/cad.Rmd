@@ -181,7 +181,6 @@ saveRDS(lfsr,"~/Dropbox/cadproject/posterio_lfsr.rds")
 ```
 
 ```{r}
-
 p=readRDS("~/Dropbox/cadproject/posterio_z.rds")
 lf=readRDS("~/Dropbox/cadproject/posterio_lfsr.rds")
 zmash=readRDS("~/Dropbox/cadproject/zmash_mat.rds")
