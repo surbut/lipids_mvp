@@ -27,7 +27,7 @@ library("flashr")
 
 
 ```{r data.mutate,eval=F}
-ztab=read.table("~/Dropbox/ALL_lipid_CAD_Z-scores_merged_no_NA.txt",header=T)
+ztab=read.table("~/Dropbox/ALL_lipid_CAD_Z-scores_merged_no_NA_without_UKB.txt",header=T)
 
 a=do.call(rbind, strsplit(ztab$MarkerName, ':'))
 chr=a[,1]
@@ -83,11 +83,12 @@ library(devtools)
 #install_github("stephenslab/flashr",build_vignettes = FALSE)
 library("flashr")
 source('~/Downloads//flashscript.R')
-zmash=readRDS("~/Dropbox/cadproject/zmash_mat.rds")
+#zmash=readRDS("~/Dropbox/cadproject/zmash_mat.rds")
 # identify a random subset of 20000 tests
-#random.subset = sample(1:nrow(zmash),40000)
+random.subset = sample(1:nrow(zmash),40000)
+saveRDS(random.subset,"~/Dropbox/cadproject/randomsubset.rds")
 random.subset=readRDS("~/Dropbox/cadproject/randomsubset.rds")
-#zmash=as.matrix(znew[,c(3:7)])
+zmash=as.matrix(znew[,c(3:7)])
 data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
 Vhat = estimate_null_correlation_simple(data.temp)##correlation matrix of the errors
 saveRDS(Vhat,"~/Dropbox/cadproject/cadVhat.rds")
@@ -177,9 +178,26 @@ for(i in 1:4){
   
 saveRDS(p,"~/Dropbox/cadproject/posterio_z.rds")
 saveRDS(lfsr,"~/Dropbox/cadproject/posterio_lfsr.rds")
+```
 
-apply(lfsr,2,function(x){sum(x<0.05)})
+```{r}
+
+p=readRDS("~/Dropbox/cadproject/posterio_z.rds")
+lf=readRDS("~/Dropbox/cadproject/posterio_lfsr.rds")
+zmash=readRDS("~/Dropbox/cadproject/zmash_mat.rds")
+
+apply(lf,2,function(x){sum(x<0.05)})
 apply(abs(zmash),2,function(x){sum(x>qnorm(1-5e-8/2))})
+
+lf=readRDS("~/Dropbox/cadproject/posterio_lfsr.rds")
+pmash=2*(pnorm(-abs(zmash)))
+
+colnames(lf)=colnames(pmash)=c("CAD","HDL","LDL","TG","TC")
+
+barplot(matrix(c(apply(lf,2,function(x){sum(x<0.05)}),apply(pmash,2,function(x){sum(x<5e-8)})),byrow=T,nr=2),beside=T,col=c("aquamarine3","coral"),main="MashR significant SNPs per trait")
+legend("topleft", c("mashR","univariate"), pch=15, 
+       col=c("aquamarine3","coral"), 
+       bty="n")
 
 ```
   
