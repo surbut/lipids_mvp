@@ -336,7 +336,7 @@ $(document).ready(function () {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -345,7 +345,7 @@ $(document).ready(function () {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -354,10 +354,10 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-12-07
+<strong>Last updated:</strong> 2021-01-01
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>lipids_mvp/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -373,12 +373,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
@@ -445,16 +445,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree7a4ca9666da19b6ffccc1aa1d5d67cb2f0ef9397targetblank7a4ca96a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/7a4ca9666da19b6ffccc1aa1d5d67cb2f0ef9397" target="_blank">7a4ca96</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreed3b5116e91a53f815c2ce11c6e40c75712a417f4targetblankd3b5116a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/d3b5116e91a53f815c2ce11c6e40c75712a417f4" target="_blank">d3b5116</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree7a4ca9666da19b6ffccc1aa1d5d67cb2f0ef9397targetblank7a4ca96a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreed3b5116e91a53f815c2ce11c6e40c75712a417f4targetblankd3b5116a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/surbut/lipids_mvp/tree/7a4ca9666da19b6ffccc1aa1d5d67cb2f0ef9397" target="_blank">7a4ca96</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/surbut/lipids_mvp/tree/d3b5116e91a53f815c2ce11c6e40c75712a417f4" target="_blank">d3b5116</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -464,14 +464,8 @@ Ignored files:
     Ignored:    .DS_Store
     Ignored:    analysis/.Rhistory
     Ignored:    analysis/cad.nb.html
-    Ignored:    analysis/figure/
-
-Untracked files:
-    Untracked:  analysis/cad.knit.md
-    Untracked:  analysis/cad.utf8.md
 
 Unstaged changes:
-    Modified:   analysis/cad.Rmd
     Modified:   analysis/workingwithdata.Rmd
 
 </code></pre>
@@ -511,6 +505,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/d3b5116e91a53f815c2ce11c6e40c75712a417f4/analysis/cad.Rmd" target="_blank">d3b5116</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2021-01-01
+</td>
+<td>
+wflow_git_commit(“~/lipids_mvp/analysis/cad.Rmd”)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/surbut/lipids_mvp/2b6f6a19cad0ad2a487c8c2fbdb221ef95b5e96d/docs/cad.html" target="_blank">2b6f6a1</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2020-12-07
+</td>
+<td>
+Update
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -661,7 +689,7 @@ source(&quot;~/Downloads/flashscript.R&quot;)
 library(&quot;stringr&quot;)
 library(&#39;data.table&#39;)
 library(&quot;flashr&quot;)</code></pre>
-<pre class="r"><code>ztab=read.table(&quot;~/Dropbox/ALL_lipid_CAD_Z-scores_merged_no_NA.txt&quot;,header=T)
+<pre class="r"><code>ztab=read.table(&quot;~/Dropbox/ALL_lipid_CAD_Z-scores_merged_no_NA_without_UKB.txt&quot;,header=T)
 
 a=do.call(rbind, strsplit(ztab$MarkerName, &#39;:&#39;))
 chr=a[,1]
@@ -709,11 +737,12 @@ library(devtools)
 #install_github(&quot;stephenslab/flashr&quot;,build_vignettes = FALSE)
 library(&quot;flashr&quot;)
 source(&#39;~/Downloads//flashscript.R&#39;)
-zmash=readRDS(&quot;~/Dropbox/cadproject/zmash_mat.rds&quot;)
+#zmash=readRDS(&quot;~/Dropbox/cadproject/zmash_mat.rds&quot;)
 # identify a random subset of 20000 tests
-#random.subset = sample(1:nrow(zmash),40000)
+random.subset = sample(1:nrow(zmash),40000)
+saveRDS(random.subset,&quot;~/Dropbox/cadproject/randomsubset.rds&quot;)
 random.subset=readRDS(&quot;~/Dropbox/cadproject/randomsubset.rds&quot;)
-#zmash=as.matrix(znew[,c(3:7)])
+zmash=as.matrix(znew[,c(3:7)])
 data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
 Vhat = estimate_null_correlation_simple(data.temp)##correlation matrix of the errors
 saveRDS(Vhat,&quot;~/Dropbox/cadproject/cadVhat.rds&quot;)
@@ -1071,16 +1100,17 @@ apply(lf,2,function(x){sum(x&lt;0.05)})</code></pre>
       158678       713497       475127       709422       524415 </code></pre>
 <pre class="r"><code>apply(abs(zmash),2,function(x){sum(x&gt;qnorm(1-5e-8/2))})</code></pre>
 <pre><code>  ztab.CAD_Z   ztab.HDL_Z   ztab.LDL_Z ztab.logTG_Z    ztab.TC_Z 
-        2044       109259        89499       103736       116682 </code></pre>
+        2044        81216        64848        80932        89431 </code></pre>
 <pre class="r"><code>lf=readRDS(&quot;~/Dropbox/cadproject/posterio_lfsr.rds&quot;)
 pmash=2*(pnorm(-abs(zmash)))
 
 colnames(lf)=colnames(pmash)=c(&quot;CAD&quot;,&quot;HDL&quot;,&quot;LDL&quot;,&quot;TG&quot;,&quot;TC&quot;)
-dev.new()
+
 barplot(matrix(c(apply(lf,2,function(x){sum(x&lt;0.05)}),apply(pmash,2,function(x){sum(x&lt;5e-8)})),byrow=T,nr=2),beside=T,col=c(&quot;aquamarine3&quot;,&quot;coral&quot;),main=&quot;MashR significant SNPs per trait&quot;)
 legend(&quot;topleft&quot;, c(&quot;mashR&quot;,&quot;univariate&quot;), pch=15, 
        col=c(&quot;aquamarine3&quot;,&quot;coral&quot;), 
        bty=&quot;n&quot;)</code></pre>
+<p><img src="figure/cad.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1104,18 +1134,17 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] lattice_0.20-41
+[1] lattice_0.20-41 workflowr_1.6.2
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.5      rstudioapi_0.13 whisker_0.4     knitr_1.30     
- [5] magrittr_2.0.1  workflowr_1.6.2 R6_2.5.0        rlang_0.4.9    
- [9] stringr_1.4.0   tools_4.0.2     grid_4.0.2      xfun_0.18      
-[13] git2r_0.27.1    htmltools_0.5.0 ellipsis_0.3.1  yaml_2.2.1     
-[17] digest_0.6.27   rprojroot_2.0.2 tibble_3.0.4    lifecycle_0.2.0
-[21] crayon_1.3.4    later_1.1.0.1   vctrs_0.3.5     promises_1.1.1 
-[25] fs_1.5.0        glue_1.4.2      evaluate_0.14   rmarkdown_2.4  
-[29] stringi_1.5.3   compiler_4.0.2  pillar_1.4.7    httpuv_1.5.4   
-[33] pkgconfig_2.0.3</code></pre>
+ [5] magrittr_2.0.1  R6_2.5.0        rlang_0.4.9     stringr_1.4.0  
+ [9] tools_4.0.2     grid_4.0.2      xfun_0.18       git2r_0.27.1   
+[13] htmltools_0.5.0 ellipsis_0.3.1  rprojroot_2.0.2 yaml_2.2.1     
+[17] digest_0.6.27   tibble_3.0.4    lifecycle_0.2.0 crayon_1.3.4   
+[21] later_1.1.0.1   vctrs_0.3.5     promises_1.1.1  fs_1.5.0       
+[25] glue_1.4.2      evaluate_0.14   rmarkdown_2.4   stringi_1.5.3  
+[29] compiler_4.0.2  pillar_1.4.7    httpuv_1.5.4    pkgconfig_2.0.3</code></pre>
 </div>
 </div>
 
