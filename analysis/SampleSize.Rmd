@@ -1,0 +1,70 @@
+---
+title: "SampleSize"
+author: "Your Name"
+date: "2021-01-21"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+here we want to compare the sample sizes for new versus old:
+
+
+```{r}
+library("data.table")
+original.standard.error=fread("~/Downloads/Merged_MVP_Full_se.txt",header = F)
+beta.se=as.matrix(data.frame(original.standard.error[,c(3:6)]))
+
+posterior_sd=readRDS("~/Downloads/shared_posteriorSD.rds")
+combined_lfsr=readRDS("~/Dropbox/farnambatches/all_MVP_posteriors/combined_lfsr_MVP.rds")
+post.var=(posterior_sd*beta.se)^2
+
+```
+
+
+Now let's plot effective sample size. Recall:
+
+$$n_{jeff}=\frac{s_{j}^2}{\tilde{s_{j}^2}}$$
+
+original sample size here was 297,626 per Klarin et al (klarin et al 2018)
+
+First let's segregate those varaints with significant lfsr:
+
+```{r}
+size=297626
+ratio=beta.se^2/post.var
+njeffective=size*beta.se^2/post.var
+
+colnames(ratio)=colnames(njeffective)=colnames(combined_lfsr)
+
+
+##clean up
+rm(original.standard.error)
+rm(posterior_sd)
+rm(post.var)
+
+##divide dataset
+sig=which(combined_lfsr<0.05)## identify those with lfsr less than 0.05 in at least one subgroup
+not_sig=which(combined_lfsr>0.05)
+rm(combined_lfsr)
+
+```              
+Recall that in the univariate case, the posterior SD is directly proportional to the prior SD, and so for effects with strongest loading on small $\sigma$ components, the posterior SD will be proportionately smaller (as we are more confident it has mass at prior mean 0).
+
+
+```{r}
+plot(density(unlist(ratio[not_sig])),col="red",main='Density of Ratio')
+lines(density(unlist(ratio[sig])),col="green")
+```
+
+Correspondingly, the tissues which benefit the most from the sharing boost in precision are those with high standard errors (and correspondingly small Z statistics).
+
+```{r}
+barplot(apply(njeffective,2,median),main="Median Effective Sample size")
+barplot(apply(ratio,2,median),main="median Increase in Effective Sample Size")
+
+```
+
+
