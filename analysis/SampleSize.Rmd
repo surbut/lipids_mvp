@@ -20,7 +20,6 @@ beta.se=as.matrix(data.frame(original.standard.error[,c(3:6)]))
 posterior_sd=readRDS("~/Downloads/shared_posteriorSD.rds")
 combined_lfsr=readRDS("~/Dropbox/farnambatches/all_MVP_posteriors/combined_lfsr_MVP.rds")
 post.var=(posterior_sd*beta.se)^2
-
 ```
 
 
@@ -43,12 +42,12 @@ colnames(ratio)=colnames(njeffective)=colnames(combined_lfsr)
 ##clean up
 rm(original.standard.error)
 rm(posterior_sd)
-rm(post.var)
+
 
 ##divide dataset
 sig=which(combined_lfsr<0.05)## identify those with lfsr less than 0.05 in at least one subgroup
 not_sig=which(combined_lfsr>0.05)
-rm(combined_lfsr)
+
 
 ```              
 Recall that in the univariate case, the posterior SD is directly proportional to the prior SD, and so for effects with strongest loading on small $\sigma$ components, the posterior SD will be proportionately smaller (as we are more confident it has mass at prior mean 0).
@@ -64,7 +63,15 @@ Correspondingly, the tissues which benefit the most from the sharing boost in pr
 ```{r}
 barplot(apply(njeffective,2,median),main="Median Effective Sample size")
 barplot(apply(ratio,2,median),main="median Increase in Effective Sample Size")
-
+barplot(colSums(combined_lfsr<0.05),main="Number Significant Per Trait")
 ```
 
+We can consider the posterior variance of $\beta|D$ as $V(\beta/\hat{s}|Data)$*\hat{s}. Recall the univariate result:
 
+$$V(\beta|Data)=\frac{1}{1/\sigma_0^{2}] + 1/\sigma^2}$$ where for the smallest effects, $\sigma_0$ will approach 0, and thus the posterior variance (for us of $$V(beta/\hat{s}|data))$$ will also.
+
+```{r}
+
+plot(density(-log10(post.var[sig])),col="green",main="Density of -log10 V(\beta|data)")
+lines(density(-log10(post.var[not_sig])),col="red")
+```
