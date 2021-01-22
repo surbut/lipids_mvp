@@ -422,7 +422,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-01-21
+<strong>Last updated:</strong> 2021-01-22
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -513,16 +513,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree3098a8e134c8cd9689054b21f542860c297e187ctargetblank3098a8ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/3098a8e134c8cd9689054b21f542860c297e187c" target="_blank">3098a8e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreeb8f6ba6822f7e24686b23b7ad45618280fb03b6dtargetblankb8f6ba6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/surbut/lipids_mvp/tree/b8f6ba6822f7e24686b23b7ad45618280fb03b6d" target="_blank">b8f6ba6</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptree3098a8e134c8cd9689054b21f542860c297e187ctargetblank3098a8ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomsurbutlipidsmvptreeb8f6ba6822f7e24686b23b7ad45618280fb03b6dtargetblankb8f6ba6a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/surbut/lipids_mvp/tree/3098a8e134c8cd9689054b21f542860c297e187c" target="_blank">3098a8e</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/surbut/lipids_mvp/tree/b8f6ba6822f7e24686b23b7ad45618280fb03b6d" target="_blank">b8f6ba6</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -584,6 +584,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/surbut/lipids_mvp/blob/b8f6ba6822f7e24686b23b7ad45618280fb03b6d/analysis/SampleSize.Rmd" target="_blank">b8f6ba6</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2021-01-22
+</td>
+<td>
+wflow_publish(“~/lipids_mvp/analysis/SampleSize.Rmd”)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/surbut/lipids_mvp/4eedbfdc4c5a0f030d3a14517016ca201e5b20b4/docs/SampleSize.html" target="_blank">4eedbfd</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2021-01-21
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/surbut/lipids_mvp/blob/3098a8e134c8cd9689054b21f542860c297e187c/analysis/SampleSize.Rmd" target="_blank">3098a8e</a>
 </td>
 <td>
@@ -627,21 +661,138 @@ colnames(ratio)=colnames(njeffective)=colnames(combined_lfsr)
 ##clean up
 rm(original.standard.error)
 rm(posterior_sd)
-rm(post.var)
+
 
 ##divide dataset
 sig=which(combined_lfsr&lt;0.05)## identify those with lfsr less than 0.05 in at least one subgroup
-not_sig=which(combined_lfsr&gt;0.05)
-rm(combined_lfsr)</code></pre>
+not_sig=which(combined_lfsr&gt;0.05)</code></pre>
 <p>Recall that in the univariate case, the posterior SD is directly proportional to the prior SD, and so for effects with strongest loading on small <span class="math inline">\(\sigma\)</span> components, the posterior SD will be proportionately smaller (as we are more confident it has mass at prior mean 0).</p>
 <pre class="r"><code>plot(density(unlist(ratio[not_sig])),col=&quot;red&quot;,main=&#39;Density of Ratio&#39;)
 lines(density(unlist(ratio[sig])),col=&quot;green&quot;)</code></pre>
 <p><img src="figure/SampleSize.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/4eedbfdc4c5a0f030d3a14517016ca201e5b20b4/docs/figure/SampleSize.Rmd/unnamed-chunk-3-1.png" target="_blank">4eedbfd</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2021-01-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Correspondingly, the tissues which benefit the most from the sharing boost in precision are those with high standard errors (and correspondingly small Z statistics).</p>
 <pre class="r"><code>barplot(apply(njeffective,2,median),main=&quot;Median Effective Sample size&quot;)</code></pre>
 <p><img src="figure/SampleSize.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/4eedbfdc4c5a0f030d3a14517016ca201e5b20b4/docs/figure/SampleSize.Rmd/unnamed-chunk-4-1.png" target="_blank">4eedbfd</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2021-01-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>barplot(apply(ratio,2,median),main=&quot;median Increase in Effective Sample Size&quot;)</code></pre>
 <p><img src="figure/SampleSize.Rmd/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-2">
+Past versions of unnamed-chunk-4-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/surbut/lipids_mvp/blob/4eedbfdc4c5a0f030d3a14517016ca201e5b20b4/docs/figure/SampleSize.Rmd/unnamed-chunk-4-2.png" target="_blank">4eedbfd</a>
+</td>
+<td>
+Your Name
+</td>
+<td>
+2021-01-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>barplot(colSums(combined_lfsr&lt;0.05),main=&quot;Number Significant Per Trait&quot;)</code></pre>
+<p><img src="figure/SampleSize.Rmd/unnamed-chunk-4-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>We can consider the posterior variance of <span class="math inline">\(\beta|D\)</span> as <span class="math inline">\(V(\beta/\hat{s}|Data)\)</span>*. Recall the univariate result:</p>
+<p><span class="math display">\[V(\beta|Data)=\frac{1}{1/\sigma_0^{2}] + 1/\sigma^2}\]</span> where for the smallest effects, <span class="math inline">\(\sigma_0\)</span> will approach 0, and thus the posterior variance (for us of <span class="math display">\[V(beta/\hat{s}|data))\]</span> will also.</p>
+<pre class="r"><code>plot(density(-log10(post.var[sig])),col=&quot;green&quot;,main=&quot;Density of -log10 V(\beta|data)&quot;)
+lines(density(-log10(post.var[not_sig])),col=&quot;red&quot;)</code></pre>
+<p><img src="figure/SampleSize.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -665,17 +816,17 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] data.table_1.13.0 workflowr_1.6.2  
+[1] data.table_1.13.0
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.5      rstudioapi_0.13 whisker_0.4     knitr_1.30     
- [5] magrittr_2.0.1  R6_2.5.0        rlang_0.4.9     stringr_1.4.0  
- [9] tools_4.0.2     xfun_0.18       git2r_0.27.1    htmltools_0.5.0
-[13] ellipsis_0.3.1  rprojroot_2.0.2 yaml_2.2.1      digest_0.6.27  
-[17] tibble_3.0.4    lifecycle_0.2.0 crayon_1.3.4    later_1.1.0.1  
-[21] vctrs_0.3.5     promises_1.1.1  fs_1.5.0        glue_1.4.2     
-[25] evaluate_0.14   rmarkdown_2.4   stringi_1.5.3   compiler_4.0.2 
-[29] pillar_1.4.7    httpuv_1.5.4    pkgconfig_2.0.3</code></pre>
+ [5] magrittr_2.0.1  workflowr_1.6.2 R6_2.5.0        rlang_0.4.9    
+ [9] stringr_1.4.0   tools_4.0.2     xfun_0.18       git2r_0.27.1   
+[13] htmltools_0.5.0 ellipsis_0.3.1  yaml_2.2.1      digest_0.6.27  
+[17] rprojroot_2.0.2 tibble_3.0.4    lifecycle_0.2.0 crayon_1.3.4   
+[21] later_1.1.0.1   vctrs_0.3.5     fs_1.5.0        promises_1.1.1 
+[25] glue_1.4.2      evaluate_0.14   rmarkdown_2.4   stringi_1.5.3  
+[29] compiler_4.0.2  pillar_1.4.7    httpuv_1.5.4    pkgconfig_2.0.3</code></pre>
 </div>
 </div>
 
