@@ -1,0 +1,100 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+
+Here we consider the SNPS which are significant in only TG and LDL
+
+```{r}
+
+mash=readRDS("~/lipids_mvp/data/mashcomplete.rds")
+tc=read.table("~/lipids_mvp/data//tc_max.txt")
+tg=read.table("~/lipids_mvp/data//tg_max.txt")
+hdl=read.table("~/lipids_mvp/data/hdl_max.txt")
+ldl=read.table("~/lipids_mvp/data/ldl_max.txt")
+bf=read.table("~/lipids_mvp/data/merged_betas.txt")[c(1:2437099),]
+se=read.table("~/lipids_mvp/data/merged_se.txt")[c(1:2437099),]
+```
+
+```{r}
+ldl_tg=intersect(rownames(ldl),rownames(tg))## shared block significnat
+a=ldl_tg[!(ldl_tg %in% rownames(hdl))]
+
+pimat=matrix(mash$fitted_g$pi[-1],byrow = T,ncol=length(mash$fitted_g$Ulist))
+barplot(colSums(pimat),names=names(mash$fitted_g$Ulist),las=2)
+
+library(lattice)
+
+
+clrs <- colorRampPalette(rev(c("#D73027","#FC8D59","#FEE090","#FFFFBF",
+                               "#E0F3F8","#91BFDB","#4575B4")))(64)
+for(i in 2:4)
+ {
+#   #dev.new()
+lat=mash$fitted_g$Ulist[[i]]
+s=svd(mash$fitted_g$Ulist[[i]])
+colnames(lat)=rownames(lat)=colnames(se)[3:6]
+lat[lower.tri(lat)] <- NA
+print(levelplot(lat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE))
+title(main = names(mash$fitted_g$Ulist[[i]]))
+}
+
+ for(i in 2:4)
+   {
+#   #dev.new(
+s=svd(mash$fitted_g$Ulist[[i]])
+ colnames(s$v)=rownames(s$v)=colnames(se)[3:6]
+ barplot(s$v[,1],main=paste0("uk",i))
+}
+
+
+df=cbind(ldl[a,],tg[a,])
+df=cbind(ldl[ldl_tg,],tg[ldl_tg,])
+t=apply(df,1,function(x){x[3]==x[6]})##also shared position
+ldl_tg_match=df[t,]
+
+
+pm=mash$result$PosteriorMean
+pv=mash$result$PosteriorSD
+lfsr=mash$result$lfsr
+rownames(pm)=bf$SNP_hg18[1:2437099]
+rownames(se)=bf$SNP_hg18
+
+
+shrunk.beta=se[,c(3:6)]*pm;colnames(shrunk.beta)=colnames(pm);
+shrunk.se=pv*se[,c(3:6)];colnames(shrunk.se)=colnames(pm)
+
+rownames(shrunk.beta)=rownames(shrunk.se)=rownames(pm)
+
+sig=paste0(ldl_tg_match[,2],":",ldl_tg_match[,3])
+good=shrunk.beta[sig,]
+good.sd=shrunk.se[sig,]
+```
+
+```{r,eval=T}
+
+
+library('rmeta')
+j=1030669
+
+title=paste("MLE",bf[j,"rsid"])
+par(mfrow=c(1,2))
+metaplot(as.numeric(bf[j,c(4,6,8,10)]),as.numeric(se[j,c(3:6)]),colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta),xlab = "",ylab="")
+title(title)
+
+title=paste("Mash",rownames(good)[j])
+sd=as.numeric(shrunk.se[j,])##to transform to posterior sd of beta
+x=as.numeric(shrunk.beta[j,])
+metaplot(x,sd,xlab = "",ylab="",colors=meta.colors(box=c("red","blue","green","yellow"),lines="blue", zero="red", summary="orange",text="forestgreen"),xlim=c(-0.4,0.4),labels = colnames(shrunk.beta))
+title(title)
+
+print("LFSR of SNP")
+lfsr[j,]
+```

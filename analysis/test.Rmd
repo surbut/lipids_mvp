@@ -1,0 +1,111 @@
+---
+title: "ethnic compare"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r cars}
+
+dir="~/Downloads/prs_ethnic/"
+l=list.files(dir)
+gwasCT=l[grep("lipids_associaitons_for_ukbb_mvp_1000g_adj_r2_gwas_C_T",l)]
+names=c("black","east_asian","european","others","south_asian")
+list_of_files=list()
+for(i in 1:length(gwasCT)){
+  r=read.csv(paste0(dir,gwasCT[i]))
+  list_of_files[[i]]=r
+}
+
+myfiles <- lapply(1:length(list_of_files),function(x){
+  r <- list_of_files[[x]]
+  rnew=data.frame(r$lipids_combo,r$adj_r2)
+  colnames(rnew)=c("lipids_combo",names[x])
+  rnew
+})
+  
+gwas_C_T_mashRbeta <- Reduce(function(x,y) {merge(x,y,all=T, by="lipids_combo")},myfiles)
+res[is.na(res)]<-0
+
+rownames(gwas_C_T_mashRbeta)=gwas_C_T_mashRbeta$lipids_combo
+gwas_C_T_mashRbeta=gwas_C_T_mashRbeta[,-1]
+
+
+rm(gwasCT)
+rm(list_of_files)
+rm(myfiles)
+
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+gwas=l[grep("lipids_associaitons_for_ukbb_mvp_1000g_adj_r2_gwas_based",l)]
+names=c("black","east_asian","european","others","south_asian")
+
+list_of_files=list()
+for(i in 1:length(gwas)){
+  r=read.csv(paste0(dir,gwas[i]))
+  list_of_files[[i]]=r
+}
+
+myfiles <- lapply(1:length(list_of_files),function(x){
+  r <- list_of_files[[x]]
+  rnew=data.frame(r$lipids_combo,r$adj_r2)
+  colnames(rnew)=c("lipids_combo",names[x])
+  rnew
+})
+  
+gwas_C_T_unibeta <- Reduce(function(x,y) {merge(x,y,all=T, by="lipids_combo")},myfiles)
+res[is.na(res)]<-0
+rownames(gwas_C_T_unibeta)=gwas_C_T_unibeta$lipids_combo
+gwas_C_T_unibeta=gwas_C_T_unibeta[,-1]
+
+rm(gwas)
+rm(list_of_files)
+rm(myfiles)
+```
+
+```{r}
+lfsr=l[grep("lipids_associaitons_for_ukbb_mvp_1000g_adj_r2_lfsr_based_",l)]
+names=c("black","east_asian","european","others","south_asian")
+
+list_of_files=list()
+for(i in 1:length(lfsr)){
+  r=read.csv(paste0(dir,lfsr[i]))
+  list_of_files[[i]]=r
+}
+
+myfiles <- lapply(1:length(list_of_files),function(x){
+  r <- list_of_files[[x]]
+  rnew=data.frame(r$lipids_combo,r$adj_r2)
+  colnames(rnew)=c("lipids_combo",names[x])
+  rnew
+})
+  
+mashrlfsr<- Reduce(function(x,y) {merge(x,y,all=T, by="lipids_combo")},myfiles)
+res[is.na(res)]<-0
+rownames(mashrlfsr)=mashrlfsr$lipids_combo
+mashrlfsr=mashrlfsr[,-1]
+
+rm(lfsr)
+
+rm(list_of_files)
+rm(myfiles)
+
+head(mashrlfsr)
+head(gwas_C_T_mashRbeta)
+head(gwas_mashrlfsr)
+
+par(mfrow = c(3,1), oma = c(5,4,1,1) + 0.1, mar = c(1,1,1,1) + 0.1)
+barplot(apply(mashrlfsr,2,max),las=2,main="mashrlfsr",names="")
+barplot(apply(gwas_C_T_mashRbeta,2,max),las=2,main="gwas_C_T_mashRbeta",names="")
+barplot(apply(gwas_C_T_unibeta,2,max),las=2,main="gwas_C_T_unibeta")
+```

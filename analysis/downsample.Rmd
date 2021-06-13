@@ -1,0 +1,36 @@
+---
+title: "mashR_ukbb_downsample"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library("mashr")
+source("~/Downloads/flashscript.R")
+library("stringr")
+library('data.table')
+library("flashr")
+```
+
+
+```{r}
+ztab=read.table("~/Dropbox/ukbb_downsample/250k_tstat_ukbb.txt")
+a=do.call(rbind, strsplit(ztab$hdl.hdl250k.locus, ':'))
+chr=as.numeric(as.character(a[,1]))
+bp=as.numeric(as.character(a[,2]))
+zframe=data.frame("chr"=chr,"bp"=as.numeric(bp),"hdl"=ztab$hdl.hdl250k.t_stat,"ldl"=ztab$ldl.ldl250k.t_stat,"tg"=ztab$tg.tg250k.t_stat,"tc"=ztab$tc.tc250k.t_stat)
+rownames(zframe)=ztab$MarkerName
+
+bed=read.table("~/Dropbox//ld_chunk.bed")
+head(bed)
+
+maxes=apply(zframe[,c(3:7)],1,function(x){max(abs(x))})##get max abs Z across phenotypes
+znew=cbind(zframe,maxes)
+saveRDS(znew,"~/Dropbox/cadproject/znew.rds")
+
+
+```
+

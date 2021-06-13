@@ -1,4 +1,16 @@
-ins
+---
+title: "creating_merged_lipids"
+output:
+  workflowr::wflow_html:
+    code_folding: hide
+    toc: no
+  html_notebook: default
+  html_document:
+    df_print: paged
+    toc: no
+editor_options:
+  chunk_output_type: inline
+---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(cache= TRUE)
@@ -120,25 +132,71 @@ max_block=na.omit(max_block)
 write.table(max_block,"~/lipids_mvp/data/max_ld_block.txt")
 
 
+###FOR UKBB
+bed=read.table("~/Downloads/ld_chunk.bed")
+z=readRDS("~/Dropbox/z_ukbb.rds")
+s=str_split_fixed(rownames(z),pattern = ":",n = 3)
+chr=paste0("chr",s[,1])
+znew=data.frame(chr=chr,bp=as.numeric(as.character(s[,2])),z)
+bad=which(znew$chr=="chrX")
+z2=znew[-bad,]
+z2$chr=factor(z2$chr)
+z2$maxes=max(abs(z2[,c(3:6)]))
+#max_block=data.frame(matrix(ncol = ncol(znew), nrow = nrow(bed)))
+
+max=apply(z2[,c(3:6)],1,function(x){max(abs(x))})
+z2$maxes=max
+
+max.block=data.frame(NULL,NULL,NULL)
+
+for(i in 1463:nrow(bed)){
+  print(i)
+  chr=bed[i,1]
+  start=bed[i,2]
+  stop=bed[i,3]
+  in_chrom=z2[z2$chr==chr,]
+  goodguys=in_chrom[in_chrom$bp>start&in_chrom$bp<stop,]
+ if(nrow(goodguys)>0) {
+    z.max=which.max(goodguys[,"maxes"])
+    z_good=goodguys[z.max,]
+    } else {
+      z_good=rep(0,ncol(z2))###If block doesn't contain a SNP in UKBB
+    }
+  #z_good=data.table(z_good,stringsAsFactors = T)
+  #z_good$chr=as.character(z_good$chr)
+  #z_good$snp=as.character(z_good$bp)
+  max.block=rbind(max.block,z_good)
+  
+}
+
+max_block=na.omit(max.block)
+write.table(max_block,"~/Dropbox//max_ld_block_ukbb.txt")
+
+
+
+
 
 
 ```
 
 Now, we're ready to mash!
 ```{r mashblock,eval=F,warning=FALSE}
-ztab=read.table("~/lipids_mvp/data/merged_z_mvp_withnames.txt")
-znew=read.table("~/lipids_mvp/data/merged_z_mvp.txt")
-colnames(znew)=c("hdl","ldl","tg","tc")
+#ztab=read.table("~/lipids_mvp/data/merged_z_mvp_withnames.txt")
+#znew=read.table("~/lipids_mvp/data/merged_z_mvp.txt")
+#colnames(znew)=c("hdl","ldl","tg","tc")
+
+znew=z2[,c(3:6)]
+
 library("mashr")
 library("flashr")
-max_block=read.table("~/lipids_mvp/data/max_ld_block.txt")
-source('~/Dropbox/jointData/flashscript.R')
+max_block=read.table("~/Dropbox//max_ld_block_ukbb.txt")
+source('~/Dropbox/flashR.R')
 # identify a random subset of 20000 tests
 random.subset = sample(1:nrow(znew),40000)
-zmash=as.matrix(znew[,c("hdl","ldl","tg","tc")]);rownames(zmash)=ztab$snpid.x
+zmash=as.matrix(znew[,c("hdl","ldl","tg","tc")])
 data.temp = mash_set_data(zmash[random.subset,],alpha = 1)
 Vhat = estimate_null_correlation_simple(data.temp)
-saveRDS("~/lipids_mvp/data/MVPVhat.rds")
+saveRDS(Vhat,"~/Dropbox//ukbbVhat.rds")
 library("lattice")
 clrs = colorRampPalette((c("#D73027","#FC8D59","#FEE090","#FFFFBF", "#E0F3F8","#91BFDB","#4575B4")))(64)
 
@@ -147,21 +205,22 @@ print(levelplot(Vhat,col.regions = clrs,xlab = "",ylab = "",colorkey = TRUE,main
 rm(data.temp)
 data.random = mash_set_data(zmash[random.subset,],alpha = 1,V=Vhat)
 
-zmax=apply(max_block[,c(4:7)],2,function(x){as.numeric(x)});rownames(zmax)=max_block$snpid.x
+zmax=apply(max_block[,c(3:6)],2,function(x){as.numeric(x)});rownames(zmax)=rownames(max_block)
+
 data.strong = mash_set_data(zmax,alpha = 1,V=Vhat)
 
 U.pca = cov_pca(data.strong,3)
-
+source("~/Downloads/flashscript.R")
 U.flash=cov_flash(data.strong, non_canonical = TRUE)
 X.center = apply(data.strong$Bhat, 2, function(x) x - mean(x))
 U.ed = cov_ed(data.strong, c(U.flash, U.pca, list("XX" = t(X.center) %*% X.center / nrow(X.center))))
-saveRDS(U.ed,"~/lipids_mvp/data/EDcov.Rds")
+saveRDS(U.ed,"~/Dropbox/ukbbEDcov.Rds")
 
-U.ed=readRDS("~/lipids_mvp/data/EDcov.Rds")
+U.ed=readRDS("~/Dropbox/ukbbEDcov.Rds")
 U.c = cov_canonical(data.random)
-U.c = cov_canonical(data.random)
+
 m = mash(data.random, Ulist = c(U.ed,U.c),outputlevel = 1)
-saveRDS(m,"mfitMVP.rds")
+saveRDS(m,"~/Dropbox/mfitukbb.rds")
 
 ########## refit covmats with ukbbdata##
 z_ukbb=as.matrix(readRDS("~/ukbb/z_ukbb.rds"))
